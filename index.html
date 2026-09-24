@@ -4,159 +4,1291 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Leitor QR Code</title>
+  <title>AgroTrace • Beneficiamento</title>
+
+  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 20px;
+    * {
+      box-sizing: border-box;
       margin: 0;
-      background: #f5f5f5;
+      padding: 0;
     }
 
-    .container {
-      max-width: 500px;
-      margin: auto;
-      background: white;
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0b1220;
+      color: #172033;
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(135deg, #101b2d, #162b43);
+      color: white;
       padding: 20px;
-      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,.25);
     }
 
-    h1 {
-      margin-top: 0;
+    .header-content {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
     }
 
-    #leitor {
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      background: #39b54a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .brand h1 {
+      font-size: 21px;
+    }
+
+    .brand p {
+      font-size: 12px;
+      color: #aebdcc;
+      margin-top: 3px;
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      color: #d5e1ec;
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #39b54a;
+      box-shadow: 0 0 8px #39b54a;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 5px 20px rgba(0,0,0,.15);
+    }
+
+    .stat-label {
+      color: #718096;
+      font-size: 12px;
+      margin-bottom: 7px;
+    }
+
+    .stat-value {
+      font-size: 25px;
+      font-weight: bold;
+      color: #172033;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 5px 20px rgba(0,0,0,.15);
+      margin-bottom: 20px;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .card-title {
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    .card-subtitle {
+      font-size: 12px;
+      color: #718096;
+      margin-top: 4px;
+    }
+
+    #reader {
       width: 100%;
-      margin-top: 20px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #f2f5f8;
+      min-height: 250px;
+    }
+
+    .camera-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
     }
 
     button {
-      width: 100%;
-      padding: 15px;
-      margin-top: 15px;
-      border: 0;
-      border-radius: 8px;
-      background: #1b5e20;
-      color: white;
-      font-size: 17px;
+      border: none;
+      border-radius: 10px;
+      padding: 13px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 14px;
+      transition: .2s;
     }
 
-    #resultado {
-      margin-top: 20px;
-      font-size: 18px;
+    button:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: #39b54a;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #2e9d3d;
+    }
+
+    .btn-secondary {
+      background: #e9eef3;
+      color: #172033;
+    }
+
+    .btn-secondary:hover {
+      background: #dce4eb;
+    }
+
+    .btn-danger {
+      background: #e64b4b;
+      color: white;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .info-item {
+      background: #f5f7fa;
+      border-radius: 10px;
+      padding: 12px;
+    }
+
+    .info-label {
+      font-size: 10px;
+      color: #718096;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin-bottom: 5px;
+    }
+
+    .info-value {
+      font-size: 14px;
+      font-weight: bold;
+      word-break: break-word;
+    }
+
+    .form-group {
+      margin-bottom: 13px;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 6px;
+      color: #465365;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid #d7dee7;
+      border-radius: 9px;
+      padding: 12px;
+      font-size: 14px;
+      outline: none;
+      background: white;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #39b54a;
+      box-shadow: 0 0 0 3px rgba(57,181,74,.12);
+    }
+
+    textarea {
+      min-height: 85px;
+      resize: vertical;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    .history-item {
+      border-left: 4px solid #39b54a;
+      background: #f5f7fa;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 9px;
+    }
+
+    .history-main {
+      font-weight: bold;
+      font-size: 13px;
+    }
+
+    .history-detail {
+      color: #718096;
+      font-size: 11px;
+      margin-top: 4px;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 25px;
+      color: #8793a2;
+      font-size: 13px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 20px;
+      background: #e8f7ea;
+      color: #248536;
+      font-size: 11px;
       font-weight: bold;
     }
-  </style>
 
-  <!-- Biblioteca de leitura de QR Code -->
-  <script src="https://unpkg.com/html5-qrcode"></script>
+    .alert {
+      display: none;
+      padding: 12px;
+      border-radius: 9px;
+      margin-bottom: 15px;
+      font-size: 13px;
+    }
+
+    .alert.success {
+      background: #e8f7ea;
+      color: #237d31;
+    }
+
+    .alert.error {
+      background: #fdecec;
+      color: #b52d2d;
+    }
+
+    footer {
+      text-align: center;
+      color: #8391a1;
+      font-size: 11px;
+      padding: 20px;
+    }
+
+    @media (max-width: 800px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .dashboard {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 500px) {
+      main {
+        padding: 12px;
+      }
+
+      header {
+        padding: 15px;
+      }
+
+      .dashboard {
+        grid-template-columns: 1fr;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .brand h1 {
+        font-size: 17px;
+      }
+
+      .status {
+        display: none;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-  <div class="container">
+<header>
+  <div class="header-content">
 
-    <h1>Leitor QR Code</h1>
+    <div class="brand">
+      <div class="brand-icon">A</div>
 
-    <p id="status">
-      Toque no botão para iniciar a câmera.
-    </p>
+      <div>
+        <h1>AgroTrace</h1>
+        <p>Sistema de Gestão de Beneficiamento</p>
+      </div>
+    </div>
 
-    <button onclick="iniciarCamera()">
-      📷 Iniciar câmera
-    </button>
+    <div class="status">
+      <span class="status-dot"></span>
+      Sistema online
+    </div>
 
-    <div id="leitor"></div>
+  </div>
+</header>
 
-    <div id="resultado"></div>
+<main>
+
+  <div id="alert" class="alert"></div>
+
+  <!-- DASHBOARD -->
+  <section class="dashboard">
+
+    <div class="stat-card">
+      <div class="stat-label">LOTES CONSULTADOS</div>
+      <div class="stat-value" id="totalLotes">0</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-label">REGISTROS REALIZADOS</div>
+      <div class="stat-value" id="totalRegistros">0</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-label">STATUS</div>
+      <div class="stat-value" style="font-size:18px;">
+        <span class="badge">OPERACIONAL</span>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="layout">
+
+    <!-- LEITOR -->
+    <section class="card">
+
+      <div class="card-header">
+        <div>
+          <div class="card-title">Leitura de QR Code</div>
+          <div class="card-subtitle">
+            Aponte a câmera para o código do lote
+          </div>
+        </div>
+      </div>
+
+      <div id="reader"></div>
+
+      <div class="camera-buttons">
+
+        <button
+          class="btn-primary"
+          onclick="iniciarCamera()">
+          Iniciar câmera
+        </button>
+
+        <button
+          class="btn-secondary"
+          onclick="pararCamera()">
+          Parar
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- DADOS DO LOTE -->
+    <section class="card">
+
+      <div class="card-header">
+
+        <div>
+          <div class="card-title">Dados do lote</div>
+          <div class="card-subtitle">
+            Informações obtidas pelo QR Code
+          </div>
+        </div>
+
+        <span class="badge" id="loteStatus">
+          AGUARDANDO
+        </span>
+
+      </div>
+
+      <div class="info-grid">
+
+        <div class="info-item">
+          <div class="info-label">QR Code</div>
+          <div class="info-value" id="qrValue">
+            —
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-label">Lote</div>
+          <div class="info-value" id="loteValue">
+            —
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-label">Cultivar</div>
+          <div class="info-value" id="cultivarValue">
+            —
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-label">Material</div>
+          <div class="info-value" id="materialValue">
+            —
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-label">Safra</div>
+          <div class="info-value" id="safraValue">
+            —
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-label">Última leitura</div>
+          <div class="info-value" id="ultimaLeitura">
+            —
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- REGISTRO -->
+    <section class="card">
+
+      <div class="card-header">
+
+        <div>
+          <div class="card-title">
+            Registrar operação
+          </div>
+
+          <div class="card-subtitle">
+            Registre a etapa realizada no lote
+          </div>
+        </div>
+
+      </div>
+
+      <form id="registroForm">
+
+        <div class="form-group">
+
+          <label for="operador">
+            Operador
+          </label>
+
+          <input
+            id="operador"
+            type="text"
+            placeholder="Nome do operador"
+            required>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="etapa">
+            Etapa do processo
+          </label>
+
+          <select id="etapa" required>
+
+            <option value="">
+              Selecione uma etapa
+            </option>
+
+            <option value="Recebimento">
+              Recebimento
+            </option>
+
+            <option value="Identificação">
+              Identificação
+            </option>
+
+            <option value="Secagem">
+              Secagem
+            </option>
+
+            <option value="Beneficiamento">
+              Beneficiamento
+            </option>
+
+            <option value="Tratamento de sementes">
+              Tratamento de sementes
+            </option>
+
+            <option value="Ensaque">
+              Ensaque
+            </option>
+
+            <option value="Expedição">
+              Expedição
+            </option>
+
+            <option value="Outra">
+              Outra
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="observacao">
+            Observação
+          </label>
+
+          <textarea
+            id="observacao"
+            placeholder="Digite uma observação, se necessário...">
+          </textarea>
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="btn-primary"
+          style="width:100%;">
+          Registrar operação
+        </button>
+
+      </form>
+
+    </section>
+
+
+    <!-- HISTÓRICO -->
+    <section class="card">
+
+      <div class="card-header">
+
+        <div>
+          <div class="card-title">
+            Histórico da sessão
+          </div>
+
+          <div class="card-subtitle">
+            Leituras realizadas neste dispositivo
+          </div>
+        </div>
+
+      </div>
+
+      <div id="historico">
+
+        <div class="empty">
+          Nenhuma leitura realizada ainda.
+        </div>
+
+      </div>
+
+    </section>
 
   </div>
 
+</main>
 
-  <script>
+<footer>
+  AgroTrace • Gestão de Beneficiamento • Sistema operacional
+</footer>
 
-    let leitor = null;
 
-    async function iniciarCamera() {
+<script>
 
-      const status = document.getElementById("status");
+  /*
+   * URL DO GOOGLE APPS SCRIPT
+   */
+  const API_URL =
+    'https://script.google.com/macros/s/AKfycbzy3I6pS51O2t_4SaknhBAbFX81lokKEOJp6y22ea8oBrw1_Crcv1SdV9pRkcIkRUXpkA/exec';
 
-      try {
 
-        status.innerText = "Solicitando acesso à câmera...";
+  let scanner = null;
 
-        /*
-         * Testa diretamente se o navegador
-         * consegue acessar a câmera.
-         */
-        const stream = await navigator.mediaDevices.getUserMedia({
-          video: {
-            facingMode: {
-              ideal: "environment"
-            }
-          },
-          audio: false
-        });
+  let cameraAtiva = false;
 
-        /*
-         * Se chegou aqui, a câmera foi liberada.
-         */
-        status.innerText = "✅ Câmera autorizada!";
+  let loteAtual = null;
 
-        /*
-         * Fecha o teste da câmera.
-         */
-        stream.getTracks().forEach(function(track) {
-          track.stop();
-        });
+  let totalLotes = 0;
 
-        /*
-         * Agora inicia o leitor QR.
-         */
-        leitor = new Html5Qrcode("leitor");
+  let totalRegistros = 0;
 
-        await leitor.start(
-          {
-            facingMode: "environment"
-          },
-          {
-            fps: 10,
-            qrbox: {
-              width: 250,
-              height: 250
-            }
-          },
-          function(qrCode) {
 
-            document.getElementById("resultado").innerText =
-              "QR Code: " + qrCode;
+  /*
+   * MOSTRAR ALERTA
+   */
 
-          },
-          function(error) {
-            // Erros de leitura enquanto procura o QR são normais.
-          }
+  function mostrarAlerta(mensagem, tipo = 'success') {
+
+    const alerta =
+      document.getElementById('alert');
+
+    alerta.textContent = mensagem;
+
+    alerta.className =
+      'alert ' + tipo;
+
+    alerta.style.display = 'block';
+
+    setTimeout(() => {
+
+      alerta.style.display = 'none';
+
+    }, 4000);
+
+  }
+
+
+  /*
+   * INICIAR CÂMERA
+   */
+
+  async function iniciarCamera() {
+
+    if (cameraAtiva) {
+
+      mostrarAlerta(
+        'A câmera já está funcionando.',
+        'success'
+      );
+
+      return;
+    }
+
+    try {
+
+      scanner =
+        new Html5Qrcode("reader");
+
+      const cameras =
+        await Html5Qrcode.getCameras();
+
+      if (!cameras || cameras.length === 0) {
+
+        throw new Error(
+          'Nenhuma câmera encontrada.'
         );
-
-        status.innerText =
-          "📷 Câmera funcionando. Aponte para o QR Code.";
-
-      } catch (erro) {
-
-        console.error(erro);
-
-        status.innerText =
-          "❌ Não foi possível acessar a câmera.";
-
-        document.getElementById("resultado").innerText =
-          erro.name + ": " + erro.message;
 
       }
 
+      let cameraId =
+        cameras[0].id;
+
+      await scanner.start(
+
+        cameraId,
+
+        {
+          fps: 10,
+
+          qrbox: {
+            width: 250,
+            height: 250
+          }
+        },
+
+        qrSucesso,
+
+        qrErro
+
+      );
+
+      cameraAtiva = true;
+
+      mostrarAlerta(
+        'Câmera iniciada. Aponte para o QR Code.',
+        'success'
+      );
+
+    } catch (erro) {
+
+      console.error(erro);
+
+      mostrarAlerta(
+        'Não foi possível iniciar a câmera: ' +
+        erro.message,
+        'error'
+      );
+
     }
 
-  </script>
+  }
+
+
+  /*
+   * PARAR CÂMERA
+   */
+
+  async function pararCamera() {
+
+    if (!scanner || !cameraAtiva) {
+
+      return;
+
+    }
+
+    try {
+
+      await scanner.stop();
+
+      scanner.clear();
+
+      cameraAtiva = false;
+
+    } catch (erro) {
+
+      console.error(erro);
+
+    }
+
+  }
+
+
+  /*
+   * QUANDO QR É LIDO
+   */
+
+  function qrSucesso(qrCodeMessage) {
+
+    console.log(
+      'QR lido:',
+      qrCodeMessage
+    );
+
+    pararCamera();
+
+    buscarLote(qrCodeMessage);
+
+  }
+
+
+  /*
+   * ERRO DE LEITURA
+   */
+
+  function qrErro(errorMessage) {
+
+    // Ignorado de propósito.
+    // A biblioteca envia mensagens enquanto
+    // ainda não encontrou um QR.
+
+  }
+
+
+  /*
+   * BUSCAR LOTE
+   */
+
+  function buscarLote(qr) {
+
+    mostrarAlerta(
+      'Consultando lote...',
+      'success'
+    );
+
+    const callbackName =
+      'callback_' +
+      Date.now();
+
+    window[callbackName] =
+      function(resposta) {
+
+        try {
+
+          if (
+            resposta &&
+            resposta.sucesso
+          ) {
+
+            preencherLote(
+              resposta.dados
+            );
+
+          } else {
+
+            mostrarAlerta(
+              resposta?.mensagem ||
+              'Lote não encontrado.',
+              'error'
+            );
+
+            limparLote();
+
+          }
+
+        } catch (erro) {
+
+          console.error(erro);
+
+          mostrarAlerta(
+            'Erro ao processar resposta.',
+            'error'
+          );
+
+        }
+
+        delete window[callbackName];
+
+        script.remove();
+
+      };
+
+
+      const script =
+        document.createElement('script');
+
+      script.src =
+        API_URL +
+        '?acao=buscar' +
+        '&qr=' +
+        encodeURIComponent(qr) +
+        '&callback=' +
+        callbackName;
+
+      script.onerror =
+        function() {
+
+          mostrarAlerta(
+            'Erro ao consultar o sistema.',
+            'error'
+          );
+
+          delete window[callbackName];
+
+          script.remove();
+
+        };
+
+      document.body.appendChild(script);
+
+  }
+
+
+  /*
+   * PREENCHER DADOS
+   */
+
+  function preencherLote(dados) {
+
+    loteAtual = dados;
+
+    totalLotes++;
+
+    document.getElementById(
+      'totalLotes'
+    ).textContent =
+      totalLotes;
+
+    document.getElementById(
+      'qrValue'
+    ).textContent =
+      dados.QR || '—';
+
+    document.getElementById(
+      'loteValue'
+    ).textContent =
+      dados.LOTE || '—';
+
+    document.getElementById(
+      'cultivarValue'
+    ).textContent =
+      dados.CULTIVAR || '—';
+
+    document.getElementById(
+      'materialValue'
+    ).textContent =
+      dados.MATERIAL || '—';
+
+    document.getElementById(
+      'safraValue'
+    ).textContent =
+      dados.SAFRA || '—';
+
+    document.getElementById(
+      'ultimaLeitura'
+    ).textContent =
+      new Date().toLocaleTimeString(
+        'pt-BR'
+      );
+
+    document.getElementById(
+      'loteStatus'
+    ).textContent =
+      'LOTE LOCALIZADO';
+
+
+    adicionarHistorico(
+      dados
+    );
+
+    mostrarAlerta(
+      'Lote localizado com sucesso.',
+      'success'
+    );
+
+  }
+
+
+  /*
+   * LIMPAR DADOS
+   */
+
+  function limparLote() {
+
+    loteAtual = null;
+
+    document.getElementById(
+      'qrValue'
+    ).textContent = '—';
+
+    document.getElementById(
+      'loteValue'
+    ).textContent = '—';
+
+    document.getElementById(
+      'cultivarValue'
+    ).textContent = '—';
+
+    document.getElementById(
+      'materialValue'
+    ).textContent = '—';
+
+    document.getElementById(
+      'safraValue'
+    ).textContent = '—';
+
+    document.getElementById(
+      'ultimaLeitura'
+    ).textContent = '—';
+
+    document.getElementById(
+      'loteStatus'
+    ).textContent =
+      'AGUARDANDO';
+
+  }
+
+
+  /*
+   * HISTÓRICO
+   */
+
+  function adicionarHistorico(dados) {
+
+    const historico =
+      document.getElementById(
+        'historico'
+      );
+
+    const vazio =
+      historico.querySelector(
+        '.empty'
+      );
+
+    if (vazio) {
+
+      vazio.remove();
+
+    }
+
+    const item =
+      document.createElement('div');
+
+    item.className =
+      'history-item';
+
+    item.innerHTML = `
+
+      <div class="history-main">
+        Lote: ${escapeHtml(dados.LOTE || '—')}
+      </div>
+
+      <div class="history-detail">
+        QR: ${escapeHtml(dados.QR || '—')}
+      </div>
+
+      <div class="history-detail">
+        ${new Date().toLocaleString('pt-BR')}
+      </div>
+
+    `;
+
+    historico.prepend(item);
+
+  }
+
+
+  /*
+   * REGISTRAR OPERAÇÃO
+   */
+
+  document
+    .getElementById('registroForm')
+    .addEventListener(
+      'submit',
+      function(event) {
+
+        event.preventDefault();
+
+        if (!loteAtual) {
+
+          mostrarAlerta(
+            'Primeiro leia um QR Code de lote.',
+            'error'
+          );
+
+          return;
+
+        }
+
+
+        const operador =
+          document.getElementById(
+            'operador'
+          ).value.trim();
+
+        const etapa =
+          document.getElementById(
+            'etapa'
+          ).value;
+
+        const observacao =
+          document.getElementById(
+            'observacao'
+          ).value.trim();
+
+
+        if (!operador || !etapa) {
+
+          mostrarAlerta(
+            'Preencha operador e etapa.',
+            'error'
+          );
+
+          return;
+
+        }
+
+
+        const dados = {
+
+          DATA_HORA:
+            new Date().toISOString(),
+
+          QR:
+            loteAtual.QR || '',
+
+          LOTE:
+            loteAtual.LOTE || '',
+
+          CULTIVAR:
+            loteAtual.CULTIVAR || '',
+
+          MATERIAL:
+            loteAtual.MATERIAL || '',
+
+          SAFRA:
+            loteAtual.SAFRA || '',
+
+          OPERADOR:
+            operador,
+
+          ETAPA:
+            etapa,
+
+          OBSERVACAO:
+            observacao
+
+        };
+
+
+        registrarOperacao(
+          dados
+        );
+
+      }
+    );
+
+
+  /*
+   * REGISTRAR NO GOOGLE APPS SCRIPT
+   */
+
+  function registrarOperacao(dados) {
+
+    mostrarAlerta(
+      'Registrando operação...',
+      'success'
+    );
+
+
+    /*
+     * Criamos um formulário temporário
+     * para enviar os dados ao Apps Script.
+     */
+
+    const form =
+      document.createElement('form');
+
+    form.method = 'POST';
+
+    form.action = API_URL;
+
+    form.target =
+      'hiddenFrame';
+
+    form.style.display =
+      'none';
+
+
+    const campo =
+      document.createElement('input');
+
+    campo.type = 'hidden';
+
+    campo.name = 'dados';
+
+    campo.value =
+      JSON.stringify(dados);
+
+
+    form.appendChild(campo);
+
+    document.body.appendChild(form);
+
+
+    form.submit();
+
+
+    setTimeout(() => {
+
+      form.remove();
+
+      totalRegistros++;
+
+      document.getElementById(
+        'totalRegistros'
+      ).textContent =
+        totalRegistros;
+
+      mostrarAlerta(
+        'Operação enviada para registro.',
+        'success'
+      );
+
+      document.getElementById(
+        'observacao'
+      ).value = '';
+
+    }, 1000);
+
+  }
+
+
+  /*
+   * ESCAPAR TEXTO
+   */
+
+  function escapeHtml(text) {
+
+    const div =
+      document.createElement('div');
+
+    div.textContent =
+      text;
+
+    return div.innerHTML;
+
+  }
+
+
+  /*
+   * NOVO LOTE
+   */
+
+  function novoLote() {
+
+    limparLote();
+
+    document.getElementById(
+      'registroForm'
+    ).reset();
+
+  }
+
+</script>
+
+
+<!-- IFRAME INVISÍVEL PARA ENVIO -->
+<iframe
+  name="hiddenFrame"
+  style="display:none;">
+</iframe>
 
 </body>
 </html>
