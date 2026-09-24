@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Leitor QR Code</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+      margin: 0;
+      background: #f5f5f5;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+    }
+
+    h1 {
+      margin-top: 0;
+    }
+
+    #leitor {
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      margin-top: 15px;
+      border: 0;
+      border-radius: 8px;
+      background: #1b5e20;
+      color: white;
+      font-size: 17px;
+    }
+
+    #resultado {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+
+  <!-- Biblioteca de leitura de QR Code -->
+  <script src="https://unpkg.com/html5-qrcode"></script>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>Leitor QR Code</h1>
+
+    <p id="status">
+      Toque no botão para iniciar a câmera.
+    </p>
+
+    <button onclick="iniciarCamera()">
+      📷 Iniciar câmera
+    </button>
+
+    <div id="leitor"></div>
+
+    <div id="resultado"></div>
+
+  </div>
+
+
+  <script>
+
+    let leitor = null;
+
+    async function iniciarCamera() {
+
+      const status = document.getElementById("status");
+
+      try {
+
+        status.innerText = "Solicitando acesso à câmera...";
+
+        /*
+         * Testa diretamente se o navegador
+         * consegue acessar a câmera.
+         */
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: {
+            facingMode: {
+              ideal: "environment"
+            }
+          },
+          audio: false
+        });
+
+        /*
+         * Se chegou aqui, a câmera foi liberada.
+         */
+        status.innerText = "✅ Câmera autorizada!";
+
+        /*
+         * Fecha o teste da câmera.
+         */
+        stream.getTracks().forEach(function(track) {
+          track.stop();
+        });
+
+        /*
+         * Agora inicia o leitor QR.
+         */
+        leitor = new Html5Qrcode("leitor");
+
+        await leitor.start(
+          {
+            facingMode: "environment"
+          },
+          {
+            fps: 10,
+            qrbox: {
+              width: 250,
+              height: 250
+            }
+          },
+          function(qrCode) {
+
+            document.getElementById("resultado").innerText =
+              "QR Code: " + qrCode;
+
+          },
+          function(error) {
+            // Erros de leitura enquanto procura o QR são normais.
+          }
+        );
+
+        status.innerText =
+          "📷 Câmera funcionando. Aponte para o QR Code.";
+
+      } catch (erro) {
+
+        console.error(erro);
+
+        status.innerText =
+          "❌ Não foi possível acessar a câmera.";
+
+        document.getElementById("resultado").innerText =
+          erro.name + ": " + erro.message;
+
+      }
+
+    }
+
+  </script>
+
+</body>
+</html>
