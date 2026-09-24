@@ -8,448 +8,242 @@
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0">
 
-<title>AgroTrace - Beneficiamento</title>
+<title>AgroTrace</title>
 
 <script src="https://unpkg.com/html5-qrcode"></script>
 
 <style>
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
 
-  margin: 0;
+    margin: 0;
 
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 
-  background: #eef2f0;
+    background:
+        linear-gradient(
+            135deg,
+            #0b2419,
+            #123d29
+        );
 
-  color: #1f2933;
+    color: #ffffff;
+
+    min-height: 100vh;
 }
-
-
-header {
-
-  background:
-    linear-gradient(
-      135deg,
-      #123b27,
-      #1f6b45
-    );
-
-  color: white;
-
-  padding: 20px;
-
-  text-align: center;
-
-  box-shadow:
-    0 2px 8px
-    rgba(0,0,0,0.15);
-}
-
-
-header h1 {
-
-  margin: 0;
-
-  font-size: 24px;
-
-  letter-spacing: .5px;
-}
-
-
-header p {
-
-  margin:
-    6px 0 0;
-
-  font-size: 13px;
-
-  opacity: .9;
-}
-
 
 .container {
 
-  max-width: 650px;
+    width: 100%;
 
-  margin:
-    auto;
+    max-width: 650px;
 
-  padding:
-    14px;
+    margin: auto;
+
+    padding: 20px;
 }
 
+.header {
+
+    text-align: center;
+
+    margin-bottom: 20px;
+}
+
+.header h1 {
+
+    margin: 0;
+
+    font-size: 28px;
+}
+
+.header p {
+
+    margin-top: 6px;
+
+    color: #b8d6c4;
+
+}
 
 .card {
 
-  background: white;
+    background: #ffffff;
 
-  border-radius:
-    14px;
+    color: #222;
 
-  padding:
-    18px;
+    border-radius: 18px;
 
-  margin-bottom:
-    15px;
+    padding: 20px;
 
-  box-shadow:
-    0 3px 12px
-    rgba(0,0,0,.08);
+    margin-bottom: 18px;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.25);
 }
 
+.card h2 {
 
-.card-title {
+    margin-top: 0;
 
-  display: flex;
+    color: #164c31;
 
-  align-items: center;
-
-  gap: 8px;
-
-  margin-bottom:
-    15px;
-
-  color:
-    #173f2a;
-
-  font-size:
-    18px;
-
-  font-weight:
-    bold;
 }
-
-
-#reader {
-
-  width: 100%;
-
-  overflow:
-    hidden;
-
-  border-radius:
-    12px;
-
-  background:
-    #111;
-}
-
-
-.camera-status {
-
-  margin-top:
-    10px;
-
-  padding:
-    11px;
-
-  border-radius:
-    8px;
-
-  background:
-    #f0f3f1;
-
-  font-size:
-    13px;
-}
-
 
 button {
 
-  width: 100%;
+    width: 100%;
 
-  border: none;
+    padding: 15px;
 
-  border-radius:
-    9px;
+    border: none;
 
-  padding:
-    14px;
+    border-radius: 12px;
 
-  margin-top:
-    10px;
+    font-size: 16px;
 
-  font-size:
-    15px;
+    font-weight: bold;
 
-  font-weight:
-    bold;
+    cursor: pointer;
 
-  cursor:
-    pointer;
+    margin-top: 10px;
 }
 
+.btn-primary {
 
-.btn-green {
+    background: #1f6b45;
 
-  background:
-    #1f6b45;
-
-  color:
-    white;
+    color: white;
 }
 
+.btn-secondary {
 
-.btn-dark {
+    background: #e7f1eb;
 
-  background:
-    #173f2a;
-
-  color:
-    white;
+    color: #164c31;
 }
 
+.btn-danger {
 
-.btn-red {
+    background: #a83232;
 
-  background:
-    #b42318;
-
-  color:
-    white;
+    color: white;
 }
-
-
-.btn-gray {
-
-  background:
-    #e5e7eb;
-
-  color:
-    #1f2933;
-}
-
-
-label {
-
-  display:
-    block;
-
-  margin-top:
-    13px;
-
-  font-size:
-    13px;
-
-  font-weight:
-    bold;
-
-  color:
-    #344054;
-}
-
 
 input,
 select,
 textarea {
 
-  width:
-    100%;
+    width: 100%;
 
-  padding:
-    12px;
+    padding: 13px;
 
-  margin-top:
-    5px;
+    margin-top: 6px;
 
-  border:
-    1px solid #cbd5d1;
+    margin-bottom: 12px;
 
-  border-radius:
-    8px;
+    border: 1px solid #ccd7d0;
 
-  font-size:
-    16px;
+    border-radius: 10px;
 
-  background:
-    white;
+    font-size: 16px;
 }
 
+label {
 
-textarea {
+    font-weight: bold;
 
-  min-height:
-    80px;
-
-  resize:
-    vertical;
+    font-size: 14px;
 }
 
+#reader {
 
-.grid {
+    width: 100%;
 
-  display:
-    grid;
+    overflow: hidden;
 
-  grid-template-columns:
-    1fr 1fr;
+    border-radius: 14px;
 
-  gap:
-    10px;
+    margin-top: 15px;
 }
-
-
-.info {
-
-  background:
-    #f3f6f4;
-
-  border-radius:
-    9px;
-
-  padding:
-    11px;
-}
-
-
-.info small {
-
-  display:
-    block;
-
-  color:
-    #667085;
-
-  font-size:
-    11px;
-}
-
-
-.info strong {
-
-  display:
-    block;
-
-  margin-top:
-    5px;
-
-  font-size:
-    15px;
-}
-
 
 .status {
 
-  margin-top:
-    10px;
+    padding: 12px;
 
-  padding:
-    12px;
+    border-radius: 10px;
 
-  border-radius:
-    8px;
+    margin-top: 12px;
 
-  background:
-    #edf6f0;
+    background: #edf6f0;
 
-  font-size:
-    13px;
+    color: #17552f;
+
+    font-weight: bold;
 }
 
+.info-grid {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+}
+
+.info {
+
+    background: #f2f6f3;
+
+    padding: 12px;
+
+    border-radius: 10px;
+}
+
+.info small {
+
+    display: block;
+
+    color: #68756d;
+
+    margin-bottom: 4px;
+}
+
+.info strong {
+
+    color: #163c29;
+}
 
 .timer {
 
-  text-align:
-    center;
+    text-align: center;
 
-  font-size:
-    32px;
+    font-size: 32px;
 
-  font-weight:
-    bold;
+    font-weight: bold;
 
-  color:
-    #173f2a;
+    color: #1f6b45;
 
-  margin:
-    18px 0;
+    margin: 15px 0;
 }
-
-
-.result {
-
-  background:
-    #edf6f0;
-
-  border-radius:
-    10px;
-
-  padding:
-    15px;
-
-  margin-top:
-    15px;
-}
-
-
-.result-number {
-
-  font-size:
-    22px;
-
-  font-weight:
-    bold;
-
-  color:
-    #173f2a;
-}
-
 
 .hidden {
 
-  display:
-    none;
+    display: none;
 }
 
+.resultado {
 
-.section-number {
+    margin-top: 15px;
 
-  background:
-    #1f6b45;
+    padding: 15px;
 
-  color:
-    white;
+    border-radius: 12px;
 
-  width:
-    26px;
-
-  height:
-    26px;
-
-  display:
-    inline-flex;
-
-  align-items:
-    center;
-
-  justify-content:
-    center;
-
-  border-radius:
-    50%;
-
-  font-size:
-    13px;
-}
-
-
-@media(max-width:450px) {
-
-  .grid {
-
-    grid-template-columns:
-      1fr;
-
-  }
-
+    background: #eaf6ed;
 }
 
 </style>
@@ -459,381 +253,295 @@ textarea {
 
 <body>
 
-
-<header>
-
-  <h1>AGROTRACE</h1>
-
-  <p>
-    Controle de Beneficiamento de Sementes
-  </p>
-
-</header>
-
-
 <div class="container">
 
+    <div class="header">
 
-<!-- ================================================= -->
-<!-- ETAPA 1 -->
-<!-- ================================================= -->
+        <h1>🌱 AgroTrace</h1>
 
-<div class="card">
-
-  <div class="card-title">
-
-    <span class="section-number">1</span>
-
-    Leitura do QR Code
-
-  </div>
-
-
-  <div id="reader"></div>
-
-
-  <button
-    id="btnCamera"
-    class="btn-green"
-    onclick="abrirCamera()">
-
-    📷 ABRIR CÂMERA TRASEIRA
-
-  </button>
-
-
-  <button
-    class="btn-gray"
-    onclick="pararCamera()">
-
-    PARAR CÂMERA
-
-  </button>
-
-
-  <div
-    id="cameraStatus"
-    class="camera-status">
-
-    Aguardando câmera...
-
-  </div>
-
-</div>
-
-
-
-<!-- ================================================= -->
-<!-- ETAPA 2 -->
-<!-- ================================================= -->
-
-<div
-  id="dadosLote"
-  class="card hidden">
-
-
-  <div class="card-title">
-
-    <span class="section-number">2</span>
-
-    Dados do Lote
-
-  </div>
-
-
-  <div class="grid">
-
-
-    <div class="info">
-
-      <small>QR CODE</small>
-
-      <strong id="qr">
-        -
-      </strong>
+        <p>Controle de Beneficiamento de Sementes</p>
 
     </div>
 
 
-    <div class="info">
+    <!-- ========================================= -->
+    <!-- LOCALIZAÇÃO DO LOTE -->
+    <!-- ========================================= -->
 
-      <small>LOTE</small>
+    <div class="card">
 
-      <strong id="lote">
-        -
-      </strong>
+        <h2>🔎 Localizar Lote</h2>
 
-    </div>
+        <p>
+            Escolha uma das duas formas para localizar o lote.
+        </p>
 
 
-    <div class="info">
+        <!-- QR -->
 
-      <small>VARIEDADE</small>
+        <button
+            class="btn-primary"
+            onclick="abrirScanner()">
 
-      <strong id="variedade">
-        -
-      </strong>
+            📷 Escanear QR Code
 
-    </div>
+        </button>
 
 
-    <div class="info">
+        <div id="reader"></div>
 
-      <small>PENEIRA</small>
-
-      <strong id="peneira">
-        -
-      </strong>
-
-    </div>
-
-
-    <div class="info">
-
-      <small>UMIDADE NO RECEBIMENTO</small>
-
-      <strong id="umidadeRecebimento">
-        -
-      </strong>
-
-    </div>
-
-
-    <div class="info">
-
-      <small>PESO DO BAG NO RECEBIMENTO</small>
-
-      <strong id="pesoRecebimento">
-        -
-      </strong>
-
-    </div>
-
-
-  </div>
-
-</div>
-
-
-
-<!-- ================================================= -->
-<!-- ETAPA 3 -->
-<!-- ================================================= -->
-
-<div
-  id="beneficiamento"
-  class="card hidden">
-
-
-  <div class="card-title">
-
-    <span class="section-number">3</span>
-
-    Beneficiamento
-
-  </div>
-
-
-  <label>
-    Operador
-  </label>
-
-  <input
-    id="operador"
-    type="text"
-    placeholder="Nome do operador">
-
-
-  <label>
-    Máquina utilizada
-  </label>
-
-  <select id="maquina">
-
-    <option value="">
-      Selecione a máquina
-    </option>
-
-    <option value="CD 500">
-      CD 500
-    </option>
-
-    <option value="CD 1000">
-      CD 1000
-    </option>
-
-  </select>
-
-
-  <label>
-    Umidade antes do beneficiamento (%)
-  </label>
-
-  <input
-    id="umidadeAntes"
-    type="number"
-    step="0.01"
-    placeholder="Ex.: 13,50">
-
-
-  <label>
-    Peso do bag antes do beneficiamento (kg)
-  </label>
-
-  <input
-    id="pesoAntes"
-    type="number"
-    step="0.01"
-    placeholder="Ex.: 1200,00">
-
-
-  <button
-    id="btnIniciar"
-    class="btn-green"
-    onclick="iniciarBeneficiamento()">
-
-    ▶ INICIAR BENEFICIAMENTO
-
-  </button>
-
-
-  <div
-    id="timer"
-    class="timer hidden">
-
-    00:00:00
-
-  </div>
-
-
-  <button
-    id="btnFinalizar"
-    class="btn-red hidden"
-    onclick="abrirFinalizacao()">
-
-    ■ FINALIZAR BENEFICIAMENTO
-
-  </button>
-
-</div>
-
-
-
-<!-- ================================================= -->
-<!-- ETAPA 4 -->
-<!-- ================================================= -->
-
-<div
-  id="finalizacao"
-  class="card hidden">
-
-
-  <div class="card-title">
-
-    <span class="section-number">4</span>
-
-    Finalização
-
-  </div>
-
-
-  <label>
-    Umidade depois do beneficiamento (%)
-  </label>
-
-  <input
-    id="umidadeDepois"
-    type="number"
-    step="0.01"
-    placeholder="Ex.: 12,80">
-
-
-  <label>
-    Peso do bag depois do beneficiamento (kg)
-  </label>
-
-  <input
-    id="pesoDepois"
-    type="number"
-    step="0.01"
-    placeholder="Ex.: 1140,00"
-    oninput="calcularResultados()">
-
-
-  <div class="result">
-
-
-    <div class="grid">
-
-
-      <div>
-
-        <small>
-          DESCARTE
-        </small>
 
         <div
-          id="descarte"
-          class="result-number">
+            id="cameraStatus"
+            class="status hidden">
 
-          0,00 kg
+            Aguardando leitura...
 
         </div>
 
-      </div>
+
+        <hr style="margin:20px 0;border:0;border-top:1px solid #ddd;">
 
 
-      <div>
+        <!-- LOTE MANUAL -->
 
-        <small>
-          RENDIMENTO
-        </small>
+        <label>
 
-        <div
-          id="rendimento"
-          class="result-number">
+            Ou digite o lote
 
-          0,00 %
+        </label>
 
-        </div>
+        <input
+            id="loteManual"
+            type="text"
+            placeholder="Ex.: LT26-001"
+            autocomplete="off">
 
-      </div>
 
+        <button
+            class="btn-secondary"
+            onclick="buscarPorLote()">
+
+            🔎 Buscar pelo Lote
+
+        </button>
 
     </div>
 
-  </div>
+
+    <!-- ========================================= -->
+    <!-- DADOS DO LOTE -->
+    <!-- ========================================= -->
+
+    <div
+        id="dadosLote"
+        class="card hidden">
+
+        <h2>📋 Dados do Lote</h2>
+
+        <div class="info-grid">
+
+            <div class="info">
+                <small>QR</small>
+                <strong id="infoQR">-</strong>
+            </div>
+
+            <div class="info">
+                <small>Lote</small>
+                <strong id="infoLote">-</strong>
+            </div>
+
+            <div class="info">
+                <small>Variedade</small>
+                <strong id="infoVariedade">-</strong>
+            </div>
+
+            <div class="info">
+                <small>Peneira</small>
+                <strong id="infoPeneira">-</strong>
+            </div>
+
+            <div class="info">
+                <small>Umidade recebimento</small>
+                <strong id="infoUmidadeRecebimento">-</strong>
+            </div>
+
+            <div class="info">
+                <small>Peso recebido</small>
+                <strong id="infoPesoRecebido">-</strong>
+            </div>
+
+            <div class="info">
+                <small>Data recebimento</small>
+                <strong id="infoDataRecebimento">-</strong>
+            </div>
+
+        </div>
+
+    </div>
 
 
-  <label>
-    Observação
-  </label>
+    <!-- ========================================= -->
+    <!-- BENEFICIAMENTO -->
+    <!-- ========================================= -->
 
-  <textarea
-    id="observacao"
-    placeholder="Observações do beneficiamento..."></textarea>
+    <div
+        id="beneficiamento"
+        class="card hidden">
 
-
-  <button
-    class="btn-green"
-    onclick="salvarBeneficiamento()">
-
-    💾 SALVAR BENEFICIAMENTO
-
-  </button>
-
-</div>
+        <h2>⚙️ Beneficiamento</h2>
 
 
+        <label>
+            Operador
+        </label>
 
-<div
-  id="statusGeral"
-  class="status">
+        <input
+            id="operador"
+            type="text"
+            placeholder="Nome do operador">
 
-  Sistema pronto para leitura.
 
-</div>
+        <label>
+            Máquina
+        </label>
 
+        <select id="maquina">
+
+            <option value="">
+                Selecione a máquina
+            </option>
+
+            <option value="CD 500">
+                CD 500
+            </option>
+
+            <option value="CD 1000">
+                CD 1000
+            </option>
+
+        </select>
+
+
+        <label>
+            Umidade antes do beneficiamento (%)
+        </label>
+
+        <input
+            id="umidadeAntes"
+            type="number"
+            step="0.1">
+
+
+        <label>
+            Peso antes do beneficiamento (kg)
+        </label>
+
+        <input
+            id="pesoAntes"
+            type="number"
+            step="0.01">
+
+
+        <button
+            id="btnIniciar"
+            class="btn-primary"
+            onclick="iniciarBeneficiamento()">
+
+            ▶️ Iniciar Beneficiamento
+
+        </button>
+
+
+        <div
+            id="timer"
+            class="timer hidden">
+
+            00:00:00
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================= -->
+    <!-- FINALIZAÇÃO -->
+    <!-- ========================================= -->
+
+    <div
+        id="finalizacao"
+        class="card hidden">
+
+        <h2>✅ Finalizar Beneficiamento</h2>
+
+
+        <label>
+            Umidade depois do beneficiamento (%)
+        </label>
+
+        <input
+            id="umidadeDepois"
+            type="number"
+            step="0.1">
+
+
+        <label>
+            Peso depois do beneficiamento (kg)
+        </label>
+
+        <input
+            id="pesoDepois"
+            type="number"
+            step="0.01">
+
+
+        <label>
+            Observações
+        </label>
+
+        <textarea
+            id="observacao"
+            rows="4"
+            placeholder="Digite alguma observação, se necessário">
+        </textarea>
+
+
+        <button
+            class="btn-primary"
+            onclick="finalizarBeneficiamento()">
+
+            ✔️ Finalizar e Registrar
+
+        </button>
+
+    </div>
+
+
+    <!-- ========================================= -->
+    <!-- RESULTADO -->
+    <!-- ========================================= -->
+
+    <div
+        id="resultado"
+        class="card hidden">
+
+        <h2>📊 Resultado</h2>
+
+        <div class="resultado">
+
+            <p>
+                <strong>Descarte:</strong>
+                <span id="resultadoDescarte">-</span> kg
+            </p>
+
+            <p>
+                <strong>Rendimento:</strong>
+                <span id="resultadoRendimento">-</span> %
+            </p>
+
+        </div>
+
+    </div>
 
 </div>
 
@@ -841,1102 +549,805 @@ textarea {
 <script>
 
 
-/* =====================================================
-CONFIGURAÇÃO
-===================================================== */
-
+// =====================================================
+// CONFIGURAÇÃO
+// =====================================================
 
 const API_URL =
-'https://script.google.com/macros/s/AKfycbzy3I6pS51O2t_4SaknhBAbFX81lokKEOJp6y22ea8oBrw1_Crcv1SdV9pRkcIkRUXpkA/exec';
+"https://script.google.com/macros/s/AKfycbzy3I6pS51O2t_4SaknhBAbFX81lokKEOJp6y22ea8oBrw1_Crcv1SdV9pRkcIkRUXpkA/exec";
 
 
-let leitor = null;
+let scanner = null;
 
 let loteAtual = null;
 
-let inicio = null;
+let inicioBeneficiamento = null;
 
-let fim = null;
-
-let intervaloTimer = null;
+let timerInterval = null;
 
 
-/* =====================================================
-CAMERA
-===================================================== */
+// =====================================================
+// ABRIR SCANNER
+// =====================================================
+
+async function abrirScanner() {
+
+    const status =
+        document.getElementById("cameraStatus");
+
+    status.classList.remove("hidden");
+
+    status.innerText =
+        "Preparando câmera traseira...";
+
+    try {
+
+        // Solicita permissão e tenta identificar as câmeras
+        const stream =
+            await navigator.mediaDevices.getUserMedia({
+
+                video: {
+                    facingMode: {
+                        ideal: "environment"
+                    }
+                },
+
+                audio: false
+
+            });
 
 
-async function abrirCamera() {
+        const devices =
+            await navigator.mediaDevices.enumerateDevices();
 
 
-  mostrarCameraStatus(
-    "Solicitando acesso à câmera..."
-  );
+        stream.getTracks().forEach(track => {
+            track.stop();
+        });
 
 
-  try {
+        const cameras =
+            devices.filter(
+                device =>
+                    device.kind === "videoinput"
+            );
 
 
-    /*
-    PRIMEIRO:
-    pedimos acesso à câmera traseira.
-    Isso permite que o navegador revele
-    os nomes das câmeras disponíveis.
-    */
+        if (!cameras.length) {
 
-
-    const stream =
-      await navigator.mediaDevices.getUserMedia({
-
-        video: {
-          facingMode: {
-            ideal: "environment"
-          }
-        },
-
-        audio: false
-
-      });
-
-
-    /*
-    Agora que o navegador autorizou,
-    podemos descobrir os dispositivos.
-    */
-
-
-    const dispositivos =
-      await navigator.mediaDevices.enumerateDevices();
-
-
-    /*
-    Paramos a câmera temporária.
-    */
-
-
-    stream.getTracks().forEach(
-      track => track.stop()
-    );
-
-
-    const cameras =
-      dispositivos.filter(
-        dispositivo =>
-          dispositivo.kind ===
-          "videoinput"
-      );
-
-
-    if (!cameras.length) {
-
-      throw new Error(
-        "Nenhuma câmera encontrada."
-      );
-
-    }
-
-
-    /*
-    Procuramos uma câmera traseira
-    pelo nome do dispositivo.
-    */
-
-
-    let traseira =
-      cameras.find(
-        camera => {
-
-          const nome =
-            (
-              camera.label || ""
-            ).toLowerCase();
-
-
-          return (
-
-            nome.includes("back") ||
-
-            nome.includes("rear") ||
-
-            nome.includes("environment") ||
-
-            nome.includes("traseira") ||
-
-            nome.includes("tras") ||
-
-            nome.includes("trás")
-
-          );
+            throw new Error(
+                "Nenhuma câmera encontrada."
+            );
 
         }
-      );
 
 
-    /*
-    Se não encontrarmos pelo nome,
-    tentamos identificar pela ordem.
-    */
+        let cameraTraseira =
+            cameras.find(camera => {
 
+                const nome =
+                    (camera.label || "").toLowerCase();
 
-    if (!traseira) {
+                return (
 
-      if (cameras.length > 1) {
+                    nome.includes("back") ||
+                    nome.includes("rear") ||
+                    nome.includes("environment") ||
+                    nome.includes("traseira") ||
+                    nome.includes("tras") ||
+                    nome.includes("trás")
 
-        traseira =
-          cameras[cameras.length - 1];
+                );
 
-      } else {
+            });
 
-        traseira =
-          cameras[0];
 
-      }
+        if (!cameraTraseira) {
 
-    }
-
-
-    mostrarCameraStatus(
-      "Câmera selecionada: " +
-      (traseira.label ||
-       "câmera traseira")
-    );
-
-
-    /*
-    Se já existe leitor,
-    paramos antes de iniciar novamente.
-    */
-
-
-    if (leitor) {
-
-      try {
-
-        await leitor.stop();
-
-      } catch(e) {}
-
-    }
-
-
-    leitor =
-      new Html5Qrcode("reader");
-
-
-    /*
-    AGORA SIM:
-    usamos o ID EXATO da câmera traseira.
-    */
-
-
-    await leitor.start(
-
-      traseira.deviceId,
-
-      {
-
-        fps: 10,
-
-        qrbox: {
-          width: 250,
-          height: 250
-        },
-
-        aspectRatio: 1.0
-
-      },
-
-      qrLido,
-
-      function() {}
-
-    );
-
-
-    mostrarCameraStatus(
-      "📷 Câmera traseira ativa. Aponte para o QR Code."
-    );
-
-
-  } catch (erro) {
-
-
-    console.error(erro);
-
-
-    mostrarCameraStatus(
-
-      "❌ Não foi possível abrir a câmera. " +
-      "Verifique a permissão do navegador."
-
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-PARAR CAMERA
-===================================================== */
-
-
-async function pararCamera() {
-
-
-  if (!leitor) {
-    return;
-  }
-
-
-  try {
-
-    await leitor.stop();
-
-
-    mostrarCameraStatus(
-      "Câmera parada."
-    );
-
-
-  } catch(erro) {
-
-    console.log(erro);
-
-  }
-
-}
-
-
-/* =====================================================
-QR LIDO
-===================================================== */
-
-
-function qrLido(codigo) {
-
-
-  mostrarCameraStatus(
-    "QR Code identificado: " +
-    codigo
-  );
-
-
-  pararCamera();
-
-
-  buscarLote(codigo);
-
-}
-
-
-/* =====================================================
-BUSCAR LOTE
-===================================================== */
-
-
-function buscarLote(qr) {
-
-
-  mostrarStatus(
-    "Consultando lote..."
-  );
-
-
-  const callback =
-    "qrCallback_" +
-    Date.now();
-
-
-  window[callback] =
-    function(resposta) {
-
-
-      try {
-
-
-        if (!resposta.sucesso) {
-
-
-          mostrarStatus(
-            "❌ " +
-            resposta.mensagem
-          );
-
-
-          return;
+            cameraTraseira =
+                cameras.length > 1
+                    ? cameras[cameras.length - 1]
+                    : cameras[0];
 
         }
 
 
-        loteAtual =
-          resposta.dados;
+        if (scanner) {
+
+            try {
+                await scanner.stop();
+            } catch(e) {}
+
+        }
 
 
-        preencherDados(
-          resposta.dados
+        scanner =
+            new Html5Qrcode("reader");
+
+
+        await scanner.start(
+
+            cameraTraseira.deviceId,
+
+            {
+                fps: 10,
+
+                qrbox: {
+                    width: 250,
+                    height: 250
+                }
+
+            },
+
+            qrCodeMessage => {
+
+                scanner.stop();
+
+                status.innerText =
+                    "QR Code identificado: " +
+                    qrCodeMessage;
+
+                buscarPorQR(qrCodeMessage);
+
+            },
+
+            errorMessage => {}
+
         );
 
 
-        mostrarStatus(
-          "✅ Lote encontrado e carregado."
-        );
+        status.innerText =
+            "Aponte a câmera para o QR Code.";
+
+    }
+
+    catch(error) {
+
+        console.error(error);
+
+        status.innerText =
+            "Não foi possível abrir a câmera: " +
+            error.message;
+
+    }
+
+}
 
 
-      } finally {
+// =====================================================
+// BUSCAR PELO QR
+// =====================================================
 
+async function buscarPorQR(qr) {
 
-        delete window[callback];
-
-      }
-
-    };
-
-
-  const script =
-    document.createElement(
-      "script"
+    mostrarStatus(
+        "Consultando lote pelo QR Code..."
     );
 
 
-  script.src =
-    API_URL +
-    "?acao=buscar" +
-    "&qr=" +
-    encodeURIComponent(qr) +
-    "&callback=" +
-    callback;
+    try {
+
+        const url =
+            API_URL +
+            "?acao=buscar&qr=" +
+            encodeURIComponent(qr);
 
 
-  script.onerror =
-    function() {
+        const resposta =
+            await fetch(url);
 
 
-      mostrarStatus(
-        "❌ Erro ao consultar o sistema."
-      );
+        const resultado =
+            await resposta.json();
 
 
-      delete window[callback];
+        processarResultado(resultado);
 
-    };
+    }
 
+    catch(error) {
 
-  document.body.appendChild(
-    script
-  );
+        alert(
+            "Erro ao consultar o QR Code."
+        );
 
-}
+        console.error(error);
 
-
-/* =====================================================
-PREENCHER DADOS
-===================================================== */
-
-
-function preencherDados(dados) {
-
-
-  document.getElementById(
-    "qr"
-  ).innerText =
-    dados.QR || "-";
-
-
-  document.getElementById(
-    "lote"
-  ).innerText =
-    dados.LOTE || "-";
-
-
-  document.getElementById(
-    "variedade"
-  ).innerText =
-    dados.VARIEDADE || "-";
-
-
-  document.getElementById(
-    "peneira"
-  ).innerText =
-    dados.PENEIRA || "-";
-
-
-  document.getElementById(
-    "umidadeRecebimento"
-  ).innerText =
-    dados.UMIDADE_RECEBIMENTO
-    || "-";
-
-
-  document.getElementById(
-    "pesoRecebimento"
-  ).innerText =
-    dados.PESO_RECEBIDO
-    || "-";
-
-
-  document.getElementById(
-    "dadosLote"
-  ).classList.remove(
-    "hidden"
-  );
-
-
-  document.getElementById(
-    "beneficiamento"
-  ).classList.remove(
-    "hidden"
-  );
+    }
 
 }
 
 
-/* =====================================================
-INICIAR BENEFICIAMENTO
-===================================================== */
+// =====================================================
+// BUSCAR PELO LOTE
+// =====================================================
 
+async function buscarPorLote() {
+
+    const campo =
+        document.getElementById("loteManual");
+
+    const lote =
+        campo.value.trim();
+
+
+    if (!lote) {
+
+        alert(
+            "Digite o número do lote."
+        );
+
+        campo.focus();
+
+        return;
+
+    }
+
+
+    mostrarStatus(
+        "Consultando lote..."
+    );
+
+
+    try {
+
+        const url =
+            API_URL +
+            "?acao=buscar&lote=" +
+            encodeURIComponent(lote);
+
+
+        const resposta =
+            await fetch(url);
+
+
+        const resultado =
+            await resposta.json();
+
+
+        processarResultado(resultado);
+
+    }
+
+    catch(error) {
+
+        alert(
+            "Erro ao consultar o lote."
+        );
+
+        console.error(error);
+
+    }
+
+}
+
+
+// =====================================================
+// PROCESSAR RESULTADO DA CONSULTA
+// =====================================================
+
+function processarResultado(resultado) {
+
+    if (!resultado.sucesso) {
+
+        alert(
+            resultado.mensagem ||
+            "Lote não encontrado."
+        );
+
+        return;
+
+    }
+
+
+    loteAtual =
+        resultado.dados;
+
+
+    preencherDadosLote(
+        loteAtual
+    );
+
+
+    document
+        .getElementById("dadosLote")
+        .classList.remove("hidden");
+
+
+    document
+        .getElementById("beneficiamento")
+        .classList.remove("hidden");
+
+
+    document
+        .getElementById("finalizacao")
+        .classList.add("hidden");
+
+
+    document
+        .getElementById("resultado")
+        .classList.add("hidden");
+
+
+    // Preenche automaticamente o peso recebido
+    document
+        .getElementById("pesoAntes")
+        .value =
+        loteAtual.PESO_RECEBIDO || "";
+
+
+    document
+        .getElementById("umidadeAntes")
+        .value =
+        loteAtual.UMIDADE_RECEBIMENTO || "";
+
+
+    window.scrollTo({
+        top: document
+            .getElementById("dadosLote")
+            .offsetTop,
+        behavior: "smooth"
+    });
+
+}
+
+
+// =====================================================
+// PREENCHER DADOS
+// =====================================================
+
+function preencherDadosLote(dados) {
+
+    document
+        .getElementById("infoQR")
+        .innerText =
+        dados.QR || "-";
+
+
+    document
+        .getElementById("infoLote")
+        .innerText =
+        dados.LOTE || "-";
+
+
+    document
+        .getElementById("infoVariedade")
+        .innerText =
+        dados.VARIEDADE || "-";
+
+
+    document
+        .getElementById("infoPeneira")
+        .innerText =
+        dados.PENEIRA || "-";
+
+
+    document
+        .getElementById("infoUmidadeRecebimento")
+        .innerText =
+        dados.UMIDADE_RECEBIMENTO || "-";
+
+
+    document
+        .getElementById("infoPesoRecebido")
+        .innerText =
+        dados.PESO_RECEBIDO || "-";
+
+
+    document
+        .getElementById("infoDataRecebimento")
+        .innerText =
+        formatarData(
+            dados.DATA_RECEBIMENTO
+        );
+
+}
+
+
+// =====================================================
+// INICIAR BENEFICIAMENTO
+// =====================================================
 
 function iniciarBeneficiamento() {
 
+    const operador =
+        document.getElementById("operador").value.trim();
 
-  const operador =
-    document.getElementById(
-      "operador"
-    ).value.trim();
+    const maquina =
+        document.getElementById("maquina").value;
 
+    const pesoAntes =
+        document.getElementById("pesoAntes").value;
 
-  const maquina =
-    document.getElementById(
-      "maquina"
-    ).value;
-
-
-  const umidade =
-    document.getElementById(
-      "umidadeAntes"
-    ).value;
+    const umidadeAntes =
+        document.getElementById("umidadeAntes").value;
 
 
-  const peso =
-    document.getElementById(
-      "pesoAntes"
-    ).value;
+    if (!operador) {
+
+        alert("Informe o operador.");
+
+        return;
+
+    }
 
 
-  if (!operador) {
+    if (!maquina) {
 
-    alert(
-      "Informe o operador."
-    );
+        alert("Selecione a máquina.");
 
-    return;
+        return;
 
-  }
+    }
 
 
-  if (!maquina) {
+    if (!pesoAntes) {
 
-    alert(
-      "Selecione a máquina."
-    );
+        alert("Informe o peso antes.");
 
-    return;
+        return;
 
-  }
+    }
 
 
-  if (!umidade) {
+    if (!umidadeAntes) {
 
-    alert(
-      "Informe a umidade antes do beneficiamento."
-    );
+        alert("Informe a umidade antes.");
 
-    return;
+        return;
 
-  }
+    }
 
 
-  if (!peso) {
-
-    alert(
-      "Informe o peso do bag antes do beneficiamento."
-    );
-
-    return;
-
-  }
+    inicioBeneficiamento =
+        new Date();
 
 
-  inicio =
-    new Date();
+    document
+        .getElementById("btnIniciar")
+        .disabled = true;
 
 
-  document.getElementById(
-    "btnIniciar"
-  ).classList.add(
-    "hidden"
-  );
+    document
+        .getElementById("btnIniciar")
+        .innerText =
+        "Beneficiamento em andamento...";
 
 
-  document.getElementById(
-    "btnFinalizar"
-  ).classList.remove(
-    "hidden"
-  );
+    document
+        .getElementById("finalizacao")
+        .classList.remove("hidden");
 
 
-  document.getElementById(
-    "timer"
-  ).classList.remove(
-    "hidden"
-  );
+    document
+        .getElementById("timer")
+        .classList.remove("hidden");
 
 
-  iniciarTimer();
-
-
-  mostrarStatus(
-    "🟢 Beneficiamento iniciado às " +
-    inicio.toLocaleTimeString("pt-BR")
-  );
+    iniciarTimer();
 
 }
 
 
-/* =====================================================
-TIMER
-===================================================== */
-
+// =====================================================
+// TIMER
+// =====================================================
 
 function iniciarTimer() {
 
-
-  clearInterval(
-    intervaloTimer
-  );
+    clearInterval(timerInterval);
 
 
-  intervaloTimer =
-    setInterval(
+    timerInterval =
+        setInterval(() => {
 
-      function() {
-
-
-        const agora =
-          new Date();
+            const agora =
+                new Date();
 
 
-        const diferenca =
-          agora - inicio;
+            const segundos =
+                Math.floor(
+                    (agora - inicioBeneficiamento) /
+                    1000
+                );
 
 
-        const segundos =
-          Math.floor(
-            diferenca / 1000
-          );
+            const h =
+                Math.floor(
+                    segundos / 3600
+                );
 
 
-        const horas =
-          Math.floor(
-            segundos / 3600
-          );
+            const m =
+                Math.floor(
+                    (segundos % 3600) / 60
+                );
 
 
-        const minutos =
-          Math.floor(
-            (segundos % 3600) / 60
-          );
+            const s =
+                segundos % 60;
 
 
-        const segundosRestantes =
-          segundos % 60;
+            document
+                .getElementById("timer")
+                .innerText =
+                String(h).padStart(2,"0") +
+                ":" +
+                String(m).padStart(2,"0") +
+                ":" +
+                String(s).padStart(2,"0");
 
-
-        document.getElementById(
-          "timer"
-        ).innerText =
-
-          String(horas)
-            .padStart(2,"0")
-
-          + ":" +
-
-          String(minutos)
-            .padStart(2,"0")
-
-          + ":" +
-
-          String(segundosRestantes)
-            .padStart(2,"0");
-
-
-      },
-
-      1000
-
-    );
+        },1000);
 
 }
 
 
-/* =====================================================
-ABRIR FINALIZAÇÃO
-===================================================== */
+// =====================================================
+// FINALIZAR
+// =====================================================
+
+function finalizarBeneficiamento() {
+
+    const pesoDepois =
+        Number(
+            document
+                .getElementById("pesoDepois")
+                .value
+        );
 
 
-function abrirFinalizacao() {
+    const umidadeDepois =
+        document
+            .getElementById("umidadeDepois")
+            .value;
 
 
-  fim =
-    new Date();
+    const pesoAntes =
+        Number(
+            document
+                .getElementById("pesoAntes")
+                .value
+        );
 
 
-  clearInterval(
-    intervaloTimer
-  );
+    if (!pesoDepois) {
+
+        alert(
+            "Informe o peso depois do beneficiamento."
+        );
+
+        return;
+
+    }
 
 
-  document.getElementById(
-    "timer"
-  ).innerText =
-    calcularTempo();
+    if (!umidadeDepois) {
+
+        alert(
+            "Informe a umidade depois."
+        );
+
+        return;
+
+    }
 
 
-  document.getElementById(
-    "finalizacao"
-  ).classList.remove(
-    "hidden"
-  );
+    const fim =
+        new Date();
 
 
-  mostrarStatus(
-    "🟡 Beneficiamento finalizado às " +
-    fim.toLocaleTimeString("pt-BR") +
-    ". Informe os dados finais."
-  );
-
-}
-
-
-/* =====================================================
-TEMPO TOTAL
-===================================================== */
-
-
-function calcularTempo() {
-
-
-  if (!inicio || !fim) {
-    return "00:00:00";
-  }
-
-
-  const segundos =
-    Math.floor(
-      (fim - inicio) / 1000
-    );
-
-
-  const horas =
-    Math.floor(
-      segundos / 3600
-    );
-
-
-  const minutos =
-    Math.floor(
-      (segundos % 3600) / 60
-    );
-
-
-  const seg =
-    segundos % 60;
-
-
-  return (
-
-    String(horas).padStart(2,"0")
-
-    + ":" +
-
-    String(minutos).padStart(2,"0")
-
-    + ":" +
-
-    String(seg).padStart(2,"0")
-
-  );
-
-}
-
-
-/* =====================================================
-CALCULAR DESCARTE E RENDIMENTO
-===================================================== */
-
-
-function calcularResultados() {
-
-
-  const pesoAntes =
-    Number(
-      document.getElementById(
-        "pesoAntes"
-      ).value
-    );
-
-
-  const pesoDepois =
-    Number(
-      document.getElementById(
-        "pesoDepois"
-      ).value
-    );
-
-
-  if (
-    pesoAntes > 0 &&
-    pesoDepois >= 0
-  ) {
+    clearInterval(timerInterval);
 
 
     const descarte =
-      pesoAntes -
-      pesoDepois;
+        pesoAntes - pesoDepois;
 
 
     const rendimento =
-      (
-        pesoDepois /
-        pesoAntes
-      ) * 100;
+        pesoAntes > 0
+            ? (pesoDepois / pesoAntes) * 100
+            : 0;
 
 
-    document.getElementById(
-      "descarte"
-    ).innerText =
-
-      descarte.toFixed(2) +
-      " kg";
+    document
+        .getElementById("resultadoDescarte")
+        .innerText =
+        descarte.toFixed(2);
 
 
-    document.getElementById(
-      "rendimento"
-    ).innerText =
+    document
+        .getElementById("resultadoRendimento")
+        .innerText =
+        rendimento.toFixed(2);
 
-      rendimento.toFixed(2) +
-      " %";
 
-  }
+    document
+        .getElementById("resultado")
+        .classList.remove("hidden");
+
+
+    enviarBeneficiamento(fim);
 
 }
 
 
-/* =====================================================
-SALVAR
-===================================================== */
+// =====================================================
+// ENVIAR PARA APPS SCRIPT
+// =====================================================
 
+function enviarBeneficiamento(fim) {
 
-function salvarBeneficiamento() {
+    const dados = {
 
+        qr:
+            loteAtual.QR || "",
 
-  const umidadeDepois =
-    document.getElementById(
-      "umidadeDepois"
-    ).value;
+        lote:
+            loteAtual.LOTE || "",
 
+        variedade:
+            loteAtual.VARIEDADE || "",
 
-  const pesoDepois =
-    Number(
-      document.getElementById(
-        "pesoDepois"
-      ).value
-    );
+        peneira:
+            loteAtual.PENEIRA || "",
 
+        umidadeRecebimento:
+            loteAtual.UMIDADE_RECEBIMENTO || "",
 
-  const pesoAntes =
-    Number(
-      document.getElementById(
-        "pesoAntes"
-      ).value
-    );
+        pesoRecebimento:
+            loteAtual.PESO_RECEBIDO || "",
 
+        operador:
+            document
+                .getElementById("operador")
+                .value,
 
-  if (!umidadeDepois) {
+        maquina:
+            document
+                .getElementById("maquina")
+                .value,
 
-    alert(
-      "Informe a umidade depois do beneficiamento."
-    );
+        dataInicio:
+            formatarDataEnvio(
+                inicioBeneficiamento
+            ),
 
-    return;
+        horaInicio:
+            formatarHora(
+                inicioBeneficiamento
+            ),
 
-  }
+        umidadeAntes:
+            document
+                .getElementById("umidadeAntes")
+                .value,
 
+        pesoAntes:
+            document
+                .getElementById("pesoAntes")
+                .value,
 
-  if (
-    isNaN(pesoDepois)
-  ) {
+        dataFim:
+            formatarDataEnvio(
+                fim
+            ),
 
-    alert(
-      "Informe o peso do bag depois do beneficiamento."
-    );
+        horaFim:
+            formatarHora(
+                fim
+            ),
 
-    return;
+        umidadeDepois:
+            document
+                .getElementById("umidadeDepois")
+                .value,
 
-  }
+        pesoDepois:
+            document
+                .getElementById("pesoDepois")
+                .value,
 
+        observacao:
+            document
+                .getElementById("observacao")
+                .value,
 
-  if (!inicio || !fim) {
+        tempoProcesso:
+            document
+                .getElementById("timer")
+                .innerText
 
-    alert(
-      "O início e o término do beneficiamento não foram registrados."
-    );
+    };
 
-    return;
 
-  }
+    const form =
+        document.createElement("form");
 
 
-  const descarte =
-    pesoAntes -
-    pesoDepois;
+    form.method = "POST";
 
+    form.action = API_URL;
 
-  const rendimento =
-    pesoAntes > 0
+    form.target = "hiddenFrame";
 
-      ? (
-          pesoDepois /
-          pesoAntes
-        ) * 100
 
-      : 0;
+    const input =
+        document.createElement("input");
 
 
-  const dados = {
+    input.type = "hidden";
 
+    input.name = "dados";
 
-    QR:
-      loteAtual.QR || "",
+    input.value =
+        JSON.stringify(dados);
 
 
-    LOTE:
-      loteAtual.LOTE || "",
+    form.appendChild(input);
 
+    document.body.appendChild(form);
 
-    VARIEDADE:
-      loteAtual.VARIEDADE || "",
+    form.submit();
 
-
-    PENEIRA:
-      loteAtual.PENEIRA || "",
-
-
-    UMIDADE_RECEBIMENTO:
-      loteAtual.UMIDADE_RECEBIMENTO || "",
-
-
-    PESO_RECEBIMENTO:
-      loteAtual.PESO_RECEBIDO || "",
-
-
-    OPERADOR:
-      document.getElementById(
-        "operador"
-      ).value,
-
-
-    MAQUINA:
-      document.getElementById(
-        "maquina"
-      ).value,
-
-
-    DATA_INICIO:
-      inicio.toLocaleDateString(
-        "pt-BR"
-      ),
-
-
-    HORA_INICIO:
-      inicio.toLocaleTimeString(
-        "pt-BR"
-      ),
-
-
-    UMIDADE_ANTES:
-      document.getElementById(
-        "umidadeAntes"
-      ).value,
-
-
-    PESO_ANTES:
-      pesoAntes,
-
-
-    DATA_FIM:
-      fim.toLocaleDateString(
-        "pt-BR"
-      ),
-
-
-    HORA_FIM:
-      fim.toLocaleTimeString(
-        "pt-BR"
-      ),
-
-
-    UMIDADE_DEPOIS:
-      umidadeDepois,
-
-
-    PESO_DEPOIS:
-      pesoDepois,
-
-
-    DESCARTE:
-      descarte,
-
-
-    RENDIMENTO:
-      rendimento,
-
-
-    TEMPO_PROCESSO:
-      calcularTempo(),
-
-
-    OBSERVACAO:
-      document.getElementById(
-        "observacao"
-      ).value,
-
-
-    STATUS:
-      "FINALIZADO"
-
-  };
-
-
-  enviarDados(dados);
+    form.remove();
 
 }
 
 
-/* =====================================================
-ENVIAR PARA APPS SCRIPT
-===================================================== */
+// =====================================================
+// FUNÇÕES AUXILIARES
+// =====================================================
 
+function mostrarStatus(texto) {
 
-function enviarDados(dados) {
+    const status =
+        document.getElementById("cameraStatus");
 
+    status.classList.remove("hidden");
 
-  mostrarStatus(
-    "💾 Salvando beneficiamento..."
-  );
-
-
-  const formulario =
-    document.createElement(
-      "form"
-    );
-
-
-  formulario.method =
-    "POST";
-
-
-  formulario.action =
-    API_URL;
-
-
-  formulario.target =
-    "iframeEnvio";
-
-
-  const campo =
-    document.createElement(
-      "input"
-    );
-
-
-  campo.type =
-    "hidden";
-
-
-  campo.name =
-    "dados";
-
-
-  campo.value =
-    JSON.stringify(dados);
-
-
-  formulario.appendChild(
-    campo
-  );
-
-
-  document.body.appendChild(
-    formulario
-  );
-
-
-  formulario.submit();
-
-
-  setTimeout(
-
-    function() {
-
-
-      mostrarStatus(
-        "✅ Beneficiamento salvo com sucesso."
-      );
-
-
-      alert(
-        "Beneficiamento registrado com sucesso!"
-      );
-
-
-      location.reload();
-
-
-    },
-
-    1800
-
-  );
+    status.innerText = texto;
 
 }
 
 
-/* =====================================================
-MENSAGENS
-===================================================== */
+function formatarData(data) {
+
+    if (!data) return "-";
+
+    const d =
+        new Date(data);
 
 
-function mostrarCameraStatus(
-  mensagem
-) {
+    if (isNaN(d)) return data;
 
-  document.getElementById(
-    "cameraStatus"
-  ).innerText =
-    mensagem;
+
+    return d.toLocaleDateString(
+        "pt-BR"
+    );
 
 }
 
 
-function mostrarStatus(
-  mensagem
-) {
+function formatarDataEnvio(data) {
 
-  document.getElementById(
-    "statusGeral"
-  ).innerText =
-    mensagem;
+    return data
+        .toISOString()
+        .split("T")[0];
+
+}
+
+
+function formatarHora(data) {
+
+    return data
+        .toLocaleTimeString(
+            "pt-BR",
+            {
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit"
+            }
+        );
 
 }
 
@@ -1944,11 +1355,10 @@ function mostrarStatus(
 
 
 <iframe
-  name="iframeEnvio"
-  style="display:none;">
+    name="hiddenFrame"
+    style="display:none;">
 </iframe>
-
 
 </body>
 
-  </html>
+</html>
