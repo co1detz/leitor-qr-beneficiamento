@@ -5,10 +5,9 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AgroTrace</title>
+<title>AgroTrace | Beneficiamento</title>
 
 <script src="https://unpkg.com/html5-qrcode"></script>
 
@@ -19,231 +18,213 @@
 }
 
 body {
-
     margin: 0;
-
     font-family: Arial, Helvetica, sans-serif;
-
-    background:
-        linear-gradient(
-            135deg,
-            #0b2419,
-            #123d29
-        );
-
+    background: linear-gradient(135deg, #0b2419, #123d29);
     color: #ffffff;
-
     min-height: 100vh;
 }
 
 .container {
-
     width: 100%;
-
-    max-width: 650px;
-
+    max-width: 680px;
     margin: auto;
-
-    padding: 20px;
+    padding: 18px;
 }
 
 .header {
-
     text-align: center;
-
-    margin-bottom: 20px;
+    padding: 10px 0 20px;
 }
 
-.header h1 {
-
-    margin: 0;
-
-    font-size: 28px;
+.logo {
+    font-size: 32px;
+    font-weight: bold;
 }
 
-.header p {
-
-    margin-top: 6px;
-
+.subtitle {
     color: #b8d6c4;
-
+    margin-top: 6px;
+    font-size: 14px;
 }
 
 .card {
-
     background: #ffffff;
-
     color: #222;
-
     border-radius: 18px;
-
     padding: 20px;
-
     margin-bottom: 18px;
-
-    box-shadow:
-        0 10px 30px rgba(0,0,0,.25);
+    box-shadow: 0 10px 30px rgba(0,0,0,.25);
 }
 
 .card h2 {
-
     margin-top: 0;
-
     color: #164c31;
+    font-size: 21px;
+}
 
+.card p {
+    color: #5d665f;
 }
 
 button {
-
     width: 100%;
-
     padding: 15px;
-
     border: none;
-
     border-radius: 12px;
-
     font-size: 16px;
-
     font-weight: bold;
-
     cursor: pointer;
-
     margin-top: 10px;
 }
 
+button:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
 .btn-primary {
-
     background: #1f6b45;
-
     color: white;
 }
 
 .btn-secondary {
-
     background: #e7f1eb;
-
     color: #164c31;
 }
 
 .btn-danger {
-
     background: #a83232;
-
     color: white;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 12px;
 }
 
 input,
 select,
 textarea {
-
     width: 100%;
-
     padding: 13px;
-
     margin-top: 6px;
-
-    margin-bottom: 12px;
-
     border: 1px solid #ccd7d0;
-
     border-radius: 10px;
-
     font-size: 16px;
+    background: #ffffff;
 }
 
-label {
+textarea {
+    resize: vertical;
+}
 
-    font-weight: bold;
-
-    font-size: 14px;
+.divider {
+    height: 1px;
+    background: #dddddd;
+    margin: 22px 0;
 }
 
 #reader {
-
     width: 100%;
-
-    overflow: hidden;
-
-    border-radius: 14px;
-
     margin-top: 15px;
+    border-radius: 14px;
+    overflow: hidden;
 }
 
 .status {
-
     padding: 12px;
-
     border-radius: 10px;
-
     margin-top: 12px;
-
     background: #edf6f0;
-
     color: #17552f;
-
     font-weight: bold;
+    font-size: 14px;
+}
+
+.status.error {
+    background: #fbeaea;
+    color: #8d2424;
+}
+
+.hidden {
+    display: none !important;
 }
 
 .info-grid {
-
     display: grid;
-
     grid-template-columns: 1fr 1fr;
-
     gap: 10px;
 }
 
 .info {
-
     background: #f2f6f3;
-
     padding: 12px;
-
     border-radius: 10px;
 }
 
 .info small {
-
     display: block;
-
     color: #68756d;
-
     margin-bottom: 4px;
 }
 
 .info strong {
-
     color: #163c29;
+    word-break: break-word;
 }
 
 .timer {
-
     text-align: center;
-
-    font-size: 32px;
-
+    font-size: 34px;
     font-weight: bold;
-
     color: #1f6b45;
-
-    margin: 15px 0;
-}
-
-.hidden {
-
-    display: none;
+    margin: 20px 0;
+    letter-spacing: 2px;
 }
 
 .resultado {
-
-    margin-top: 15px;
-
-    padding: 15px;
-
-    border-radius: 12px;
-
     background: #eaf6ed;
+    padding: 16px;
+    border-radius: 12px;
+}
+
+.resultado p {
+    margin: 8px 0;
+    color: #164c31;
+}
+
+.badge {
+    display: inline-block;
+    background: #d9eadf;
+    color: #164c31;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 500px) {
+
+    .container {
+        padding: 12px;
+    }
+
+    .card {
+        padding: 16px;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .timer {
+        font-size: 28px;
+    }
+
 }
 
 </style>
@@ -253,33 +234,44 @@ label {
 
 <body>
 
+
 <div class="container">
+
+
+    <!-- CABEÇALHO -->
 
     <div class="header">
 
-        <h1>🌱 AgroTrace</h1>
+        <div class="logo">
+            🌱 AgroTrace
+        </div>
 
-        <p>Controle de Beneficiamento de Sementes</p>
+        <div class="subtitle">
+            Controle de Beneficiamento de Sementes
+        </div>
 
     </div>
 
 
-    <!-- ========================================= -->
-    <!-- LOCALIZAÇÃO DO LOTE -->
-    <!-- ========================================= -->
+
+    <!-- ================================================= -->
+    <!-- LOCALIZAR LOTE -->
+    <!-- ================================================= -->
 
     <div class="card">
 
         <h2>🔎 Localizar Lote</h2>
 
         <p>
-            Escolha uma das duas formas para localizar o lote.
+            Você pode localizar o lote de duas formas:
+            pelo QR Code ou digitando o lote manualmente.
         </p>
 
 
-        <!-- QR -->
+        <!-- QR CODE -->
 
         <button
+            id="btnCamera"
             class="btn-primary"
             onclick="abrirScanner()">
 
@@ -295,27 +287,32 @@ label {
             id="cameraStatus"
             class="status hidden">
 
-            Aguardando leitura...
+            Preparando câmera...
 
         </div>
 
 
-        <hr style="margin:20px 0;border:0;border-top:1px solid #ddd;">
+        <!-- SEPARADOR -->
+
+        <div class="divider"></div>
 
 
-        <!-- LOTE MANUAL -->
+        <!-- PESQUISA MANUAL -->
 
-        <label>
+        <label for="loteManual">
 
             Ou digite o lote
 
         </label>
 
+
         <input
             id="loteManual"
             type="text"
             placeholder="Ex.: LT26-001"
-            autocomplete="off">
+            autocomplete="off"
+            onkeydown="if(event.key === 'Enter') buscarPorLote()"
+        >
 
 
         <button
@@ -326,83 +323,153 @@ label {
 
         </button>
 
+
     </div>
 
 
-    <!-- ========================================= -->
+
+    <!-- ================================================= -->
     <!-- DADOS DO LOTE -->
-    <!-- ========================================= -->
+    <!-- ================================================= -->
 
     <div
         id="dadosLote"
         class="card hidden">
 
-        <h2>📋 Dados do Lote</h2>
+        <span class="badge">
+            LOTE LOCALIZADO
+        </span>
+
+        <h2>
+            📋 Dados do Lote
+        </h2>
+
 
         <div class="info-grid">
 
-            <div class="info">
-                <small>QR</small>
-                <strong id="infoQR">-</strong>
-            </div>
 
             <div class="info">
-                <small>Lote</small>
-                <strong id="infoLote">-</strong>
+
+                <small>
+                    QR
+                </small>
+
+                <strong id="infoQR">
+                    -
+                </strong>
+
             </div>
 
-            <div class="info">
-                <small>Variedade</small>
-                <strong id="infoVariedade">-</strong>
-            </div>
 
             <div class="info">
-                <small>Peneira</small>
-                <strong id="infoPeneira">-</strong>
+
+                <small>
+                    Lote
+                </small>
+
+                <strong id="infoLote">
+                    -
+                </strong>
+
             </div>
 
-            <div class="info">
-                <small>Umidade recebimento</small>
-                <strong id="infoUmidadeRecebimento">-</strong>
-            </div>
 
             <div class="info">
-                <small>Peso recebido</small>
-                <strong id="infoPesoRecebido">-</strong>
+
+                <small>
+                    Variedade
+                </small>
+
+                <strong id="infoVariedade">
+                    -
+                </strong>
+
             </div>
 
+
             <div class="info">
-                <small>Data recebimento</small>
-                <strong id="infoDataRecebimento">-</strong>
+
+                <small>
+                    Peneira
+                </small>
+
+                <strong id="infoPeneira">
+                    -
+                </strong>
+
             </div>
+
+
+            <div class="info">
+
+                <small>
+                    Umidade no recebimento
+                </small>
+
+                <strong id="infoUmidadeRecebimento">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="info">
+
+                <small>
+                    Peso recebido
+                </small>
+
+                <strong id="infoPesoRecebido">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="info">
+
+                <small>
+                    Data de recebimento
+                </small>
+
+                <strong id="infoDataRecebimento">
+                    -
+                </strong>
+
+            </div>
+
 
         </div>
 
     </div>
 
 
-    <!-- ========================================= -->
+
+    <!-- ================================================= -->
     <!-- BENEFICIAMENTO -->
-    <!-- ========================================= -->
+    <!-- ================================================= -->
 
     <div
         id="beneficiamento"
         class="card hidden">
 
-        <h2>⚙️ Beneficiamento</h2>
+        <h2>
+            ⚙️ Beneficiamento
+        </h2>
 
 
-        <label>
+        <label for="operador">
             Operador
         </label>
 
         <input
             id="operador"
             type="text"
-            placeholder="Nome do operador">
+            placeholder="Nome do operador"
+        >
 
 
-        <label>
+        <label for="maquina">
             Máquina
         </label>
 
@@ -423,24 +490,28 @@ label {
         </select>
 
 
-        <label>
+        <label for="umidadeAntes">
             Umidade antes do beneficiamento (%)
         </label>
 
         <input
             id="umidadeAntes"
             type="number"
-            step="0.1">
+            step="0.1"
+            placeholder="Ex.: 13.5"
+        >
 
 
-        <label>
+        <label for="pesoAntes">
             Peso antes do beneficiamento (kg)
         </label>
 
         <input
             id="pesoAntes"
             type="number"
-            step="0.01">
+            step="0.01"
+            placeholder="Ex.: 1200"
+        >
 
 
         <button
@@ -461,49 +532,57 @@ label {
 
         </div>
 
+
     </div>
 
 
-    <!-- ========================================= -->
+
+    <!-- ================================================= -->
     <!-- FINALIZAÇÃO -->
-    <!-- ========================================= -->
+    <!-- ================================================= -->
 
     <div
         id="finalizacao"
         class="card hidden">
 
-        <h2>✅ Finalizar Beneficiamento</h2>
+        <h2>
+            ✅ Finalizar Beneficiamento
+        </h2>
 
 
-        <label>
+        <label for="umidadeDepois">
             Umidade depois do beneficiamento (%)
         </label>
 
         <input
             id="umidadeDepois"
             type="number"
-            step="0.1">
+            step="0.1"
+            placeholder="Ex.: 12.8"
+        >
 
 
-        <label>
+        <label for="pesoDepois">
             Peso depois do beneficiamento (kg)
         </label>
 
         <input
             id="pesoDepois"
             type="number"
-            step="0.01">
+            step="0.01"
+            placeholder="Ex.: 1160"
+        >
 
 
-        <label>
+        <label for="observacao">
             Observações
         </label>
 
         <textarea
             id="observacao"
             rows="4"
-            placeholder="Digite alguma observação, se necessário">
-        </textarea>
+            placeholder="Digite alguma observação, se necessário..."
+        ></textarea>
 
 
         <button
@@ -514,48 +593,74 @@ label {
 
         </button>
 
+
     </div>
 
 
-    <!-- ========================================= -->
+
+    <!-- ================================================= -->
     <!-- RESULTADO -->
-    <!-- ========================================= -->
+    <!-- ================================================= -->
 
     <div
         id="resultado"
         class="card hidden">
 
-        <h2>📊 Resultado</h2>
+        <h2>
+            📊 Resultado
+        </h2>
+
 
         <div class="resultado">
 
             <p>
-                <strong>Descarte:</strong>
-                <span id="resultadoDescarte">-</span> kg
+                <strong>
+                    Descarte:
+                </strong>
+
+                <span id="resultadoDescarte">
+                    -
+                </span>
+
+                kg
             </p>
 
+
             <p>
-                <strong>Rendimento:</strong>
-                <span id="resultadoRendimento">-</span> %
+                <strong>
+                    Rendimento:
+                </strong>
+
+                <span id="resultadoRendimento">
+                    -
+                </span>
+
+                %
             </p>
 
         </div>
 
     </div>
 
+
 </div>
+
 
 
 <script>
 
 
 // =====================================================
-// CONFIGURAÇÃO
+// CONFIGURAÇÃO DA API
 // =====================================================
 
 const API_URL =
 "https://script.google.com/macros/s/AKfycbzy3I6pS51O2t_4SaknhBAbFX81lokKEOJp6y22ea8oBrw1_Crcv1SdV9pRkcIkRUXpkA/exec";
 
+
+// =====================================================
+// VARIÁVEIS
+// =====================================================
 
 let scanner = null;
 
@@ -566,8 +671,9 @@ let inicioBeneficiamento = null;
 let timerInterval = null;
 
 
+
 // =====================================================
-// ABRIR SCANNER
+// ABRIR CÂMERA
 // =====================================================
 
 async function abrirScanner() {
@@ -575,14 +681,20 @@ async function abrirScanner() {
     const status =
         document.getElementById("cameraStatus");
 
+
     status.classList.remove("hidden");
+
+    status.classList.remove("error");
 
     status.innerText =
         "Preparando câmera traseira...";
 
+
     try {
 
-        // Solicita permissão e tenta identificar as câmeras
+
+        // Solicita acesso à câmera
+
         const stream =
             await navigator.mediaDevices.getUserMedia({
 
@@ -597,13 +709,17 @@ async function abrirScanner() {
             });
 
 
+        // Descobre as câmeras disponíveis
+
         const devices =
             await navigator.mediaDevices.enumerateDevices();
 
 
-        stream.getTracks().forEach(track => {
-            track.stop();
-        });
+        // Para a câmera temporária
+
+        stream
+            .getTracks()
+            .forEach(track => track.stop());
 
 
         const cameras =
@@ -622,11 +738,15 @@ async function abrirScanner() {
         }
 
 
+        // Procura câmera traseira
+
         let cameraTraseira =
             cameras.find(camera => {
 
                 const nome =
-                    (camera.label || "").toLowerCase();
+                    (camera.label || "")
+                    .toLowerCase();
+
 
                 return (
 
@@ -642,21 +762,29 @@ async function abrirScanner() {
             });
 
 
+        // Se não encontrar pelo nome,
+        // usa a última câmera disponível
+
         if (!cameraTraseira) {
 
             cameraTraseira =
                 cameras.length > 1
-                    ? cameras[cameras.length - 1]
-                    : cameras[0];
+                ? cameras[cameras.length - 1]
+                : cameras[0];
 
         }
 
 
+        // Se já existir scanner,
+        // encerra antes de abrir outro
+
         if (scanner) {
 
             try {
+
                 await scanner.stop();
-            } catch(e) {}
+
+            } catch (e) {}
 
         }
 
@@ -665,11 +793,14 @@ async function abrirScanner() {
             new Html5Qrcode("reader");
 
 
+        // Inicia scanner
+
         await scanner.start(
 
             cameraTraseira.deviceId,
 
             {
+
                 fps: 10,
 
                 qrbox: {
@@ -679,17 +810,32 @@ async function abrirScanner() {
 
             },
 
-            qrCodeMessage => {
 
-                scanner.stop();
+            // QR encontrado
+
+            async qrCodeMessage => {
+
+                try {
+
+                    await scanner.stop();
+
+                } catch (e) {}
+
 
                 status.innerText =
                     "QR Code identificado: " +
                     qrCodeMessage;
 
-                buscarPorQR(qrCodeMessage);
+
+                buscarPorQR(
+                    qrCodeMessage
+                );
 
             },
+
+
+            // Erros normais de leitura
+            // são ignorados
 
             errorMessage => {}
 
@@ -697,13 +843,18 @@ async function abrirScanner() {
 
 
         status.innerText =
-            "Aponte a câmera para o QR Code.";
+            "📷 Aponte a câmera para o QR Code.";
 
     }
 
-    catch(error) {
+
+    catch (error) {
 
         console.error(error);
+
+
+        status.classList.add("error");
+
 
         status.innerText =
             "Não foi possível abrir a câmera: " +
@@ -714,18 +865,21 @@ async function abrirScanner() {
 }
 
 
+
 // =====================================================
-// BUSCAR PELO QR
+// BUSCAR POR QR
 // =====================================================
 
 async function buscarPorQR(qr) {
 
+
     mostrarStatus(
-        "Consultando lote pelo QR Code..."
+        "🔎 Consultando QR Code..."
     );
 
 
     try {
+
 
         const url =
             API_URL +
@@ -741,31 +895,40 @@ async function buscarPorQR(qr) {
             await resposta.json();
 
 
-        processarResultado(resultado);
+        processarResultado(
+            resultado
+        );
 
     }
 
-    catch(error) {
 
-        alert(
-            "Erro ao consultar o QR Code."
-        );
+    catch (error) {
 
         console.error(error);
+
+
+        mostrarErro(
+            "Erro ao consultar o QR Code."
+        );
 
     }
 
 }
 
 
+
 // =====================================================
-// BUSCAR PELO LOTE
+// BUSCAR POR LOTE
 // =====================================================
 
 async function buscarPorLote() {
 
+
     const campo =
-        document.getElementById("loteManual");
+        document.getElementById(
+            "loteManual"
+        );
+
 
     const lote =
         campo.value.trim();
@@ -777,6 +940,7 @@ async function buscarPorLote() {
             "Digite o número do lote."
         );
 
+
         campo.focus();
 
         return;
@@ -785,11 +949,12 @@ async function buscarPorLote() {
 
 
     mostrarStatus(
-        "Consultando lote..."
+        "🔎 Consultando lote..."
     );
 
 
     try {
+
 
         const url =
             API_URL +
@@ -805,137 +970,200 @@ async function buscarPorLote() {
             await resposta.json();
 
 
-        processarResultado(resultado);
+        processarResultado(
+            resultado
+        );
 
     }
 
-    catch(error) {
 
-        alert(
-            "Erro ao consultar o lote."
-        );
+    catch (error) {
 
         console.error(error);
+
+
+        mostrarErro(
+            "Erro ao consultar o lote."
+        );
 
     }
 
 }
 
 
+
 // =====================================================
-// PROCESSAR RESULTADO DA CONSULTA
+// PROCESSAR RESULTADO
 // =====================================================
 
 function processarResultado(resultado) {
 
+
     if (!resultado.sucesso) {
+
 
         alert(
             resultado.mensagem ||
             "Lote não encontrado."
         );
 
+
         return;
 
     }
 
 
+    // Guarda o lote
+
     loteAtual =
         resultado.dados;
 
+
+    // Preenche tela
 
     preencherDadosLote(
         loteAtual
     );
 
 
-    document
-        .getElementById("dadosLote")
-        .classList.remove("hidden");
-
+    // Mostra dados
 
     document
-        .getElementById("beneficiamento")
-        .classList.remove("hidden");
+        .getElementById(
+            "dadosLote"
+        )
+        .classList
+        .remove("hidden");
 
+
+    // Mostra beneficiamento
 
     document
-        .getElementById("finalizacao")
-        .classList.add("hidden");
+        .getElementById(
+            "beneficiamento"
+        )
+        .classList
+        .remove("hidden");
 
+
+    // Esconde finalização
 
     document
-        .getElementById("resultado")
-        .classList.add("hidden");
+        .getElementById(
+            "finalizacao"
+        )
+        .classList
+        .add("hidden");
 
 
-    // Preenche automaticamente o peso recebido
+    // Esconde resultado
+
     document
-        .getElementById("pesoAntes")
+        .getElementById(
+            "resultado"
+        )
+        .classList
+        .add("hidden");
+
+
+    // Preenche peso recebido
+
+    document
+        .getElementById(
+            "pesoAntes"
+        )
         .value =
         loteAtual.PESO_RECEBIDO || "";
 
 
+    // Preenche umidade recebimento
+
     document
-        .getElementById("umidadeAntes")
+        .getElementById(
+            "umidadeAntes"
+        )
         .value =
         loteAtual.UMIDADE_RECEBIMENTO || "";
 
 
+    // Rola para os dados
+
     window.scrollTo({
-        top: document
-            .getElementById("dadosLote")
-            .offsetTop,
+
+        top:
+            document
+                .getElementById(
+                    "dadosLote"
+                )
+                .offsetTop,
+
         behavior: "smooth"
+
     });
 
 }
 
 
+
 // =====================================================
-// PREENCHER DADOS
+// PREENCHER DADOS DO LOTE
 // =====================================================
 
 function preencherDadosLote(dados) {
 
+
     document
-        .getElementById("infoQR")
+        .getElementById(
+            "infoQR"
+        )
         .innerText =
         dados.QR || "-";
 
 
     document
-        .getElementById("infoLote")
+        .getElementById(
+            "infoLote"
+        )
         .innerText =
         dados.LOTE || "-";
 
 
     document
-        .getElementById("infoVariedade")
+        .getElementById(
+            "infoVariedade"
+        )
         .innerText =
         dados.VARIEDADE || "-";
 
 
     document
-        .getElementById("infoPeneira")
+        .getElementById(
+            "infoPeneira"
+        )
         .innerText =
         dados.PENEIRA || "-";
 
 
     document
-        .getElementById("infoUmidadeRecebimento")
+        .getElementById(
+            "infoUmidadeRecebimento"
+        )
         .innerText =
         dados.UMIDADE_RECEBIMENTO || "-";
 
 
     document
-        .getElementById("infoPesoRecebido")
+        .getElementById(
+            "infoPesoRecebido"
+        )
         .innerText =
         dados.PESO_RECEBIDO || "-";
 
 
     document
-        .getElementById("infoDataRecebimento")
+        .getElementById(
+            "infoDataRecebimento"
+        )
         .innerText =
         formatarData(
             dados.DATA_RECEBIMENTO
@@ -944,28 +1172,52 @@ function preencherDadosLote(dados) {
 }
 
 
+
 // =====================================================
 // INICIAR BENEFICIAMENTO
 // =====================================================
 
 function iniciarBeneficiamento() {
 
+
     const operador =
-        document.getElementById("operador").value.trim();
+        document
+            .getElementById(
+                "operador"
+            )
+            .value
+            .trim();
+
 
     const maquina =
-        document.getElementById("maquina").value;
+        document
+            .getElementById(
+                "maquina"
+            )
+            .value;
+
 
     const pesoAntes =
-        document.getElementById("pesoAntes").value;
+        document
+            .getElementById(
+                "pesoAntes"
+            )
+            .value;
+
 
     const umidadeAntes =
-        document.getElementById("umidadeAntes").value;
+        document
+            .getElementById(
+                "umidadeAntes"
+            )
+            .value;
 
 
     if (!operador) {
 
-        alert("Informe o operador.");
+        alert(
+            "Informe o operador."
+        );
 
         return;
 
@@ -974,7 +1226,9 @@ function iniciarBeneficiamento() {
 
     if (!maquina) {
 
-        alert("Selecione a máquina.");
+        alert(
+            "Selecione a máquina."
+        );
 
         return;
 
@@ -983,7 +1237,9 @@ function iniciarBeneficiamento() {
 
     if (!pesoAntes) {
 
-        alert("Informe o peso antes.");
+        alert(
+            "Informe o peso antes."
+        );
 
         return;
 
@@ -992,41 +1248,62 @@ function iniciarBeneficiamento() {
 
     if (!umidadeAntes) {
 
-        alert("Informe a umidade antes.");
+        alert(
+            "Informe a umidade antes."
+        );
 
         return;
 
     }
 
 
+    // Guarda horário inicial
+
     inicioBeneficiamento =
         new Date();
 
 
+    // Bloqueia botão
+
     document
-        .getElementById("btnIniciar")
+        .getElementById(
+            "btnIniciar"
+        )
         .disabled = true;
 
 
     document
-        .getElementById("btnIniciar")
+        .getElementById(
+            "btnIniciar"
+        )
         .innerText =
-        "Beneficiamento em andamento...";
+        "⏳ Beneficiamento em andamento...";
 
 
-    document
-        .getElementById("finalizacao")
-        .classList.remove("hidden");
-
+    // Mostra finalização
 
     document
-        .getElementById("timer")
-        .classList.remove("hidden");
+        .getElementById(
+            "finalizacao"
+        )
+        .classList
+        .remove("hidden");
+
+
+    // Mostra timer
+
+    document
+        .getElementById(
+            "timer"
+        )
+        .classList
+        .remove("hidden");
 
 
     iniciarTimer();
 
 }
+
 
 
 // =====================================================
@@ -1035,11 +1312,15 @@ function iniciarBeneficiamento() {
 
 function iniciarTimer() {
 
-    clearInterval(timerInterval);
+
+    clearInterval(
+        timerInterval
+    );
 
 
     timerInterval =
         setInterval(() => {
+
 
             const agora =
                 new Date();
@@ -1047,67 +1328,90 @@ function iniciarTimer() {
 
             const segundos =
                 Math.floor(
-                    (agora - inicioBeneficiamento) /
-                    1000
+
+                    (
+                        agora -
+                        inicioBeneficiamento
+                    ) / 1000
+
                 );
 
 
-            const h =
+            const horas =
                 Math.floor(
                     segundos / 3600
                 );
 
 
-            const m =
+            const minutos =
                 Math.floor(
                     (segundos % 3600) / 60
                 );
 
 
-            const s =
+            const segundosRestantes =
                 segundos % 60;
 
 
             document
-                .getElementById("timer")
+                .getElementById(
+                    "timer"
+                )
                 .innerText =
-                String(h).padStart(2,"0") +
-                ":" +
-                String(m).padStart(2,"0") +
-                ":" +
-                String(s).padStart(2,"0");
 
-        },1000);
+                String(horas)
+                    .padStart(2,"0")
+
+                + ":" +
+
+                String(minutos)
+                    .padStart(2,"0")
+
+                + ":" +
+
+                String(segundosRestantes)
+                    .padStart(2,"0");
+
+
+        }, 1000);
 
 }
 
 
+
 // =====================================================
-// FINALIZAR
+// FINALIZAR BENEFICIAMENTO
 // =====================================================
 
 function finalizarBeneficiamento() {
 
+
+    const pesoAntes =
+        Number(
+            document
+                .getElementById(
+                    "pesoAntes"
+                )
+                .value
+        );
+
+
     const pesoDepois =
         Number(
             document
-                .getElementById("pesoDepois")
+                .getElementById(
+                    "pesoDepois"
+                )
                 .value
         );
 
 
     const umidadeDepois =
         document
-            .getElementById("umidadeDepois")
+            .getElementById(
+                "umidadeDepois"
+            )
             .value;
-
-
-    const pesoAntes =
-        Number(
-            document
-                .getElementById("pesoAntes")
-                .value
-        );
 
 
     if (!pesoDepois) {
@@ -1132,193 +1436,346 @@ function finalizarBeneficiamento() {
     }
 
 
+    if (pesoDepois > pesoAntes) {
+
+        if (
+            !confirm(
+                "O peso depois está maior que o peso antes. Deseja continuar?"
+            )
+        ) {
+
+            return;
+
+        }
+
+    }
+
+
     const fim =
         new Date();
 
 
-    clearInterval(timerInterval);
+    clearInterval(
+        timerInterval
+    );
 
+
+    // Calcula descarte
 
     const descarte =
-        pesoAntes - pesoDepois;
+        pesoAntes -
+        pesoDepois;
 
+
+    // Calcula rendimento
 
     const rendimento =
         pesoAntes > 0
-            ? (pesoDepois / pesoAntes) * 100
-            : 0;
 
+        ? (
+            pesoDepois /
+            pesoAntes
+          ) * 100
+
+        : 0;
+
+
+    // Mostra resultado
 
     document
-        .getElementById("resultadoDescarte")
+        .getElementById(
+            "resultadoDescarte"
+        )
         .innerText =
         descarte.toFixed(2);
 
 
     document
-        .getElementById("resultadoRendimento")
+        .getElementById(
+            "resultadoRendimento"
+        )
         .innerText =
         rendimento.toFixed(2);
 
 
     document
-        .getElementById("resultado")
-        .classList.remove("hidden");
+        .getElementById(
+            "resultado"
+        )
+        .classList
+        .remove("hidden");
 
 
-    enviarBeneficiamento(fim);
+    // Envia para planilha
+
+    enviarBeneficiamento(
+        fim
+    );
 
 }
 
 
+
 // =====================================================
-// ENVIAR PARA APPS SCRIPT
+// ENVIAR PARA GOOGLE SHEETS
 // =====================================================
 
 function enviarBeneficiamento(fim) {
 
+
     const dados = {
+
 
         qr:
             loteAtual.QR || "",
 
+
         lote:
             loteAtual.LOTE || "",
+
 
         variedade:
             loteAtual.VARIEDADE || "",
 
+
         peneira:
             loteAtual.PENEIRA || "",
+
 
         umidadeRecebimento:
             loteAtual.UMIDADE_RECEBIMENTO || "",
 
+
         pesoRecebimento:
             loteAtual.PESO_RECEBIDO || "",
 
+
         operador:
             document
-                .getElementById("operador")
+                .getElementById(
+                    "operador"
+                )
                 .value,
+
 
         maquina:
             document
-                .getElementById("maquina")
+                .getElementById(
+                    "maquina"
+                )
                 .value,
+
 
         dataInicio:
             formatarDataEnvio(
                 inicioBeneficiamento
             ),
 
+
         horaInicio:
             formatarHora(
                 inicioBeneficiamento
             ),
 
+
         umidadeAntes:
             document
-                .getElementById("umidadeAntes")
+                .getElementById(
+                    "umidadeAntes"
+                )
                 .value,
+
 
         pesoAntes:
             document
-                .getElementById("pesoAntes")
+                .getElementById(
+                    "pesoAntes"
+                )
                 .value,
+
 
         dataFim:
             formatarDataEnvio(
                 fim
             ),
 
+
         horaFim:
             formatarHora(
                 fim
             ),
 
+
         umidadeDepois:
             document
-                .getElementById("umidadeDepois")
+                .getElementById(
+                    "umidadeDepois"
+                )
                 .value,
+
 
         pesoDepois:
             document
-                .getElementById("pesoDepois")
+                .getElementById(
+                    "pesoDepois"
+                )
                 .value,
+
 
         observacao:
             document
-                .getElementById("observacao")
+                .getElementById(
+                    "observacao"
+                )
                 .value,
+
 
         tempoProcesso:
             document
-                .getElementById("timer")
+                .getElementById(
+                    "timer"
+                )
                 .innerText
 
     };
 
 
+    // Cria formulário invisível
+
     const form =
-        document.createElement("form");
+        document.createElement(
+            "form"
+        );
 
 
-    form.method = "POST";
+    form.method =
+        "POST";
 
-    form.action = API_URL;
 
-    form.target = "hiddenFrame";
+    form.action =
+        API_URL;
+
+
+    form.target =
+        "hiddenFrame";
 
 
     const input =
-        document.createElement("input");
+        document.createElement(
+            "input"
+        );
 
 
-    input.type = "hidden";
+    input.type =
+        "hidden";
 
-    input.name = "dados";
+
+    input.name =
+        "dados";
+
 
     input.value =
-        JSON.stringify(dados);
+        JSON.stringify(
+            dados
+        );
 
 
-    form.appendChild(input);
+    form.appendChild(
+        input
+    );
 
-    document.body.appendChild(form);
+
+    document.body.appendChild(
+        form
+    );
+
 
     form.submit();
+
 
     form.remove();
 
 }
 
 
+
 // =====================================================
-// FUNÇÕES AUXILIARES
+// STATUS
 // =====================================================
 
 function mostrarStatus(texto) {
 
     const status =
-        document.getElementById("cameraStatus");
+        document.getElementById(
+            "cameraStatus"
+        );
 
-    status.classList.remove("hidden");
 
-    status.innerText = texto;
+    status.classList.remove(
+        "hidden"
+    );
+
+
+    status.classList.remove(
+        "error"
+    );
+
+
+    status.innerText =
+        texto;
 
 }
 
 
+
+function mostrarErro(texto) {
+
+    const status =
+        document.getElementById(
+            "cameraStatus"
+        );
+
+
+    status.classList.remove(
+        "hidden"
+    );
+
+
+    status.classList.add(
+        "error"
+    );
+
+
+    status.innerText =
+        texto;
+
+}
+
+
+
+// =====================================================
+// FORMATAR DATA
+// =====================================================
+
 function formatarData(data) {
 
-    if (!data) return "-";
+
+    if (!data) {
+
+        return "-";
+
+    }
+
 
     const d =
         new Date(data);
 
 
-    if (isNaN(d)) return data;
+    if (isNaN(d)) {
+
+        return data;
+
+    }
 
 
     return d.toLocaleDateString(
@@ -1328,7 +1785,13 @@ function formatarData(data) {
 }
 
 
+
+// =====================================================
+// DATA PARA APPS SCRIPT
+// =====================================================
+
 function formatarDataEnvio(data) {
+
 
     return data
         .toISOString()
@@ -1337,27 +1800,37 @@ function formatarDataEnvio(data) {
 }
 
 
+
+// =====================================================
+// HORA
+// =====================================================
+
 function formatarHora(data) {
 
-    return data
-        .toLocaleTimeString(
-            "pt-BR",
-            {
-                hour: "2-digit",
-                minute: "2-digit",
-                second: "2-digit"
-            }
-        );
+
+    return data.toLocaleTimeString(
+        "pt-BR",
+        {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit"
+        }
+    );
 
 }
 
+
 </script>
 
+
+
+<!-- FORMULÁRIO INVISÍVEL PARA ENVIO -->
 
 <iframe
     name="hiddenFrame"
     style="display:none;">
 </iframe>
+
 
 </body>
 
