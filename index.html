@@ -1,16 +1,24 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>AgroTrace - Beneficiamento</title>
+
 
   <style>
 
     * {
       box-sizing: border-box;
     }
+
 
     body {
       margin: 0;
@@ -19,6 +27,7 @@
       color: #222;
     }
 
+
     header {
       background: #176b3a;
       color: white;
@@ -26,10 +35,12 @@
       text-align: center;
     }
 
+
     header h1 {
       margin: 0;
       font-size: 24px;
     }
+
 
     header p {
       margin: 5px 0 0;
@@ -37,11 +48,13 @@
       opacity: 0.9;
     }
 
+
     .container {
       max-width: 600px;
       margin: auto;
       padding: 15px;
     }
+
 
     .card {
       background: white;
@@ -51,11 +64,13 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
 
+
     .card h2 {
       margin-top: 0;
       font-size: 18px;
       color: #176b3a;
     }
+
 
     label {
       display: block;
@@ -64,6 +79,7 @@
       font-size: 13px;
       font-weight: bold;
     }
+
 
     input,
     select,
@@ -76,10 +92,12 @@
       background: white;
     }
 
+
     textarea {
       min-height: 80px;
       resize: vertical;
     }
+
 
     button {
       width: 100%;
@@ -92,25 +110,30 @@
       cursor: pointer;
     }
 
+
     .btn-primary {
       background: #176b3a;
       color: white;
     }
+
 
     .btn-secondary {
       background: #e8eee9;
       color: #176b3a;
     }
 
+
     .btn-danger {
       background: #b3261e;
       color: white;
     }
 
+
     button:disabled {
       opacity: 0.5;
       cursor: not-allowed;
     }
+
 
     .status {
       padding: 12px;
@@ -120,11 +143,13 @@
       font-size: 14px;
     }
 
+
     .status.success {
       display: block;
       background: #e4f4e9;
       color: #176b3a;
     }
+
 
     .status.error {
       display: block;
@@ -132,11 +157,13 @@
       color: #a11d17;
     }
 
+
     .status.info {
       display: block;
       background: #e8f0f8;
       color: #24577a;
     }
+
 
     .dados-grid {
       display: grid;
@@ -144,11 +171,13 @@
       gap: 10px;
     }
 
+
     .dado {
       background: #f5f7f5;
       padding: 10px;
       border-radius: 8px;
     }
+
 
     .dado strong {
       display: block;
@@ -157,10 +186,12 @@
       margin-bottom: 4px;
     }
 
+
     .dado span {
       font-size: 15px;
       font-weight: bold;
     }
+
 
     .timer {
       text-align: center;
@@ -170,6 +201,7 @@
       padding: 15px;
     }
 
+
     .resultado {
       text-align: center;
       background: #eef7f0;
@@ -178,11 +210,13 @@
       margin-top: 15px;
     }
 
+
     .resultado .valor {
       font-size: 28px;
       font-weight: bold;
       color: #176b3a;
     }
+
 
     #dadosLote,
     #etapaBeneficiamento,
@@ -190,17 +224,13 @@
       display: none;
     }
 
-    .pequeno {
-      font-size: 12px;
-      color: #777;
-      margin-top: 5px;
-    }
-
   </style>
+
 </head>
 
 
 <body>
+
 
 <header>
 
@@ -213,18 +243,25 @@
 </header>
 
 
+
 <div class="container">
 
 
-  <!-- CONSULTA DO LOTE -->
+  <!-- =========================================
+       IDENTIFICAÇÃO DO LOTE
+       ========================================= -->
 
   <div class="card">
 
-    <h2>1. Identificação do lote</h2>
+    <h2>
+      1. Identificação do lote
+    </h2>
+
 
     <label for="lote">
       Número do lote
     </label>
+
 
     <input
       type="text"
@@ -233,6 +270,7 @@
       autocomplete="off"
     >
 
+
     <button
       class="btn-primary"
       onclick="consultarLote()"
@@ -240,12 +278,14 @@
       Consultar lote
     </button>
 
+
     <button
       class="btn-secondary"
       onclick="limparTela()"
     >
       Limpar
     </button>
+
 
     <div
       id="status"
@@ -255,65 +295,126 @@
   </div>
 
 
-  <!-- DADOS DO LOTE -->
+
+  <!-- =========================================
+       DADOS DO LOTE
+       ========================================= -->
 
   <div
     class="card"
     id="dadosLote"
   >
 
-    <h2>Dados do lote</h2>
+    <h2>
+      Dados do lote
+    </h2>
+
 
     <div class="dados-grid">
 
-      <div class="dado">
-        <strong>QR</strong>
-        <span id="campoQR">-</span>
-      </div>
 
       <div class="dado">
-        <strong>LOTE</strong>
-        <span id="campoLote">-</span>
+
+        <strong>
+          QR
+        </strong>
+
+        <span id="campoQR">
+          -
+        </span>
+
       </div>
 
-      <div class="dado">
-        <strong>VARIEDADE</strong>
-        <span id="campoVariedade">-</span>
-      </div>
 
       <div class="dado">
-        <strong>PENEIRA</strong>
-        <span id="campoPeneira">-</span>
+
+        <strong>
+          LOTE
+        </strong>
+
+        <span id="campoLote">
+          -
+        </span>
+
       </div>
 
-      <div class="dado">
-        <strong>UMIDADE RECEBIMENTO</strong>
-        <span id="campoUmidadeRecebimento">-</span>
-      </div>
 
       <div class="dado">
-        <strong>PESO RECEBIDO</strong>
-        <span id="campoPesoRecebido">-</span>
+
+        <strong>
+          VARIEDADE
+        </strong>
+
+        <span id="campoVariedade">
+          -
+        </span>
+
       </div>
+
+
+      <div class="dado">
+
+        <strong>
+          PENEIRA
+        </strong>
+
+        <span id="campoPeneira">
+          -
+        </span>
+
+      </div>
+
+
+      <div class="dado">
+
+        <strong>
+          UMIDADE RECEBIMENTO
+        </strong>
+
+        <span id="campoUmidadeRecebimento">
+          -
+        </span>
+
+      </div>
+
+
+      <div class="dado">
+
+        <strong>
+          PESO RECEBIDO
+        </strong>
+
+        <span id="campoPesoRecebido">
+          -
+        </span>
+
+      </div>
+
 
     </div>
 
   </div>
 
 
-  <!-- BENEFICIAMENTO -->
+
+  <!-- =========================================
+       INÍCIO DO BENEFICIAMENTO
+       ========================================= -->
 
   <div
     class="card"
     id="etapaBeneficiamento"
   >
 
-    <h2>2. Iniciar beneficiamento</h2>
+    <h2>
+      2. Iniciar beneficiamento
+    </h2>
 
 
     <label for="operador">
       Operador
     </label>
+
 
     <input
       type="text"
@@ -325,6 +426,7 @@
     <label for="maquina">
       Máquina
     </label>
+
 
     <select id="maquina">
 
@@ -347,6 +449,7 @@
       Umidade antes do beneficiamento (%)
     </label>
 
+
     <input
       type="number"
       id="umidadeAntes"
@@ -358,6 +461,7 @@
     <label for="pesoAntes">
       Peso antes do beneficiamento (kg)
     </label>
+
 
     <input
       type="number"
@@ -386,19 +490,25 @@
   </div>
 
 
-  <!-- FINALIZAÇÃO -->
+
+  <!-- =========================================
+       FINALIZAÇÃO
+       ========================================= -->
 
   <div
     class="card"
     id="etapaFinalizacao"
   >
 
-    <h2>3. Finalizar beneficiamento</h2>
+    <h2>
+      3. Finalizar beneficiamento
+    </h2>
 
 
     <label for="umidadeDepois">
       Umidade depois do beneficiamento (%)
     </label>
+
 
     <input
       type="number"
@@ -412,6 +522,7 @@
       Peso depois do beneficiamento (kg)
     </label>
 
+
     <input
       type="number"
       id="pesoDepois"
@@ -423,6 +534,7 @@
     <label for="observacao">
       Observação
     </label>
+
 
     <textarea
       id="observacao"
@@ -440,7 +552,10 @@
   </div>
 
 
-  <!-- RESULTADO -->
+
+  <!-- =========================================
+       RESULTADO
+       ========================================= -->
 
   <div
     class="card"
@@ -448,7 +563,9 @@
     style="display:none;"
   >
 
-    <h2>Resultado</h2>
+    <h2>
+      Resultado
+    </h2>
 
 
     <div class="resultado">
@@ -512,24 +629,24 @@
 </div>
 
 
+
 <script>
 
 
-/*
-==================================================
-CONFIGURAÇÃO DA API
-==================================================
-*/
+/* =================================================
+   CONFIGURAÇÃO DA API
+   ================================================= */
+
 
 const API_URL =
 "https://script.google.com/macros/s/AKfycbx7boqIdOtBzhFpxY2sF9Bp7MDR4_VdKTJWAOAwGwt67UHoBRrnIYshDCbXe4HzqmXv/exec";
 
 
-/*
-==================================================
-VARIÁVEIS
-==================================================
-*/
+
+/* =================================================
+   VARIÁVEIS
+   ================================================= */
+
 
 let loteAtual = null;
 
@@ -538,13 +655,14 @@ let inicioProcesso = null;
 let intervaloTimer = null;
 
 
-/*
-==================================================
-CONSULTAR LOTE
-==================================================
-*/
+
+/* =================================================
+   CONSULTAR LOTE
+   ================================================= */
+
 
 function consultarLote() {
+
 
   const lote =
     document
@@ -561,7 +679,6 @@ function consultarLote() {
     );
 
     return;
-
   }
 
 
@@ -575,15 +692,18 @@ function consultarLote() {
 
     .then(function(resposta) {
 
+
       console.log(
-        "Resposta da API:",
+        "Resposta recebida:",
         resposta
       );
 
 
       if (
+        resposta &&
         resposta.status === "ok"
       ) {
+
 
         loteAtual =
           resposta.dados;
@@ -595,13 +715,19 @@ function consultarLote() {
 
 
         document
-          .getElementById("dadosLote")
-          .style.display = "block";
+          .getElementById(
+            "dadosLote"
+          )
+          .style.display =
+          "block";
 
 
         document
-          .getElementById("etapaBeneficiamento")
-          .style.display = "block";
+          .getElementById(
+            "etapaBeneficiamento"
+          )
+          .style.display =
+          "block";
 
 
         mostrarStatus(
@@ -609,23 +735,33 @@ function consultarLote() {
           "success"
         );
 
+
       }
 
       else {
 
+
         document
-          .getElementById("dadosLote")
-          .style.display = "none";
+          .getElementById(
+            "dadosLote"
+          )
+          .style.display =
+          "none";
 
 
         document
-          .getElementById("etapaBeneficiamento")
-          .style.display = "none";
+          .getElementById(
+            "etapaBeneficiamento"
+          )
+          .style.display =
+          "none";
 
 
         mostrarStatus(
-          resposta.mensagem ||
-          "Lote não encontrado.",
+          resposta &&
+          resposta.mensagem
+            ? resposta.mensagem
+            : "Lote não encontrado.",
           "error"
         );
 
@@ -633,10 +769,12 @@ function consultarLote() {
 
     })
 
+
     .catch(function(erro) {
 
+
       console.error(
-        "Erro:",
+        "Erro na consulta:",
         erro
       );
 
@@ -651,13 +789,14 @@ function consultarLote() {
 }
 
 
-/*
-==================================================
-COMUNICAÇÃO COM APPS SCRIPT
-==================================================
-*/
+
+/* =================================================
+   COMUNICAÇÃO COM GOOGLE APPS SCRIPT
+   ================================================= */
+
 
 function consultar(lote) {
+
 
   return new Promise(function(
     resolve,
@@ -675,53 +814,26 @@ function consultar(lote) {
       "none";
 
 
-    iframe.src =
-      API_URL +
-      "?acao=buscar" +
-      "&lote=" +
-      encodeURIComponent(lote);
+    let timeout;
 
 
-    document.body.appendChild(
-      iframe
-    );
 
-
-    const timeout =
-      setTimeout(function() {
-
-
-        window.removeEventListener(
-          "message",
-          receberResposta
-        );
-
-
-        if (
-          iframe.parentNode
-        ) {
-
-          iframe.parentNode
-            .removeChild(
-              iframe
-            );
-
-        }
-
-
-        reject(
-          new Error(
-            "Tempo limite da consulta."
-          )
-        );
-
-
-      }, 15000);
+    /*
+    -----------------------------------------------
+    RECEBER RESPOSTA
+    -----------------------------------------------
+    */
 
 
     function receberResposta(
       evento
     ) {
+
+
+      console.log(
+        "Mensagem recebida do Apps Script:",
+        evento.data
+      );
 
 
       if (
@@ -765,9 +877,79 @@ function consultar(lote) {
     }
 
 
+
+    /*
+    -----------------------------------------------
+    PRIMEIRO COMEÇA A ESCUTAR
+    -----------------------------------------------
+    */
+
+
     window.addEventListener(
       "message",
       receberResposta
+    );
+
+
+
+    /*
+    -----------------------------------------------
+    TEMPO LIMITE
+    -----------------------------------------------
+    */
+
+
+    timeout =
+      setTimeout(function() {
+
+
+        window.removeEventListener(
+          "message",
+          receberResposta
+        );
+
+
+        if (
+          iframe.parentNode
+        ) {
+
+          iframe.parentNode
+            .removeChild(
+              iframe
+            );
+
+        }
+
+
+        reject(
+          new Error(
+            "Tempo limite da consulta."
+          )
+        );
+
+
+      }, 15000);
+
+
+
+    /*
+    -----------------------------------------------
+    DEPOIS ABRE O APPS SCRIPT
+    -----------------------------------------------
+    */
+
+
+    iframe.src =
+      API_URL +
+      "?acao=buscar" +
+      "&lote=" +
+      encodeURIComponent(
+        lote
+      );
+
+
+    document.body.appendChild(
+      iframe
     );
 
 
@@ -776,11 +958,11 @@ function consultar(lote) {
 }
 
 
-/*
-==================================================
-PREENCHER DADOS DO LOTE
-==================================================
-*/
+
+/* =================================================
+   PREENCHER DADOS DO LOTE
+   ================================================= */
+
 
 function preencherDadosLote(
   dados
@@ -788,25 +970,33 @@ function preencherDadosLote(
 
 
   document
-    .getElementById("campoQR")
+    .getElementById(
+      "campoQR"
+    )
     .textContent =
       dados.QR || "-";
 
 
   document
-    .getElementById("campoLote")
+    .getElementById(
+      "campoLote"
+    )
     .textContent =
       dados.LOTE || "-";
 
 
   document
-    .getElementById("campoVariedade")
+    .getElementById(
+      "campoVariedade"
+    )
     .textContent =
       dados.VARIEDADE || "-";
 
 
   document
-    .getElementById("campoPeneira")
+    .getElementById(
+      "campoPeneira"
+    )
     .textContent =
       dados.PENEIRA || "-";
 
@@ -820,23 +1010,26 @@ function preencherDadosLote(
 
 
   document
-    .getElementById("campoPesoRecebido")
+    .getElementById(
+      "campoPesoRecebido"
+    )
     .textContent =
       dados.PESO_RECEBIDO || "-";
 
 }
 
 
-/*
-==================================================
-STATUS
-==================================================
-*/
+
+/* =================================================
+   STATUS
+   ================================================= */
+
 
 function mostrarStatus(
   mensagem,
   tipo
 ) {
+
 
   const status =
     document.getElementById(
@@ -854,37 +1047,45 @@ function mostrarStatus(
 }
 
 
-/*
-==================================================
-INICIAR BENEFICIAMENTO
-==================================================
-*/
+
+/* =================================================
+   INICIAR BENEFICIAMENTO
+   ================================================= */
+
 
 function iniciarBeneficiamento() {
 
 
   const operador =
     document
-      .getElementById("operador")
+      .getElementById(
+        "operador"
+      )
       .value
       .trim();
 
 
   const maquina =
     document
-      .getElementById("maquina")
+      .getElementById(
+        "maquina"
+      )
       .value;
 
 
   const umidadeAntes =
     document
-      .getElementById("umidadeAntes")
+      .getElementById(
+        "umidadeAntes"
+      )
       .value;
 
 
   const pesoAntes =
     document
-      .getElementById("pesoAntes")
+      .getElementById(
+        "pesoAntes"
+      )
       .value;
 
 
@@ -895,7 +1096,6 @@ function iniciarBeneficiamento() {
     );
 
     return;
-
   }
 
 
@@ -906,7 +1106,6 @@ function iniciarBeneficiamento() {
     );
 
     return;
-
   }
 
 
@@ -917,7 +1116,6 @@ function iniciarBeneficiamento() {
     );
 
     return;
-
   }
 
 
@@ -928,7 +1126,6 @@ function iniciarBeneficiamento() {
     );
 
     return;
-
   }
 
 
@@ -940,14 +1137,16 @@ function iniciarBeneficiamento() {
     .getElementById(
       "btnIniciar"
     )
-    .disabled = true;
+    .disabled =
+    true;
 
 
   document
     .getElementById(
       "etapaFinalizacao"
     )
-    .style.display = "block";
+    .style.display =
+    "block";
 
 
   iniciarTimer();
@@ -961,11 +1160,11 @@ function iniciarBeneficiamento() {
 }
 
 
-/*
-==================================================
-TIMER
-==================================================
-*/
+
+/* =================================================
+   TIMER
+   ================================================= */
+
 
 function iniciarTimer() {
 
@@ -994,11 +1193,13 @@ function iniciarTimer() {
 
 
       document
-        .getElementById("timer")
+        .getElementById(
+          "timer"
+        )
         .textContent =
-          formatarTempo(
-            diferenca
-          );
+        formatarTempo(
+          diferenca
+        );
 
 
     }, 1000);
@@ -1006,11 +1207,11 @@ function iniciarTimer() {
 }
 
 
-/*
-==================================================
-FORMATAR TEMPO
-==================================================
-*/
+
+/* =================================================
+   FORMATAR TEMPO
+   ================================================= */
+
 
 function formatarTempo(
   milissegundos
@@ -1019,42 +1220,57 @@ function formatarTempo(
 
   const totalSegundos =
     Math.floor(
-      milissegundos / 1000
+      milissegundos /
+      1000
     );
 
 
   const horas =
     Math.floor(
-      totalSegundos / 3600
+      totalSegundos /
+      3600
     );
 
 
   const minutos =
     Math.floor(
-      (totalSegundos % 3600) / 60
+      (
+        totalSegundos %
+        3600
+      ) / 60
     );
 
 
   const segundos =
-    totalSegundos % 60;
+    totalSegundos %
+    60;
 
 
   return (
-    String(horas).padStart(2, "0") +
-    ":" +
-    String(minutos).padStart(2, "0") +
-    ":" +
-    String(segundos).padStart(2, "0")
+
+    String(horas)
+      .padStart(2, "0")
+
+    + ":" +
+
+    String(minutos)
+      .padStart(2, "0")
+
+    + ":" +
+
+    String(segundos)
+      .padStart(2, "0")
+
   );
 
 }
 
 
-/*
-==================================================
-FINALIZAR BENEFICIAMENTO
-==================================================
-*/
+
+/* =================================================
+   FINALIZAR BENEFICIAMENTO
+   ================================================= */
+
 
 function finalizarBeneficiamento() {
 
@@ -1096,7 +1312,6 @@ function finalizarBeneficiamento() {
     );
 
     return;
-
   }
 
 
@@ -1110,7 +1325,6 @@ function finalizarBeneficiamento() {
     );
 
     return;
-
   }
 
 
@@ -1124,7 +1338,6 @@ function finalizarBeneficiamento() {
     );
 
     return;
-
   }
 
 
@@ -1137,7 +1350,8 @@ function finalizarBeneficiamento() {
     (
       pesoDepois /
       pesoAntes
-    ) * 100;
+    ) *
+    100;
 
 
   const tempo =
@@ -1157,10 +1371,10 @@ function finalizarBeneficiamento() {
       "resultadoDescarte"
     )
     .textContent =
-      pesoDescarte
-        .toFixed(2)
-        .replace(".", ",") +
-      " kg";
+    pesoDescarte
+      .toFixed(2)
+      .replace(".", ",")
+    + " kg";
 
 
   document
@@ -1168,10 +1382,10 @@ function finalizarBeneficiamento() {
       "resultadoRendimento"
     )
     .textContent =
-      rendimento
-        .toFixed(2)
-        .replace(".", ",") +
-      "%";
+    rendimento
+      .toFixed(2)
+      .replace(".", ",")
+    + "%";
 
 
   document
@@ -1179,9 +1393,9 @@ function finalizarBeneficiamento() {
       "resultadoTempo"
     )
     .textContent =
-      formatarTempo(
-        tempo
-      );
+    formatarTempo(
+      tempo
+    );
 
 
   document
@@ -1189,7 +1403,7 @@ function finalizarBeneficiamento() {
       "resultadoCard"
     )
     .style.display =
-      "block";
+    "block";
 
 
   mostrarStatus(
@@ -1200,11 +1414,11 @@ function finalizarBeneficiamento() {
 }
 
 
-/*
-==================================================
-LIMPAR TELA
-==================================================
-*/
+
+/* =================================================
+   LIMPAR TELA
+   ================================================= */
+
 
 function limparTela() {
 
@@ -1214,49 +1428,76 @@ function limparTela() {
   );
 
 
-  loteAtual = null;
+  loteAtual =
+    null;
 
-  inicioProcesso = null;
 
-
-  document
-    .getElementById("lote")
-    .value = "";
+  inicioProcesso =
+    null;
 
 
   document
-    .getElementById("operador")
-    .value = "";
+    .getElementById(
+      "lote"
+    )
+    .value =
+    "";
 
 
   document
-    .getElementById("maquina")
-    .value = "";
+    .getElementById(
+      "operador"
+    )
+    .value =
+    "";
 
 
   document
-    .getElementById("umidadeAntes")
-    .value = "";
+    .getElementById(
+      "maquina"
+    )
+    .value =
+    "";
 
 
   document
-    .getElementById("pesoAntes")
-    .value = "";
+    .getElementById(
+      "umidadeAntes"
+    )
+    .value =
+    "";
 
 
   document
-    .getElementById("umidadeDepois")
-    .value = "";
+    .getElementById(
+      "pesoAntes"
+    )
+    .value =
+    "";
 
 
   document
-    .getElementById("pesoDepois")
-    .value = "";
+    .getElementById(
+      "umidadeDepois"
+    )
+    .value =
+    "";
 
 
   document
-    .getElementById("observacao")
-    .value = "";
+    .getElementById(
+      "pesoDepois"
+    )
+    .value =
+    "";
+
+
+  document
+    .getElementById(
+      "observacao"
+    )
+    .value =
+    "";
 
 
   document
@@ -1264,7 +1505,7 @@ function limparTela() {
       "dadosLote"
     )
     .style.display =
-      "none";
+    "none";
 
 
   document
@@ -1272,7 +1513,7 @@ function limparTela() {
       "etapaBeneficiamento"
     )
     .style.display =
-      "none";
+    "none";
 
 
   document
@@ -1280,7 +1521,7 @@ function limparTela() {
       "etapaFinalizacao"
     )
     .style.display =
-      "none";
+    "none";
 
 
   document
@@ -1288,14 +1529,15 @@ function limparTela() {
       "resultadoCard"
     )
     .style.display =
-      "none";
+    "none";
 
 
   document
     .getElementById(
       "btnIniciar"
     )
-    .disabled = false;
+    .disabled =
+    false;
 
 
   document
@@ -1303,7 +1545,7 @@ function limparTela() {
       "timer"
     )
     .textContent =
-      "00:00:00";
+    "00:00:00";
 
 
   document
@@ -1311,31 +1553,37 @@ function limparTela() {
       "status"
     )
     .className =
-      "status";
+    "status";
 
 
   document
     .getElementById(
       "status"
     )
-    .textContent = "";
+    .textContent =
+    "";
 
 }
 
 
-/*
-==================================================
-NOVO BENEFICIAMENTO
-==================================================
-*/
+
+/* =================================================
+   NOVO BENEFICIAMENTO
+   ================================================= */
+
 
 function novoBeneficiamento() {
 
+
   limparTela();
 
+
   window.scrollTo({
+
     top: 0,
+
     behavior: "smooth"
+
   });
 
 }
@@ -1343,5 +1591,7 @@ function novoBeneficiamento() {
 
 </script>
 
+
 </body>
+
 </html>
