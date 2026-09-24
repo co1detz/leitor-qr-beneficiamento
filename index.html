@@ -150,6 +150,8 @@ button {
 
   font-weight: bold;
 
+  cursor: pointer;
+
 }
 
 .btn-primary {
@@ -609,122 +611,178 @@ function status(elemento, mensagem, tipo) {
 
 function consultar(parametros) {
 
-  return new Promise(
-    function(resolve, reject) {
+  return new Promise(function(resolve, reject) {
 
-      const nomeCallback =
-        "callback_" +
-        Date.now() +
-        "_" +
-        Math.floor(
-          Math.random() * 100000
-        );
-
-
-      const script =
-        document.createElement(
-          "script"
-        );
-
-
-      const query =
-        new URLSearchParams(
-          parametros
-        );
-
-
-      query.set(
-        "callback",
-        nomeCallback
+    const nomeCallback =
+      "agrotrace_callback_" +
+      Date.now() +
+      "_" +
+      Math.floor(
+        Math.random() * 100000
       );
 
+    const script =
+      document.createElement("script");
 
-      let finalizado = false;
+    const query =
+      new URLSearchParams();
+
+    /*
+     * Adiciona os parâmetros
+     */
+
+    Object.keys(parametros).forEach(function(chave) {
+
+      query.set(
+        chave,
+        parametros[chave]
+      );
+
+    });
+
+    /*
+     * Adiciona callback
+     */
+
+    query.set(
+      "callback",
+      nomeCallback
+    );
+
+    /*
+     * Evita cache
+     */
+
+    query.set(
+      "_",
+      Date.now()
+    );
+
+    let finalizado = false;
+
+    let tempoLimite;
 
 
-      function limpar() {
+    function limpar() {
 
-        if (finalizado)
-          return;
+      if (finalizado)
+        return;
 
-        finalizado = true;
+      finalizado = true;
 
-        clearTimeout(
-          tempoLimite
+      clearTimeout(
+        tempoLimite
+      );
+
+      delete window[
+        nomeCallback
+      ];
+
+      if (script.parentNode) {
+
+        script.parentNode.removeChild(
+          script
         );
-
-        delete window[
-          nomeCallback
-        ];
-
-        if (
-          script.parentNode
-        ) {
-
-          script.parentNode.removeChild(
-            script
-          );
-
-        }
 
       }
 
-
-      window[nomeCallback] =
-        function(resposta) {
-
-          limpar();
-
-          resolve(
-            resposta
-          );
-
-        };
+    }
 
 
-      script.onerror =
+    /*
+     * Recebe resposta da API
+     */
+
+    window[nomeCallback] =
+      function(resposta) {
+
+        console.log(
+          "Resposta recebida da API:",
+          resposta
+        );
+
+        limpar();
+
+        resolve(
+          resposta
+        );
+
+      };
+
+
+    /*
+     * Erro ao carregar API
+     */
+
+    script.onerror =
+      function(erro) {
+
+        console.error(
+          "Erro ao acessar a API:",
+          erro
+        );
+
+        limpar();
+
+        reject(
+          new Error(
+            "Não foi possível acessar a API."
+          )
+        );
+
+      };
+
+
+    /*
+     * Tempo limite
+     */
+
+    tempoLimite =
+      setTimeout(
         function() {
 
           limpar();
 
           reject(
             new Error(
-              "Falha ao carregar API"
+              "A API demorou muito para responder."
             )
           );
 
-        };
-
-
-      const tempoLimite =
-        setTimeout(
-          function() {
-
-            limpar();
-
-            reject(
-              new Error(
-                "Tempo limite da API"
-              )
-            );
-
-          },
-          15000
-        );
-
-
-      script.src =
-        API_URL +
-        "?" +
-        query.toString();
-
-
-      document.body.appendChild(
-        script
+        },
+        15000
       );
 
-    }
-  );
+
+    /*
+     * Monta URL
+
+     */
+
+    const url =
+      API_URL +
+      "?" +
+      query.toString();
+
+
+    console.log(
+      "Consultando API:",
+      url
+    );
+
+
+    /*
+     * Faz chamada
+     */
+
+    script.src =
+      url;
+
+    document.head.appendChild(
+      script
+    );
+
+  });
 
 }
 
