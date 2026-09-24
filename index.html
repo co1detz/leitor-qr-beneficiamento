@@ -1,1837 +1,1550 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
+  <title>AgroTrace - Beneficiamento</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 
-<title>AgroTrace | Beneficiamento</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-<script src="https://unpkg.com/html5-qrcode"></script>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f3f5f4;
+      color: #1f2933;
+    }
 
-<style>
+    .topo {
+      background: #1f5f3b;
+      color: white;
+      padding: 18px 20px;
+      text-align: center;
+    }
 
-* {
-    box-sizing: border-box;
-}
+    .topo h1 {
+      margin: 0;
+      font-size: 24px;
+    }
 
-body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: linear-gradient(135deg, #0b2419, #123d29);
-    color: #ffffff;
-    min-height: 100vh;
-}
-
-.container {
-    width: 100%;
-    max-width: 680px;
-    margin: auto;
-    padding: 18px;
-}
-
-.header {
-    text-align: center;
-    padding: 10px 0 20px;
-}
-
-.logo {
-    font-size: 32px;
-    font-weight: bold;
-}
-
-.subtitle {
-    color: #b8d6c4;
-    margin-top: 6px;
-    font-size: 14px;
-}
-
-.card {
-    background: #ffffff;
-    color: #222;
-    border-radius: 18px;
-    padding: 20px;
-    margin-bottom: 18px;
-    box-shadow: 0 10px 30px rgba(0,0,0,.25);
-}
-
-.card h2 {
-    margin-top: 0;
-    color: #164c31;
-    font-size: 21px;
-}
-
-.card p {
-    color: #5d665f;
-}
-
-button {
-    width: 100%;
-    padding: 15px;
-    border: none;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-button:disabled {
-    opacity: .6;
-    cursor: not-allowed;
-}
-
-.btn-primary {
-    background: #1f6b45;
-    color: white;
-}
-
-.btn-secondary {
-    background: #e7f1eb;
-    color: #164c31;
-}
-
-.btn-danger {
-    background: #a83232;
-    color: white;
-}
-
-label {
-    display: block;
-    font-weight: bold;
-    font-size: 14px;
-    margin-top: 12px;
-}
-
-input,
-select,
-textarea {
-    width: 100%;
-    padding: 13px;
-    margin-top: 6px;
-    border: 1px solid #ccd7d0;
-    border-radius: 10px;
-    font-size: 16px;
-    background: #ffffff;
-}
-
-textarea {
-    resize: vertical;
-}
-
-.divider {
-    height: 1px;
-    background: #dddddd;
-    margin: 22px 0;
-}
-
-#reader {
-    width: 100%;
-    margin-top: 15px;
-    border-radius: 14px;
-    overflow: hidden;
-}
-
-.status {
-    padding: 12px;
-    border-radius: 10px;
-    margin-top: 12px;
-    background: #edf6f0;
-    color: #17552f;
-    font-weight: bold;
-    font-size: 14px;
-}
-
-.status.error {
-    background: #fbeaea;
-    color: #8d2424;
-}
-
-.hidden {
-    display: none !important;
-}
-
-.info-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-}
-
-.info {
-    background: #f2f6f3;
-    padding: 12px;
-    border-radius: 10px;
-}
-
-.info small {
-    display: block;
-    color: #68756d;
-    margin-bottom: 4px;
-}
-
-.info strong {
-    color: #163c29;
-    word-break: break-word;
-}
-
-.timer {
-    text-align: center;
-    font-size: 34px;
-    font-weight: bold;
-    color: #1f6b45;
-    margin: 20px 0;
-    letter-spacing: 2px;
-}
-
-.resultado {
-    background: #eaf6ed;
-    padding: 16px;
-    border-radius: 12px;
-}
-
-.resultado p {
-    margin: 8px 0;
-    color: #164c31;
-}
-
-.badge {
-    display: inline-block;
-    background: #d9eadf;
-    color: #164c31;
-    padding: 6px 10px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-@media (max-width: 500px) {
+    .topo p {
+      margin: 5px 0 0;
+      font-size: 13px;
+      opacity: 0.9;
+    }
 
     .container {
-        padding: 12px;
+      max-width: 700px;
+      margin: 20px auto;
+      padding: 0 15px 40px;
     }
 
     .card {
-        padding: 16px;
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
     }
 
-    .info-grid {
-        grid-template-columns: 1fr;
+    .card h2 {
+      margin-top: 0;
+      font-size: 19px;
+    }
+
+    label {
+      display: block;
+      margin-top: 14px;
+      margin-bottom: 6px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cbd5d1;
+      border-radius: 8px;
+      font-size: 16px;
+      background: white;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      border: 0;
+      border-radius: 8px;
+      padding: 13px;
+      margin-top: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .btn-principal {
+      background: #1f5f3b;
+      color: white;
+    }
+
+    .btn-secundario {
+      background: #e8efeb;
+      color: #1f5f3b;
+    }
+
+    .btn-finalizar {
+      background: #b42318;
+      color: white;
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .campo {
+      margin-bottom: 10px;
+    }
+
+    .valor {
+      background: #f5f7f6;
+      padding: 11px;
+      border-radius: 7px;
+      border: 1px solid #e1e7e4;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .status {
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 12px;
+      font-size: 14px;
+      display: none;
+    }
+
+    .status.ok {
+      display: block;
+      background: #e7f5ec;
+      color: #176b3a;
+    }
+
+    .status.erro {
+      display: block;
+      background: #fdecec;
+      color: #a11a1a;
+    }
+
+    .status.info {
+      display: block;
+      background: #eef4f8;
+      color: #24516b;
+    }
+
+    #areaScanner {
+      display: none;
+      margin-top: 15px;
+    }
+
+    #reader {
+      width: 100%;
+      overflow: hidden;
+      border-radius: 10px;
     }
 
     .timer {
-        font-size: 28px;
+      text-align: center;
+      font-size: 34px;
+      font-weight: bold;
+      margin: 15px 0;
+      color: #1f5f3b;
     }
 
-}
+    .resultado {
+      background: #eef7f1;
+      border-radius: 8px;
+      padding: 15px;
+      margin-top: 15px;
+    }
 
-</style>
+    .resultado strong {
+      display: block;
+      margin-bottom: 5px;
+    }
 
+    .oculto {
+      display: none;
+    }
+
+    .rodape {
+      text-align: center;
+      color: #6b7280;
+      font-size: 12px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 550px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        margin-top: 10px;
+      }
+    }
+  </style>
 </head>
-
 
 <body>
 
+  <div class="topo">
+    <h1>AgroTrace</h1>
+    <p>Controle de Beneficiamento de Sementes</p>
+  </div>
 
-<div class="container">
+  <div class="container">
 
-
-    <!-- CABEÇALHO -->
-
-    <div class="header">
-
-        <div class="logo">
-            🌱 AgroTrace
-        </div>
-
-        <div class="subtitle">
-            Controle de Beneficiamento de Sementes
-        </div>
-
-    </div>
-
-
-
-    <!-- ================================================= -->
     <!-- LOCALIZAR LOTE -->
-    <!-- ================================================= -->
-
     <div class="card">
 
-        <h2>🔎 Localizar Lote</h2>
+      <h2>🔎 Localizar Lote</h2>
 
-        <p>
-            Você pode localizar o lote de duas formas:
-            pelo QR Code ou digitando o lote manualmente.
-        </p>
+      <button
+        class="btn-principal"
+        onclick="abrirScanner()">
+        📷 Escanear QR Code
+      </button>
 
-
-        <!-- QR CODE -->
-
-        <button
-            id="btnCamera"
-            class="btn-primary"
-            onclick="abrirScanner()">
-
-            📷 Escanear QR Code
-
-        </button>
-
-
+      <div id="areaScanner">
         <div id="reader"></div>
 
-
-        <div
-            id="cameraStatus"
-            class="status hidden">
-
-            Preparando câmera...
-
-        </div>
-
-
-        <!-- SEPARADOR -->
-
-        <div class="divider"></div>
-
-
-        <!-- PESQUISA MANUAL -->
-
-        <label for="loteManual">
-
-            Ou digite o lote
-
-        </label>
-
-
-        <input
-            id="loteManual"
-            type="text"
-            placeholder="Ex.: LT26-001"
-            autocomplete="off"
-            onkeydown="if(event.key === 'Enter') buscarPorLote()"
-        >
-
-
         <button
-            class="btn-secondary"
-            onclick="buscarPorLote()">
-
-            🔎 Buscar pelo Lote
-
+          class="btn-secundario"
+          onclick="fecharScanner()">
+          Fechar câmera
         </button>
+      </div>
 
+      <label for="loteManual">
+        Ou digite o número do lote
+      </label>
+
+      <input
+        type="text"
+        id="loteManual"
+        placeholder="Ex.: LT26-001">
+
+      <button
+        class="btn-principal"
+        onclick="buscarPorLote()">
+        🔎 Buscar pelo Lote
+      </button>
+
+      <div id="statusBusca" class="status"></div>
 
     </div>
 
 
-
-    <!-- ================================================= -->
     <!-- DADOS DO LOTE -->
-    <!-- ================================================= -->
-
     <div
-        id="dadosLote"
-        class="card hidden">
+      class="card oculto"
+      id="cardLote">
 
-        <span class="badge">
-            LOTE LOCALIZADO
-        </span>
+      <h2>📋 Dados do Lote</h2>
 
-        <h2>
-            📋 Dados do Lote
-        </h2>
+      <div class="grid">
 
-
-        <div class="info-grid">
-
-
-            <div class="info">
-
-                <small>
-                    QR
-                </small>
-
-                <strong id="infoQR">
-                    -
-                </strong>
-
-            </div>
-
-
-            <div class="info">
-
-                <small>
-                    Lote
-                </small>
-
-                <strong id="infoLote">
-                    -
-                </strong>
-
-            </div>
-
-
-            <div class="info">
-
-                <small>
-                    Variedade
-                </small>
-
-                <strong id="infoVariedade">
-                    -
-                </strong>
-
-            </div>
-
-
-            <div class="info">
-
-                <small>
-                    Peneira
-                </small>
-
-                <strong id="infoPeneira">
-                    -
-                </strong>
-
-            </div>
-
-
-            <div class="info">
-
-                <small>
-                    Umidade no recebimento
-                </small>
-
-                <strong id="infoUmidadeRecebimento">
-                    -
-                </strong>
-
-            </div>
-
-
-            <div class="info">
-
-                <small>
-                    Peso recebido
-                </small>
-
-                <strong id="infoPesoRecebido">
-                    -
-                </strong>
-
-            </div>
-
-
-            <div class="info">
-
-                <small>
-                    Data de recebimento
-                </small>
-
-                <strong id="infoDataRecebimento">
-                    -
-                </strong>
-
-            </div>
-
-
+        <div class="campo">
+          <label>QR</label>
+          <div class="valor" id="campoQR">-</div>
         </div>
+
+        <div class="campo">
+          <label>Lote</label>
+          <div class="valor" id="campoLote">-</div>
+        </div>
+
+        <div class="campo">
+          <label>Variedade</label>
+          <div class="valor" id="campoVariedade">-</div>
+        </div>
+
+        <div class="campo">
+          <label>Peneira</label>
+          <div class="valor" id="campoPeneira">-</div>
+        </div>
+
+        <div class="campo">
+          <label>Umidade no recebimento</label>
+          <div class="valor" id="campoUmidadeRecebimento">-</div>
+        </div>
+
+        <div class="campo">
+          <label>Peso recebido</label>
+          <div class="valor" id="campoPesoRecebido">-</div>
+        </div>
+
+      </div>
 
     </div>
 
 
-
-    <!-- ================================================= -->
     <!-- BENEFICIAMENTO -->
-    <!-- ================================================= -->
-
     <div
-        id="beneficiamento"
-        class="card hidden">
+      class="card oculto"
+      id="cardBeneficiamento">
 
-        <h2>
-            ⚙️ Beneficiamento
-        </h2>
+      <h2>⚙️ Beneficiamento</h2>
 
+      <label for="operador">
+        Operador
+      </label>
 
-        <label for="operador">
-            Operador
-        </label>
-
-        <input
-            id="operador"
-            type="text"
-            placeholder="Nome do operador"
-        >
+      <input
+        type="text"
+        id="operador"
+        placeholder="Nome do operador">
 
 
-        <label for="maquina">
-            Máquina
-        </label>
+      <label for="maquina">
+        Máquina
+      </label>
 
-        <select id="maquina">
-
-            <option value="">
-                Selecione a máquina
-            </option>
-
-            <option value="CD 500">
-                CD 500
-            </option>
-
-            <option value="CD 1000">
-                CD 1000
-            </option>
-
-        </select>
+      <select id="maquina">
+        <option value="">Selecione a máquina</option>
+        <option value="CD 500">CD 500</option>
+        <option value="CD 1000">CD 1000</option>
+      </select>
 
 
-        <label for="umidadeAntes">
-            Umidade antes do beneficiamento (%)
-        </label>
+      <div class="grid">
 
-        <input
+        <div>
+          <label for="umidadeAntes">
+            Umidade antes
+          </label>
+
+          <input
+            type="number"
             id="umidadeAntes"
-            type="number"
             step="0.1"
-            placeholder="Ex.: 13.5"
-        >
+            inputmode="decimal"
+            placeholder="Ex.: 13,5">
+        </div>
 
+        <div>
+          <label for="pesoAntes">
+            Peso antes (kg)
+          </label>
 
-        <label for="pesoAntes">
-            Peso antes do beneficiamento (kg)
-        </label>
-
-        <input
+          <input
+            type="number"
             id="pesoAntes"
-            type="number"
             step="0.01"
-            placeholder="Ex.: 1200"
-        >
-
-
-        <button
-            id="btnIniciar"
-            class="btn-primary"
-            onclick="iniciarBeneficiamento()">
-
-            ▶️ Iniciar Beneficiamento
-
-        </button>
-
-
-        <div
-            id="timer"
-            class="timer hidden">
-
-            00:00:00
-
+            inputmode="decimal"
+            placeholder="Ex.: 1200">
         </div>
 
+      </div>
+
+
+      <button
+        class="btn-principal"
+        id="btnIniciar"
+        onclick="iniciarBeneficiamento()">
+        ▶️ Iniciar Beneficiamento
+      </button>
+
+
+      <div
+        id="areaProcesso"
+        class="oculto">
+
+        <div class="timer" id="timer">
+          00:00:00
+        </div>
+
+        <button
+          class="btn-finalizar"
+          onclick="finalizarBeneficiamento()">
+          ⏹️ Finalizar Beneficiamento
+        </button>
+
+      </div>
 
     </div>
 
 
-
-    <!-- ================================================= -->
     <!-- FINALIZAÇÃO -->
-    <!-- ================================================= -->
-
     <div
-        id="finalizacao"
-        class="card hidden">
+      class="card oculto"
+      id="cardFinalizacao">
 
-        <h2>
-            ✅ Finalizar Beneficiamento
-        </h2>
+      <h2>✅ Finalizar Beneficiamento</h2>
 
+      <div class="grid">
 
-        <label for="umidadeDepois">
-            Umidade depois do beneficiamento (%)
-        </label>
+        <div>
+          <label for="umidadeDepois">
+            Umidade depois
+          </label>
 
-        <input
+          <input
+            type="number"
             id="umidadeDepois"
-            type="number"
             step="0.1"
-            placeholder="Ex.: 12.8"
-        >
-
-
-        <label for="pesoDepois">
-            Peso depois do beneficiamento (kg)
-        </label>
-
-        <input
-            id="pesoDepois"
-            type="number"
-            step="0.01"
-            placeholder="Ex.: 1160"
-        >
-
-
-        <label for="observacao">
-            Observações
-        </label>
-
-        <textarea
-            id="observacao"
-            rows="4"
-            placeholder="Digite alguma observação, se necessário..."
-        ></textarea>
-
-
-        <button
-            class="btn-primary"
-            onclick="finalizarBeneficiamento()">
-
-            ✔️ Finalizar e Registrar
-
-        </button>
-
-
-    </div>
-
-
-
-    <!-- ================================================= -->
-    <!-- RESULTADO -->
-    <!-- ================================================= -->
-
-    <div
-        id="resultado"
-        class="card hidden">
-
-        <h2>
-            📊 Resultado
-        </h2>
-
-
-        <div class="resultado">
-
-            <p>
-                <strong>
-                    Descarte:
-                </strong>
-
-                <span id="resultadoDescarte">
-                    -
-                </span>
-
-                kg
-            </p>
-
-
-            <p>
-                <strong>
-                    Rendimento:
-                </strong>
-
-                <span id="resultadoRendimento">
-                    -
-                </span>
-
-                %
-            </p>
-
+            inputmode="decimal"
+            placeholder="Ex.: 12,8">
         </div>
 
+        <div>
+          <label for="pesoDepois">
+            Peso depois (kg)
+          </label>
+
+          <input
+            type="number"
+            id="pesoDepois"
+            step="0.01"
+            inputmode="decimal"
+            placeholder="Ex.: 1160">
+        </div>
+
+      </div>
+
+
+      <label for="observacao">
+        Observação
+      </label>
+
+      <textarea
+        id="observacao"
+        placeholder="Digite alguma observação sobre o processo..."></textarea>
+
+
+      <div
+        class="resultado"
+        id="resultadoCalculo">
+
+        <strong>Resultado</strong>
+
+        <div id="resultadoTexto">
+          Informe o peso depois para calcular.
+        </div>
+
+      </div>
+
+
+      <button
+        class="btn-principal"
+        onclick="calcularResultado()">
+        🧮 Calcular
+      </button>
+
+
+      <button
+        class="btn-principal"
+        onclick="salvarBeneficiamento()">
+        💾 Salvar Beneficiamento
+      </button>
+
+      <div
+        id="statusSalvar"
+        class="status">
+      </div>
+
     </div>
 
 
-</div>
+    <div class="rodape">
+      AgroTrace • Controle de Beneficiamento
+    </div>
+
+  </div>
 
 
+  <script>
 
-<script>
+    /*
+     * =========================================================
+     * CONFIGURAÇÃO DA API
+     * =========================================================
+     */
 
-
-// =====================================================
-// CONFIGURAÇÃO DA API
-// =====================================================
-
-const API_URL =
-"https://script.google.com/macros/s/AKfycbzy3I6pS51O2t_4SaknhBAbFX81lokKEOJp6y22ea8oBrw1_Crcv1SdV9pRkcIkRUXpkA/exec";
-
-
-// =====================================================
-// VARIÁVEIS
-// =====================================================
-
-let scanner = null;
-
-let loteAtual = null;
-
-let inicioBeneficiamento = null;
-
-let timerInterval = null;
+    const API_URL =
+      "https://script.google.com/macros/s/AKfycbx7boqIdOtBzhFpxY2sF9Bp7MDR4_VdKTJWAOAwGwt67UHoBRrnIYshDCbXe4HzqmXv/exec";
 
 
+    /*
+     * =========================================================
+     * VARIÁVEIS DO SISTEMA
+     * =========================================================
+     */
 
-// =====================================================
-// ABRIR CÂMERA
-// =====================================================
+    let scanner = null;
 
-async function abrirScanner() {
+    let loteAtual = null;
 
-    const status =
-        document.getElementById("cameraStatus");
+    let inicioProcesso = null;
 
+    let fimProcesso = null;
 
-    status.classList.remove("hidden");
-
-    status.classList.remove("error");
-
-    status.innerText =
-        "Preparando câmera traseira...";
+    let intervaloTimer = null;
 
 
-    try {
+    /*
+     * =========================================================
+     * SCANNER QR CODE
+     * =========================================================
+     */
 
+    async function abrirScanner() {
 
-        // Solicita acesso à câmera
+      const area =
+        document.getElementById("areaScanner");
 
-        const stream =
-            await navigator.mediaDevices.getUserMedia({
+      area.style.display = "block";
 
-                video: {
-                    facingMode: {
-                        ideal: "environment"
-                    }
-                },
-
-                audio: false
-
-            });
-
-
-        // Descobre as câmeras disponíveis
-
-        const devices =
-            await navigator.mediaDevices.enumerateDevices();
-
-
-        // Para a câmera temporária
-
-        stream
-            .getTracks()
-            .forEach(track => track.stop());
-
-
-        const cameras =
-            devices.filter(
-                device =>
-                    device.kind === "videoinput"
-            );
-
-
-        if (!cameras.length) {
-
-            throw new Error(
-                "Nenhuma câmera encontrada."
-            );
-
-        }
-
-
-        // Procura câmera traseira
-
-        let cameraTraseira =
-            cameras.find(camera => {
-
-                const nome =
-                    (camera.label || "")
-                    .toLowerCase();
-
-
-                return (
-
-                    nome.includes("back") ||
-                    nome.includes("rear") ||
-                    nome.includes("environment") ||
-                    nome.includes("traseira") ||
-                    nome.includes("tras") ||
-                    nome.includes("trás")
-
-                );
-
-            });
-
-
-        // Se não encontrar pelo nome,
-        // usa a última câmera disponível
-
-        if (!cameraTraseira) {
-
-            cameraTraseira =
-                cameras.length > 1
-                ? cameras[cameras.length - 1]
-                : cameras[0];
-
-        }
-
-
-        // Se já existir scanner,
-        // encerra antes de abrir outro
-
-        if (scanner) {
-
-            try {
-
-                await scanner.stop();
-
-            } catch (e) {}
-
-        }
-
+      try {
 
         scanner =
-            new Html5Qrcode("reader");
+          new Html5Qrcode("reader");
+
+        const cameras =
+          await Html5Qrcode.getCameras();
+
+        if (!cameras || cameras.length === 0) {
+
+          mostrarStatus(
+            "statusBusca",
+            "Nenhuma câmera encontrada.",
+            "erro"
+          );
+
+          return;
+        }
 
 
-        // Inicia scanner
+        let cameraSelecionada =
+          cameras[cameras.length - 1].id;
+
+
+        for (const camera of cameras) {
+
+          const nome =
+            (camera.label || "").toLowerCase();
+
+          if (
+            nome.includes("back") ||
+            nome.includes("rear") ||
+            nome.includes("traseira") ||
+            nome.includes("environment")
+          ) {
+
+            cameraSelecionada = camera.id;
+
+            break;
+          }
+        }
+
 
         await scanner.start(
 
-            cameraTraseira.deviceId,
+          cameraSelecionada,
 
-            {
+          {
+            fps: 10,
 
-                fps: 10,
+            qrbox: {
+              width: 250,
+              height: 250
+            }
 
-                qrbox: {
-                    width: 250,
-                    height: 250
-                }
+          },
 
-            },
+          (texto) => {
 
+            fecharScanner();
 
-            // QR encontrado
+            buscarPorQR(texto);
 
-            async qrCodeMessage => {
+          },
 
-                try {
+          () => {
 
-                    await scanner.stop();
+            // Ignora erros normais de leitura
+            // enquanto o QR não é identificado.
 
-                } catch (e) {}
-
-
-                status.innerText =
-                    "QR Code identificado: " +
-                    qrCodeMessage;
-
-
-                buscarPorQR(
-                    qrCodeMessage
-                );
-
-            },
-
-
-            // Erros normais de leitura
-            // são ignorados
-
-            errorMessage => {}
+          }
 
         );
 
+      } catch (erro) {
 
-        status.innerText =
-            "📷 Aponte a câmera para o QR Code.";
+        console.error(erro);
+
+        mostrarStatus(
+          "statusBusca",
+          "Não foi possível acessar a câmera. Verifique a permissão do navegador.",
+          "erro"
+        );
+
+      }
+
+    }
+
+
+    async function fecharScanner() {
+
+      if (scanner) {
+
+        try {
+
+          await scanner.stop();
+
+          await scanner.clear();
+
+        } catch (erro) {
+
+          console.log(erro);
+
+        }
+
+        scanner = null;
+
+      }
+
+      document
+        .getElementById("areaScanner")
+        .style.display = "none";
 
     }
 
 
-    catch (error) {
+    /*
+     * =========================================================
+     * BUSCA POR QR
+     * =========================================================
+     */
 
-        console.error(error);
+    async function buscarPorQR(qr) {
 
+      if (!qr) {
 
-        status.classList.add("error");
+        mostrarStatus(
+          "statusBusca",
+          "QR Code vazio.",
+          "erro"
+        );
 
-
-        status.innerText =
-            "Não foi possível abrir a câmera: " +
-            error.message;
-
-    }
-
-}
-
-
-
-// =====================================================
-// BUSCAR POR QR
-// =====================================================
-
-async function buscarPorQR(qr) {
+        return;
+      }
 
 
-    mostrarStatus(
-        "🔎 Consultando QR Code..."
-    );
+      mostrarStatus(
+        "statusBusca",
+        "Consultando lote...",
+        "info"
+      );
 
 
-    try {
-
+      try {
 
         const url =
-            API_URL +
-            "?acao=buscar&qr=" +
-            encodeURIComponent(qr);
+          API_URL +
+          "?acao=buscar&qr=" +
+          encodeURIComponent(qr);
 
 
         const resposta =
-            await fetch(url);
-
+          await fetch(url);
 
         const resultado =
-            await resposta.json();
+          await resposta.json();
 
 
-        processarResultado(
-            resultado
+        processarResultado(resultado);
+
+      } catch (erro) {
+
+        console.error(erro);
+
+        mostrarStatus(
+          "statusBusca",
+          "Erro ao consultar lote.",
+          "erro"
         );
+
+      }
 
     }
 
 
-    catch (error) {
+    /*
+     * =========================================================
+     * BUSCA POR LOTE
+     * =========================================================
+     */
 
-        console.error(error);
+    async function buscarPorLote() {
+
+      const lote =
+        document
+          .getElementById("loteManual")
+          .value
+          .trim();
 
 
-        mostrarErro(
-            "Erro ao consultar o QR Code."
+      if (!lote) {
+
+        mostrarStatus(
+          "statusBusca",
+          "Digite o número do lote.",
+          "erro"
         );
-
-    }
-
-}
-
-
-
-// =====================================================
-// BUSCAR POR LOTE
-// =====================================================
-
-async function buscarPorLote() {
-
-
-    const campo =
-        document.getElementById(
-            "loteManual"
-        );
-
-
-    const lote =
-        campo.value.trim();
-
-
-    if (!lote) {
-
-        alert(
-            "Digite o número do lote."
-        );
-
-
-        campo.focus();
 
         return;
-
-    }
-
-
-    mostrarStatus(
-        "🔎 Consultando lote..."
-    );
+      }
 
 
-    try {
+      mostrarStatus(
+        "statusBusca",
+        "Consultando lote...",
+        "info"
+      );
 
+
+      try {
 
         const url =
-            API_URL +
-            "?acao=buscar&lote=" +
-            encodeURIComponent(lote);
+          API_URL +
+          "?acao=buscar&lote=" +
+          encodeURIComponent(lote);
 
 
         const resposta =
-            await fetch(url);
-
+          await fetch(url);
 
         const resultado =
-            await resposta.json();
+          await resposta.json();
 
 
-        processarResultado(
-            resultado
+        processarResultado(resultado);
+
+      } catch (erro) {
+
+        console.error(erro);
+
+        mostrarStatus(
+          "statusBusca",
+          "Erro ao consultar lote.",
+          "erro"
         );
+
+      }
 
     }
 
 
-    catch (error) {
+    /*
+     * =========================================================
+     * PROCESSAR RESULTADO DA API
+     * =========================================================
+     */
 
-        console.error(error);
+    function processarResultado(resultado) {
 
+      if (
+        !resultado ||
+        resultado.status !== "ok"
+      ) {
 
-        mostrarErro(
-            "Erro ao consultar o lote."
+        mostrarStatus(
+          "statusBusca",
+          resultado && resultado.mensagem
+            ? resultado.mensagem
+            : "Lote não encontrado.",
+          "erro"
         );
-
-    }
-
-}
-
-
-
-// =====================================================
-// PROCESSAR RESULTADO
-// =====================================================
-
-function processarResultado(resultado) {
-
-
-    if (!resultado.sucesso) {
-
-
-        alert(
-            resultado.mensagem ||
-            "Lote não encontrado."
-        );
-
 
         return;
+      }
 
-    }
 
-
-    // Guarda o lote
-
-    loteAtual =
+      loteAtual =
         resultado.dados;
 
 
-    // Preenche tela
+      /*
+       * Preenche os dados do lote.
+       */
 
-    preencherDadosLote(
-        loteAtual
-    );
+      document
+        .getElementById("campoQR")
+        .textContent =
+          loteAtual.QR || "-";
 
 
-    // Mostra dados
+      document
+        .getElementById("campoLote")
+        .textContent =
+          loteAtual.LOTE || "-";
 
-    document
-        .getElementById(
-            "dadosLote"
-        )
+
+      document
+        .getElementById("campoVariedade")
+        .textContent =
+          loteAtual.VARIEDADE || "-";
+
+
+      document
+        .getElementById("campoPeneira")
+        .textContent =
+          formatarNumero(
+            loteAtual.PENEIRA
+          );
+
+
+      /*
+       * Aceita tanto o cabeçalho correto
+       * quanto o cabeçalho antigo com espaço.
+       */
+
+      const umidadeRecebimento =
+        loteAtual.UMIDADE_RECEBIMENTO ??
+        loteAtual["UMIDADE_RECEBIMENTO "] ??
+        "";
+
+
+      document
+        .getElementById("campoUmidadeRecebimento")
+        .textContent =
+          formatarNumero(
+            umidadeRecebimento
+          );
+
+
+      document
+        .getElementById("campoPesoRecebido")
+        .textContent =
+          formatarNumero(
+            loteAtual.PESO_RECEBIDO
+          );
+
+
+      /*
+       * Mostra os cards.
+       */
+
+      document
+        .getElementById("cardLote")
         .classList
-        .remove("hidden");
+        .remove("oculto");
 
 
-    // Mostra beneficiamento
-
-    document
-        .getElementById(
-            "beneficiamento"
-        )
+      document
+        .getElementById("cardBeneficiamento")
         .classList
-        .remove("hidden");
+        .remove("oculto");
 
 
-    // Esconde finalização
-
-    document
-        .getElementById(
-            "finalizacao"
-        )
-        .classList
-        .add("hidden");
-
-
-    // Esconde resultado
-
-    document
-        .getElementById(
-            "resultado"
-        )
-        .classList
-        .add("hidden");
-
-
-    // Preenche peso recebido
-
-    document
-        .getElementById(
-            "pesoAntes"
-        )
-        .value =
-        loteAtual.PESO_RECEBIDO || "";
-
-
-    // Preenche umidade recebimento
-
-    document
-        .getElementById(
-            "umidadeAntes"
-        )
-        .value =
-        loteAtual.UMIDADE_RECEBIMENTO || "";
-
-
-    // Rola para os dados
-
-    window.scrollTo({
-
-        top:
-            document
-                .getElementById(
-                    "dadosLote"
-                )
-                .offsetTop,
-
-        behavior: "smooth"
-
-    });
-
-}
-
-
-
-// =====================================================
-// PREENCHER DADOS DO LOTE
-// =====================================================
-
-function preencherDadosLote(dados) {
-
-
-    document
-        .getElementById(
-            "infoQR"
-        )
-        .innerText =
-        dados.QR || "-";
-
-
-    document
-        .getElementById(
-            "infoLote"
-        )
-        .innerText =
-        dados.LOTE || "-";
-
-
-    document
-        .getElementById(
-            "infoVariedade"
-        )
-        .innerText =
-        dados.VARIEDADE || "-";
-
-
-    document
-        .getElementById(
-            "infoPeneira"
-        )
-        .innerText =
-        dados.PENEIRA || "-";
-
-
-    document
-        .getElementById(
-            "infoUmidadeRecebimento"
-        )
-        .innerText =
-        dados.UMIDADE_RECEBIMENTO || "-";
-
-
-    document
-        .getElementById(
-            "infoPesoRecebido"
-        )
-        .innerText =
-        dados.PESO_RECEBIDO || "-";
-
-
-    document
-        .getElementById(
-            "infoDataRecebimento"
-        )
-        .innerText =
-        formatarData(
-            dados.DATA_RECEBIMENTO
-        );
-
-}
-
-
-
-// =====================================================
-// INICIAR BENEFICIAMENTO
-// =====================================================
-
-function iniciarBeneficiamento() {
-
-
-    const operador =
-        document
-            .getElementById(
-                "operador"
-            )
-            .value
-            .trim();
-
-
-    const maquina =
-        document
-            .getElementById(
-                "maquina"
-            )
-            .value;
-
-
-    const pesoAntes =
-        document
-            .getElementById(
-                "pesoAntes"
-            )
-            .value;
-
-
-    const umidadeAntes =
-        document
-            .getElementById(
-                "umidadeAntes"
-            )
-            .value;
-
-
-    if (!operador) {
-
-        alert(
-            "Informe o operador."
-        );
-
-        return;
+      mostrarStatus(
+        "statusBusca",
+        "Lote localizado com sucesso.",
+        "ok"
+      );
 
     }
 
 
-    if (!maquina) {
+    /*
+     * =========================================================
+     * INICIAR BENEFICIAMENTO
+     * =========================================================
+     */
 
-        alert(
-            "Selecione a máquina."
-        );
+    function iniciarBeneficiamento() {
+
+      const operador =
+        document
+          .getElementById("operador")
+          .value
+          .trim();
+
+
+      const maquina =
+        document
+          .getElementById("maquina")
+          .value;
+
+
+      const umidadeAntes =
+        document
+          .getElementById("umidadeAntes")
+          .value;
+
+
+      const pesoAntes =
+        document
+          .getElementById("pesoAntes")
+          .value;
+
+
+      if (!operador) {
+
+        alert("Informe o operador.");
 
         return;
+      }
 
-    }
 
+      if (!maquina) {
 
-    if (!pesoAntes) {
-
-        alert(
-            "Informe o peso antes."
-        );
+        alert("Selecione a máquina.");
 
         return;
+      }
 
-    }
 
+      if (!umidadeAntes) {
 
-    if (!umidadeAntes) {
-
-        alert(
-            "Informe a umidade antes."
-        );
+        alert("Informe a umidade antes.");
 
         return;
+      }
 
-    }
+
+      if (!pesoAntes) {
+
+        alert("Informe o peso antes.");
+
+        return;
+      }
 
 
-    // Guarda horário inicial
-
-    inicioBeneficiamento =
+      inicioProcesso =
         new Date();
 
 
-    // Bloqueia botão
-
-    document
-        .getElementById(
-            "btnIniciar"
-        )
+      document
+        .getElementById("btnIniciar")
         .disabled = true;
 
 
-    document
-        .getElementById(
-            "btnIniciar"
-        )
-        .innerText =
-        "⏳ Beneficiamento em andamento...";
-
-
-    // Mostra finalização
-
-    document
-        .getElementById(
-            "finalizacao"
-        )
+      document
+        .getElementById("areaProcesso")
         .classList
-        .remove("hidden");
+        .remove("oculto");
 
 
-    // Mostra timer
-
-    document
-        .getElementById(
-            "timer"
-        )
+      document
+        .getElementById("cardFinalizacao")
         .classList
-        .remove("hidden");
+        .add("oculto");
 
 
-    iniciarTimer();
-
-}
+      atualizarTimer();
 
 
-
-// =====================================================
-// TIMER
-// =====================================================
-
-function iniciarTimer() {
-
-
-    clearInterval(
-        timerInterval
-    );
-
-
-    timerInterval =
-        setInterval(() => {
-
-
-            const agora =
-                new Date();
-
-
-            const segundos =
-                Math.floor(
-
-                    (
-                        agora -
-                        inicioBeneficiamento
-                    ) / 1000
-
-                );
-
-
-            const horas =
-                Math.floor(
-                    segundos / 3600
-                );
-
-
-            const minutos =
-                Math.floor(
-                    (segundos % 3600) / 60
-                );
-
-
-            const segundosRestantes =
-                segundos % 60;
-
-
-            document
-                .getElementById(
-                    "timer"
-                )
-                .innerText =
-
-                String(horas)
-                    .padStart(2,"0")
-
-                + ":" +
-
-                String(minutos)
-                    .padStart(2,"0")
-
-                + ":" +
-
-                String(segundosRestantes)
-                    .padStart(2,"0");
-
-
-        }, 1000);
-
-}
-
-
-
-// =====================================================
-// FINALIZAR BENEFICIAMENTO
-// =====================================================
-
-function finalizarBeneficiamento() {
-
-
-    const pesoAntes =
-        Number(
-            document
-                .getElementById(
-                    "pesoAntes"
-                )
-                .value
+      intervaloTimer =
+        setInterval(
+          atualizarTimer,
+          1000
         );
 
-
-    const pesoDepois =
-        Number(
-            document
-                .getElementById(
-                    "pesoDepois"
-                )
-                .value
-        );
+    }
 
 
-    const umidadeDepois =
-        document
-            .getElementById(
-                "umidadeDepois"
-            )
-            .value;
+    /*
+     * =========================================================
+     * TIMER
+     * =========================================================
+     */
 
+    function atualizarTimer() {
 
-    if (!pesoDepois) {
-
-        alert(
-            "Informe o peso depois do beneficiamento."
-        );
-
+      if (!inicioProcesso) {
         return;
-
-    }
-
-
-    if (!umidadeDepois) {
-
-        alert(
-            "Informe a umidade depois."
-        );
-
-        return;
-
-    }
+      }
 
 
-    if (pesoDepois > pesoAntes) {
-
-        if (
-            !confirm(
-                "O peso depois está maior que o peso antes. Deseja continuar?"
-            )
-        ) {
-
-            return;
-
-        }
-
-    }
-
-
-    const fim =
+      const agora =
         new Date();
 
 
-    clearInterval(
-        timerInterval
-    );
+      const diferenca =
+        agora - inicioProcesso;
 
 
-    // Calcula descarte
+      document
+        .getElementById("timer")
+        .textContent =
+          formatarTempo(
+            diferenca
+          );
 
-    const descarte =
-        pesoAntes -
-        pesoDepois;
-
-
-    // Calcula rendimento
-
-    const rendimento =
-        pesoAntes > 0
-
-        ? (
-            pesoDepois /
-            pesoAntes
-          ) * 100
-
-        : 0;
+    }
 
 
-    // Mostra resultado
+    /*
+     * =========================================================
+     * FINALIZAR PROCESSO
+     * =========================================================
+     */
 
-    document
-        .getElementById(
-            "resultadoDescarte"
-        )
-        .innerText =
-        descarte.toFixed(2);
+    function finalizarBeneficiamento() {
+
+      if (!inicioProcesso) {
+
+        alert(
+          "O beneficiamento ainda não foi iniciado."
+        );
+
+        return;
+      }
 
 
-    document
-        .getElementById(
-            "resultadoRendimento"
-        )
-        .innerText =
-        rendimento.toFixed(2);
+      fimProcesso =
+        new Date();
 
 
-    document
-        .getElementById(
-            "resultado"
-        )
+      clearInterval(
+        intervaloTimer
+      );
+
+
+      document
+        .getElementById("cardFinalizacao")
         .classList
-        .remove("hidden");
+        .remove("oculto");
 
 
-    // Envia para planilha
-
-    enviarBeneficiamento(
-        fim
-    );
-
-}
+      document
+        .getElementById("areaProcesso")
+        .classList
+        .add("oculto");
 
 
+      calcularResultado();
 
-// =====================================================
-// ENVIAR PARA GOOGLE SHEETS
-// =====================================================
-
-function enviarBeneficiamento(fim) {
+    }
 
 
-    const dados = {
+    /*
+     * =========================================================
+     * CALCULAR RESULTADO
+     * =========================================================
+     */
 
+    function calcularResultado() {
+
+      const pesoAntes =
+        converterNumero(
+          document
+            .getElementById("pesoAntes")
+            .value
+        );
+
+
+      const pesoDepois =
+        converterNumero(
+          document
+            .getElementById("pesoDepois")
+            .value
+        );
+
+
+      if (!pesoAntes || !pesoDepois) {
+
+        document
+          .getElementById("resultadoTexto")
+          .textContent =
+            "Informe o peso antes e o peso depois.";
+
+        return;
+
+      }
+
+
+      const descarte =
+        pesoAntes - pesoDepois;
+
+
+      const rendimento =
+        (pesoDepois / pesoAntes) * 100;
+
+
+      document
+        .getElementById("resultadoTexto")
+        .innerHTML =
+
+        "Descarte: <strong>" +
+        formatarNumero(descarte) +
+        " kg</strong><br>" +
+
+        "Rendimento: <strong>" +
+        rendimento.toFixed(2).replace(".", ",") +
+        "%</strong>";
+
+    }
+
+
+    /*
+     * =========================================================
+     * SALVAR BENEFICIAMENTO
+     * =========================================================
+     */
+
+    async function salvarBeneficiamento() {
+
+      if (!loteAtual) {
+
+        alert("Nenhum lote foi selecionado.");
+
+        return;
+      }
+
+
+      if (!inicioProcesso) {
+
+        alert(
+          "O beneficiamento não foi iniciado."
+        );
+
+        return;
+      }
+
+
+      if (!fimProcesso) {
+
+        alert(
+          "Finalize o beneficiamento antes de salvar."
+        );
+
+        return;
+      }
+
+
+      const operador =
+        document
+          .getElementById("operador")
+          .value
+          .trim();
+
+
+      const maquina =
+        document
+          .getElementById("maquina")
+          .value;
+
+
+      const umidadeAntes =
+        document
+          .getElementById("umidadeAntes")
+          .value;
+
+
+      const pesoAntes =
+        document
+          .getElementById("pesoAntes")
+          .value;
+
+
+      const umidadeDepois =
+        document
+          .getElementById("umidadeDepois")
+          .value;
+
+
+      const pesoDepois =
+        document
+          .getElementById("pesoDepois")
+          .value;
+
+
+      const observacao =
+        document
+          .getElementById("observacao")
+          .value;
+
+
+      if (!umidadeDepois) {
+
+        alert(
+          "Informe a umidade depois."
+        );
+
+        return;
+      }
+
+
+      if (!pesoDepois) {
+
+        alert(
+          "Informe o peso depois."
+        );
+
+        return;
+      }
+
+
+      const dados = {
 
         qr:
-            loteAtual.QR || "",
-
+          loteAtual.QR || "",
 
         lote:
-            loteAtual.LOTE || "",
-
+          loteAtual.LOTE || "",
 
         variedade:
-            loteAtual.VARIEDADE || "",
-
+          loteAtual.VARIEDADE || "",
 
         peneira:
-            loteAtual.PENEIRA || "",
-
+          loteAtual.PENEIRA || "",
 
         umidadeRecebimento:
-            loteAtual.UMIDADE_RECEBIMENTO || "",
-
+          loteAtual.UMIDADE_RECEBIMENTO ??
+          loteAtual["UMIDADE_RECEBIMENTO "] ??
+          "",
 
         pesoRecebimento:
-            loteAtual.PESO_RECEBIDO || "",
-
+          loteAtual.PESO_RECEBIDO || "",
 
         operador:
-            document
-                .getElementById(
-                    "operador"
-                )
-                .value,
-
+          operador,
 
         maquina:
-            document
-                .getElementById(
-                    "maquina"
-                )
-                .value,
-
+          maquina,
 
         dataInicio:
-            formatarDataEnvio(
-                inicioBeneficiamento
-            ),
-
+          formatarData(inicioProcesso),
 
         horaInicio:
-            formatarHora(
-                inicioBeneficiamento
-            ),
-
+          formatarHora(inicioProcesso),
 
         umidadeAntes:
-            document
-                .getElementById(
-                    "umidadeAntes"
-                )
-                .value,
-
+          converterNumero(umidadeAntes),
 
         pesoAntes:
-            document
-                .getElementById(
-                    "pesoAntes"
-                )
-                .value,
-
+          converterNumero(pesoAntes),
 
         dataFim:
-            formatarDataEnvio(
-                fim
-            ),
-
+          formatarData(fimProcesso),
 
         horaFim:
-            formatarHora(
-                fim
-            ),
-
+          formatarHora(fimProcesso),
 
         umidadeDepois:
-            document
-                .getElementById(
-                    "umidadeDepois"
-                )
-                .value,
-
+          converterNumero(umidadeDepois),
 
         pesoDepois:
-            document
-                .getElementById(
-                    "pesoDepois"
-                )
-                .value,
-
-
-        observacao:
-            document
-                .getElementById(
-                    "observacao"
-                )
-                .value,
-
+          converterNumero(pesoDepois),
 
         tempoProcesso:
-            document
-                .getElementById(
-                    "timer"
-                )
-                .innerText
+          formatarTempo(
+            fimProcesso - inicioProcesso
+          ),
 
-    };
+        observacao:
+          observacao
+
+      };
 
 
-    // Cria formulário invisível
+      mostrarStatus(
+        "statusSalvar",
+        "Salvando beneficiamento...",
+        "info"
+      );
 
-    const form =
-        document.createElement(
-            "form"
+
+      try {
+
+        /*
+         * Usa um formulário invisível para enviar
+         * os dados para o Apps Script.
+         */
+
+        const iframe =
+          document.createElement("iframe");
+
+        iframe.name =
+          "agrotrace_post_" +
+          Date.now();
+
+        iframe.style.display =
+          "none";
+
+
+        document
+          .body
+          .appendChild(iframe);
+
+
+        const form =
+          document.createElement("form");
+
+        form.method =
+          "POST";
+
+        form.action =
+          API_URL;
+
+        form.target =
+          iframe.name;
+
+
+        const campo =
+          document.createElement("input");
+
+        campo.type =
+          "hidden";
+
+        campo.name =
+          "dados";
+
+        campo.value =
+          JSON.stringify(dados);
+
+
+        form.appendChild(campo);
+
+        document
+          .body
+          .appendChild(form);
+
+
+        form.submit();
+
+
+        mostrarStatus(
+          "statusSalvar",
+          "Beneficiamento enviado para gravação. Confira a aba BENEFICIAMENTOS.",
+          "ok"
         );
 
 
-    form.method =
-        "POST";
+        setTimeout(() => {
+
+          iframe.remove();
+          form.remove();
+
+        }, 5000);
 
 
-    form.action =
-        API_URL;
+      } catch (erro) {
 
+        console.error(erro);
 
-    form.target =
-        "hiddenFrame";
-
-
-    const input =
-        document.createElement(
-            "input"
+        mostrarStatus(
+          "statusSalvar",
+          "Erro ao enviar beneficiamento.",
+          "erro"
         );
 
+      }
 
-    input.type =
-        "hidden";
-
-
-    input.name =
-        "dados";
+    }
 
 
-    input.value =
-        JSON.stringify(
-            dados
-        );
+    /*
+     * =========================================================
+     * FUNÇÕES AUXILIARES
+     * =========================================================
+     */
 
+    function mostrarStatus(
+      elementoId,
+      mensagem,
+      tipo
+    ) {
 
-    form.appendChild(
-        input
-    );
-
-
-    document.body.appendChild(
-        form
-    );
-
-
-    form.submit();
-
-
-    form.remove();
-
-}
-
-
-
-// =====================================================
-// STATUS
-// =====================================================
-
-function mostrarStatus(texto) {
-
-    const status =
+      const elemento =
         document.getElementById(
-            "cameraStatus"
+          elementoId
         );
 
 
-    status.classList.remove(
-        "hidden"
-    );
+      elemento.textContent =
+        mensagem;
 
 
-    status.classList.remove(
-        "error"
-    );
+      elemento.className =
+        "status " + tipo;
+
+    }
 
 
-    status.innerText =
-        texto;
+    function converterNumero(valor) {
 
-}
+      if (
+        valor === null ||
+        valor === undefined ||
+        valor === ""
+      ) {
 
+        return 0;
 
-
-function mostrarErro(texto) {
-
-    const status =
-        document.getElementById(
-            "cameraStatus"
-        );
+      }
 
 
-    status.classList.remove(
-        "hidden"
-    );
+      return Number(
+        String(valor)
+          .replace(",", ".")
+      );
+
+    }
 
 
-    status.classList.add(
-        "error"
-    );
+    function formatarNumero(valor) {
 
-
-    status.innerText =
-        texto;
-
-}
-
-
-
-// =====================================================
-// FORMATAR DATA
-// =====================================================
-
-function formatarData(data) {
-
-
-    if (!data) {
+      if (
+        valor === null ||
+        valor === undefined ||
+        valor === ""
+      ) {
 
         return "-";
 
+      }
+
+
+      const numero =
+        Number(valor);
+
+
+      if (isNaN(numero)) {
+
+        return String(valor);
+
+      }
+
+
+      return numero
+        .toFixed(2)
+        .replace(".", ",");
+
     }
 
 
-    const d =
-        new Date(data);
+    function formatarData(data) {
+
+      const dia =
+        String(
+          data.getDate()
+        ).padStart(2, "0");
 
 
-    if (isNaN(d)) {
+      const mes =
+        String(
+          data.getMonth() + 1
+        ).padStart(2, "0");
 
-        return data;
+
+      const ano =
+        data.getFullYear();
+
+
+      return (
+        dia +
+        "/" +
+        mes +
+        "/" +
+        ano
+      );
 
     }
 
 
-    return d.toLocaleDateString(
-        "pt-BR"
-    );
+    function formatarHora(data) {
 
-}
-
-
-
-// =====================================================
-// DATA PARA APPS SCRIPT
-// =====================================================
-
-function formatarDataEnvio(data) {
+      const hora =
+        String(
+          data.getHours()
+        ).padStart(2, "0");
 
 
-    return data
-        .toISOString()
-        .split("T")[0];
-
-}
-
+      const minuto =
+        String(
+          data.getMinutes()
+        ).padStart(2, "0");
 
 
-// =====================================================
-// HORA
-// =====================================================
-
-function formatarHora(data) {
-
-
-    return data.toLocaleTimeString(
-        "pt-BR",
-        {
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit"
-        }
-    );
-
-}
+      const segundo =
+        String(
+          data.getSeconds()
+        ).padStart(2, "0");
 
 
-</script>
+      return (
+        hora +
+        ":" +
+        minuto +
+        ":" +
+        segundo
+      );
+
+    }
 
 
+    function formatarTempo(milisegundos) {
 
-<!-- FORMULÁRIO INVISÍVEL PARA ENVIO -->
+      const totalSegundos =
+        Math.floor(
+          milisegundos / 1000
+        );
 
-<iframe
-    name="hiddenFrame"
-    style="display:none;">
-</iframe>
 
+      const horas =
+        Math.floor(
+          totalSegundos / 3600
+        );
+
+
+      const minutos =
+        Math.floor(
+          (totalSegundos % 3600) / 60
+        );
+
+
+      const segundos =
+        totalSegundos % 60;
+
+
+      return (
+
+        String(horas)
+          .padStart(2, "0") +
+
+        ":" +
+
+        String(minutos)
+          .padStart(2, "0") +
+
+        ":" +
+
+        String(segundos)
+          .padStart(2, "0")
+
+      );
+
+    }
+
+  </script>
 
 </body>
-
 </html>
