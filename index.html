@@ -1,301 +1,541 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>AgroTrace - Beneficiamento</title>
 
-  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+  <script
+    src="https://unpkg.com/html5-qrcode"
+    type="text/javascript">
+  </script>
+
 
   <style>
+
     * {
       box-sizing: border-box;
     }
 
+
     body {
+
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
       background: #f3f5f4;
+
       color: #1f2933;
+
     }
+
 
     .topo {
+
       background: #1f5f3b;
+
       color: white;
+
       padding: 18px 20px;
+
       text-align: center;
+
     }
+
 
     .topo h1 {
+
       margin: 0;
+
       font-size: 24px;
+
     }
+
 
     .topo p {
+
       margin: 5px 0 0;
+
       font-size: 13px;
-      opacity: 0.9;
+
+      opacity: .9;
+
     }
+
 
     .container {
+
       max-width: 700px;
+
       margin: 20px auto;
+
       padding: 0 15px 40px;
+
     }
+
 
     .card {
+
       background: white;
+
       border-radius: 12px;
+
       padding: 20px;
+
       margin-bottom: 18px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+
+      box-shadow:
+        0 2px 10px
+        rgba(0,0,0,.08);
+
     }
+
 
     .card h2 {
+
       margin-top: 0;
+
       font-size: 19px;
+
     }
 
+
     label {
+
       display: block;
+
       margin-top: 14px;
+
       margin-bottom: 6px;
+
       font-weight: bold;
+
       font-size: 14px;
+
     }
+
 
     input,
     select,
     textarea {
+
       width: 100%;
+
       padding: 12px;
-      border: 1px solid #cbd5d1;
+
+      border:
+        1px solid #cbd5d1;
+
       border-radius: 8px;
+
       font-size: 16px;
+
       background: white;
+
     }
+
 
     textarea {
+
       min-height: 90px;
+
       resize: vertical;
+
     }
+
 
     button {
+
       width: 100%;
+
       border: 0;
+
       border-radius: 8px;
+
       padding: 13px;
+
       margin-top: 12px;
+
       font-size: 16px;
+
       font-weight: bold;
+
       cursor: pointer;
+
     }
 
-    .btn-principal {
-      background: #1f5f3b;
-      color: white;
-    }
-
-    .btn-secundario {
-      background: #e8efeb;
-      color: #1f5f3b;
-    }
-
-    .btn-finalizar {
-      background: #b42318;
-      color: white;
-    }
 
     button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
+
+      opacity: .5;
+
     }
 
-    .campo {
-      margin-bottom: 10px;
+
+    .btn-principal {
+
+      background: #1f5f3b;
+
+      color: white;
+
     }
 
-    .valor {
-      background: #f5f7f6;
-      padding: 11px;
-      border-radius: 7px;
-      border: 1px solid #e1e7e4;
+
+    .btn-secundario {
+
+      background: #e8efeb;
+
+      color: #1f5f3b;
+
     }
+
+
+    .btn-finalizar {
+
+      background: #b42318;
+
+      color: white;
+
+    }
+
 
     .grid {
+
       display: grid;
-      grid-template-columns: 1fr 1fr;
+
+      grid-template-columns:
+        1fr 1fr;
+
       gap: 12px;
+
     }
+
+
+    .valor {
+
+      background: #f5f7f6;
+
+      padding: 11px;
+
+      border-radius: 7px;
+
+      border:
+        1px solid #e1e7e4;
+
+    }
+
 
     .status {
+
       padding: 12px;
+
       border-radius: 8px;
+
       margin-top: 12px;
+
       font-size: 14px;
+
       display: none;
+
     }
+
 
     .status.ok {
+
       display: block;
+
       background: #e7f5ec;
+
       color: #176b3a;
+
     }
+
 
     .status.erro {
+
       display: block;
+
       background: #fdecec;
+
       color: #a11a1a;
+
     }
+
 
     .status.info {
+
       display: block;
+
       background: #eef4f8;
+
       color: #24516b;
+
     }
+
 
     #areaScanner {
+
       display: none;
+
       margin-top: 15px;
+
     }
+
 
     #reader {
+
       width: 100%;
+
       overflow: hidden;
+
       border-radius: 10px;
+
     }
+
 
     .timer {
+
       text-align: center;
+
       font-size: 34px;
+
       font-weight: bold;
+
       margin: 15px 0;
+
       color: #1f5f3b;
+
     }
+
 
     .resultado {
+
       background: #eef7f1;
+
       border-radius: 8px;
+
       padding: 15px;
+
       margin-top: 15px;
+
     }
 
-    .resultado strong {
-      display: block;
-      margin-bottom: 5px;
-    }
 
     .oculto {
+
       display: none;
+
     }
+
 
     .rodape {
+
       text-align: center;
+
       color: #6b7280;
+
       font-size: 12px;
+
       margin-top: 20px;
+
     }
+
 
     @media (max-width: 550px) {
+
       .grid {
+
         grid-template-columns: 1fr;
+
       }
 
-      .container {
-        margin-top: 10px;
-      }
     }
+
   </style>
+
 </head>
+
 
 <body>
 
+
   <div class="topo">
+
     <h1>AgroTrace</h1>
-    <p>Controle de Beneficiamento de Sementes</p>
+
+    <p>
+      Controle de Beneficiamento de Sementes
+    </p>
+
   </div>
+
 
   <div class="container">
 
-    <!-- LOCALIZAR LOTE -->
+
+    <!-- LOCALIZAR -->
+
     <div class="card">
 
       <h2>🔎 Localizar Lote</h2>
 
+
       <button
         class="btn-principal"
         onclick="abrirScanner()">
+
         📷 Escanear QR Code
+
       </button>
 
+
       <div id="areaScanner">
+
         <div id="reader"></div>
 
         <button
           class="btn-secundario"
           onclick="fecharScanner()">
+
           Fechar câmera
+
         </button>
+
       </div>
 
-      <label for="loteManual">
+
+      <label>
+
         Ou digite o número do lote
+
       </label>
+
 
       <input
         type="text"
         id="loteManual"
-        placeholder="Ex.: LT26-001">
+        placeholder="Ex.: LT26-001"
+      >
+
 
       <button
         class="btn-principal"
         onclick="buscarPorLote()">
+
         🔎 Buscar pelo Lote
+
       </button>
 
-      <div id="statusBusca" class="status"></div>
+
+      <div
+        id="statusBusca"
+        class="status">
+      </div>
 
     </div>
 
 
-    <!-- DADOS DO LOTE -->
+    <!-- DADOS -->
+
     <div
       class="card oculto"
       id="cardLote">
 
       <h2>📋 Dados do Lote</h2>
 
+
       <div class="grid">
 
-        <div class="campo">
+        <div>
+
           <label>QR</label>
-          <div class="valor" id="campoQR">-</div>
+
+          <div
+            class="valor"
+            id="campoQR">
+            -
+          </div>
+
         </div>
 
-        <div class="campo">
+
+        <div>
+
           <label>Lote</label>
-          <div class="valor" id="campoLote">-</div>
+
+          <div
+            class="valor"
+            id="campoLote">
+            -
+          </div>
+
         </div>
 
-        <div class="campo">
+
+        <div>
+
           <label>Variedade</label>
-          <div class="valor" id="campoVariedade">-</div>
+
+          <div
+            class="valor"
+            id="campoVariedade">
+            -
+          </div>
+
         </div>
 
-        <div class="campo">
+
+        <div>
+
           <label>Peneira</label>
-          <div class="valor" id="campoPeneira">-</div>
+
+          <div
+            class="valor"
+            id="campoPeneira">
+            -
+          </div>
+
         </div>
 
-        <div class="campo">
-          <label>Umidade no recebimento</label>
-          <div class="valor" id="campoUmidadeRecebimento">-</div>
+
+        <div>
+
+          <label>
+            Umidade no recebimento
+          </label>
+
+          <div
+            class="valor"
+            id="campoUmidadeRecebimento">
+            -
+          </div>
+
         </div>
 
-        <div class="campo">
-          <label>Peso recebido</label>
-          <div class="valor" id="campoPesoRecebido">-</div>
+
+        <div>
+
+          <label>
+            Peso recebido
+          </label>
+
+          <div
+            class="valor"
+            id="campoPesoRecebido">
+            -
+          </div>
+
         </div>
 
       </div>
@@ -304,37 +544,51 @@
 
 
     <!-- BENEFICIAMENTO -->
+
     <div
       class="card oculto"
       id="cardBeneficiamento">
 
       <h2>⚙️ Beneficiamento</h2>
 
-      <label for="operador">
+
+      <label>
         Operador
       </label>
 
       <input
         type="text"
         id="operador"
-        placeholder="Nome do operador">
+        placeholder="Nome do operador"
+      >
 
 
-      <label for="maquina">
+      <label>
         Máquina
       </label>
 
       <select id="maquina">
-        <option value="">Selecione a máquina</option>
-        <option value="CD 500">CD 500</option>
-        <option value="CD 1000">CD 1000</option>
+
+        <option value="">
+          Selecione a máquina
+        </option>
+
+        <option value="CD 500">
+          CD 500
+        </option>
+
+        <option value="CD 1000">
+          CD 1000
+        </option>
+
       </select>
 
 
       <div class="grid">
 
         <div>
-          <label for="umidadeAntes">
+
+          <label>
             Umidade antes
           </label>
 
@@ -343,11 +597,15 @@
             id="umidadeAntes"
             step="0.1"
             inputmode="decimal"
-            placeholder="Ex.: 13,5">
+            placeholder="Ex.: 13,5"
+          >
+
         </div>
 
+
         <div>
-          <label for="pesoAntes">
+
+          <label>
             Peso antes (kg)
           </label>
 
@@ -356,7 +614,9 @@
             id="pesoAntes"
             step="0.01"
             inputmode="decimal"
-            placeholder="Ex.: 1200">
+            placeholder="Ex.: 1200"
+          >
+
         </div>
 
       </div>
@@ -366,7 +626,9 @@
         class="btn-principal"
         id="btnIniciar"
         onclick="iniciarBeneficiamento()">
+
         ▶️ Iniciar Beneficiamento
+
       </button>
 
 
@@ -374,14 +636,19 @@
         id="areaProcesso"
         class="oculto">
 
-        <div class="timer" id="timer">
+        <div
+          class="timer"
+          id="timer">
           00:00:00
         </div>
+
 
         <button
           class="btn-finalizar"
           onclick="finalizarBeneficiamento()">
+
           ⏹️ Finalizar Beneficiamento
+
         </button>
 
       </div>
@@ -390,16 +657,21 @@
 
 
     <!-- FINALIZAÇÃO -->
+
     <div
       class="card oculto"
       id="cardFinalizacao">
 
-      <h2>✅ Finalizar Beneficiamento</h2>
+      <h2>
+        ✅ Finalizar Beneficiamento
+      </h2>
+
 
       <div class="grid">
 
         <div>
-          <label for="umidadeDepois">
+
+          <label>
             Umidade depois
           </label>
 
@@ -408,11 +680,15 @@
             id="umidadeDepois"
             step="0.1"
             inputmode="decimal"
-            placeholder="Ex.: 12,8">
+            placeholder="Ex.: 12,8"
+          >
+
         </div>
 
+
         <div>
-          <label for="pesoDepois">
+
+          <label>
             Peso depois (kg)
           </label>
 
@@ -421,19 +697,23 @@
             id="pesoDepois"
             step="0.01"
             inputmode="decimal"
-            placeholder="Ex.: 1160">
+            placeholder="Ex.: 1160"
+          >
+
         </div>
 
       </div>
 
 
-      <label for="observacao">
+      <label>
         Observação
       </label>
 
+
       <textarea
         id="observacao"
-        placeholder="Digite alguma observação sobre o processo..."></textarea>
+        placeholder="Observação do processo...">
+      </textarea>
 
 
       <div
@@ -443,7 +723,10 @@
         <strong>Resultado</strong>
 
         <div id="resultadoTexto">
-          Informe o peso depois para calcular.
+
+          Informe o peso depois
+          para calcular.
+
         </div>
 
       </div>
@@ -452,15 +735,20 @@
       <button
         class="btn-principal"
         onclick="calcularResultado()">
+
         🧮 Calcular
+
       </button>
 
 
       <button
         class="btn-principal"
         onclick="salvarBeneficiamento()">
+
         💾 Salvar Beneficiamento
+
       </button>
+
 
       <div
         id="statusSalvar"
@@ -471,29 +759,27 @@
 
 
     <div class="rodape">
+
       AgroTrace • Controle de Beneficiamento
+
     </div>
+
 
   </div>
 
 
   <script>
 
+
     /*
-     * =========================================================
-     * CONFIGURAÇÃO DA API
-     * =========================================================
+     * =====================================================
+     * API
+     * =====================================================
      */
 
     const API_URL =
       "https://script.google.com/macros/s/AKfycbx7boqIdOtBzhFpxY2sF9Bp7MDR4_VdKTJWAOAwGwt67UHoBRrnIYshDCbXe4HzqmXv/exec";
 
-
-    /*
-     * =========================================================
-     * VARIÁVEIS DO SISTEMA
-     * =========================================================
-     */
 
     let scanner = null;
 
@@ -507,99 +793,508 @@
 
 
     /*
-     * =========================================================
-     * SCANNER QR CODE
-     * =========================================================
+     * =====================================================
+     * BUSCA USANDO JSONP
+     * =====================================================
+     *
+     * Aqui não usamos fetch().
+     *
+     * Isso evita o problema de comunicação
+     * entre GitHub Pages e Google Apps Script.
+     */
+
+
+    function consultarAPI(parametros) {
+
+      return new Promise(
+        function(resolve, reject) {
+
+          const callbackName =
+            "agrotraceCallback_" +
+            Date.now() +
+            "_" +
+            Math.floor(
+              Math.random() * 10000
+            );
+
+
+          const script =
+            document.createElement(
+              "script"
+            );
+
+
+          const query =
+            new URLSearchParams(
+              parametros
+            );
+
+
+          query.set(
+            "callback",
+            callbackName
+          );
+
+
+          const timeout =
+            setTimeout(
+              function() {
+
+                limpar();
+
+                reject(
+                  new Error(
+                    "Tempo limite da consulta."
+                  )
+                );
+
+              },
+              15000
+            );
+
+
+          window[callbackName] =
+            function(resultado) {
+
+              clearTimeout(
+                timeout
+              );
+
+              limpar();
+
+              resolve(
+                resultado
+              );
+
+            };
+
+
+          function limpar() {
+
+            delete window[
+              callbackName
+            ];
+
+            if (script.parentNode) {
+
+              script.parentNode.removeChild(
+                script
+              );
+
+            }
+
+          }
+
+
+          script.onerror =
+            function() {
+
+              clearTimeout(
+                timeout
+              );
+
+              limpar();
+
+              reject(
+                new Error(
+                  "Não foi possível acessar a API."
+                )
+              );
+
+            };
+
+
+          script.src =
+            API_URL +
+            "?" +
+            query.toString();
+
+
+          document
+            .body
+            .appendChild(script);
+
+        }
+      );
+
+    }
+
+
+    /*
+     * =====================================================
+     * BUSCAR POR LOTE
+     * =====================================================
+     */
+
+    async function buscarPorLote() {
+
+      const lote =
+        document
+          .getElementById(
+            "loteManual"
+          )
+          .value
+          .trim();
+
+
+      if (!lote) {
+
+        mostrarStatus(
+          "statusBusca",
+          "Digite o número do lote.",
+          "erro"
+        );
+
+        return;
+
+      }
+
+
+      mostrarStatus(
+        "statusBusca",
+        "Consultando lote...",
+        "info"
+      );
+
+
+      try {
+
+        const resultado =
+          await consultarAPI({
+
+            acao: "buscar",
+
+            lote: lote
+
+          });
+
+
+        processarResultado(
+          resultado
+        );
+
+
+      } catch (erro) {
+
+        console.error(
+          erro
+        );
+
+
+        mostrarStatus(
+          "statusBusca",
+          "Erro ao consultar lote. Verifique a conexão com a API.",
+          "erro"
+        );
+
+      }
+
+    }
+
+
+    /*
+     * =====================================================
+     * BUSCAR POR QR
+     * =====================================================
+     */
+
+    async function buscarPorQR(qr) {
+
+      if (!qr) {
+
+        mostrarStatus(
+          "statusBusca",
+          "QR Code vazio.",
+          "erro"
+        );
+
+        return;
+
+      }
+
+
+      mostrarStatus(
+        "statusBusca",
+        "Consultando QR Code...",
+        "info"
+      );
+
+
+      try {
+
+        const resultado =
+          await consultarAPI({
+
+            acao: "buscar",
+
+            qr: qr
+
+          });
+
+
+        processarResultado(
+          resultado
+        );
+
+
+      } catch (erro) {
+
+        console.error(
+          erro
+        );
+
+
+        mostrarStatus(
+          "statusBusca",
+          "Erro ao consultar QR Code.",
+          "erro"
+        );
+
+      }
+
+    }
+
+
+    /*
+     * =====================================================
+     * PROCESSAR LOTE
+     * =====================================================
+     */
+
+    function processarResultado(
+      resultado
+    ) {
+
+      if (
+        !resultado ||
+        resultado.status !== "ok"
+      ) {
+
+        mostrarStatus(
+          "statusBusca",
+
+          resultado &&
+          resultado.mensagem
+            ? resultado.mensagem
+            : "Lote não encontrado.",
+
+          "erro"
+        );
+
+        return;
+
+      }
+
+
+      loteAtual =
+        resultado.dados;
+
+
+      document
+        .getElementById(
+          "campoQR"
+        )
+        .textContent =
+          loteAtual.QR || "-";
+
+
+      document
+        .getElementById(
+          "campoLote"
+        )
+        .textContent =
+          loteAtual.LOTE || "-";
+
+
+      document
+        .getElementById(
+          "campoVariedade"
+        )
+        .textContent =
+          loteAtual.VARIEDADE || "-";
+
+
+      document
+        .getElementById(
+          "campoPeneira"
+        )
+        .textContent =
+          formatarNumero(
+            loteAtual.PENEIRA
+          );
+
+
+      const umidade =
+        loteAtual.UMIDADE_RECEBIMENTO ??
+        loteAtual[
+          "UMIDADE_RECEBIMENTO "
+        ] ??
+        "";
+
+
+      document
+        .getElementById(
+          "campoUmidadeRecebimento"
+        )
+        .textContent =
+          formatarNumero(
+            umidade
+          );
+
+
+      document
+        .getElementById(
+          "campoPesoRecebido"
+        )
+        .textContent =
+          formatarNumero(
+            loteAtual.PESO_RECEBIDO
+          );
+
+
+      document
+        .getElementById(
+          "cardLote"
+        )
+        .classList
+        .remove("oculto");
+
+
+      document
+        .getElementById(
+          "cardBeneficiamento"
+        )
+        .classList
+        .remove("oculto");
+
+
+      mostrarStatus(
+        "statusBusca",
+        "Lote localizado com sucesso.",
+        "ok"
+      );
+
+    }
+
+
+    /*
+     * =====================================================
+     * SCANNER
+     * =====================================================
      */
 
     async function abrirScanner() {
 
-      const area =
-        document.getElementById("areaScanner");
+      document
+        .getElementById(
+          "areaScanner"
+        )
+        .style.display =
+          "block";
 
-      area.style.display = "block";
 
       try {
 
         scanner =
-          new Html5Qrcode("reader");
-
-        const cameras =
-          await Html5Qrcode.getCameras();
-
-        if (!cameras || cameras.length === 0) {
-
-          mostrarStatus(
-            "statusBusca",
-            "Nenhuma câmera encontrada.",
-            "erro"
+          new Html5Qrcode(
+            "reader"
           );
 
-          return;
+
+        const cameras =
+          await Html5Qrcode
+            .getCameras();
+
+
+        if (
+          !cameras ||
+          cameras.length === 0
+        ) {
+
+          throw new Error(
+            "Nenhuma câmera encontrada."
+          );
+
         }
 
 
-        let cameraSelecionada =
-          cameras[cameras.length - 1].id;
+        let camera =
+          cameras[
+            cameras.length - 1
+          ].id;
 
 
-        for (const camera of cameras) {
+        for (
+          const c of cameras
+        ) {
 
           const nome =
-            (camera.label || "").toLowerCase();
+            (
+              c.label || ""
+            ).toLowerCase();
+
 
           if (
+
             nome.includes("back") ||
             nome.includes("rear") ||
             nome.includes("traseira") ||
             nome.includes("environment")
+
           ) {
 
-            cameraSelecionada = camera.id;
+            camera = c.id;
 
             break;
+
           }
+
         }
 
 
         await scanner.start(
 
-          cameraSelecionada,
+          camera,
 
           {
+
             fps: 10,
 
             qrbox: {
+
               width: 250,
+
               height: 250
+
             }
 
           },
 
-          (texto) => {
+          function(texto) {
 
             fecharScanner();
 
-            buscarPorQR(texto);
+            buscarPorQR(
+              texto
+            );
 
           },
 
-          () => {
-
-            // Ignora erros normais de leitura
-            // enquanto o QR não é identificado.
-
-          }
+          function() {}
 
         );
 
+
       } catch (erro) {
 
-        console.error(erro);
+        console.error(
+          erro
+        );
+
 
         mostrarStatus(
           "statusBusca",
-          "Não foi possível acessar a câmera. Verifique a permissão do navegador.",
+          "Não foi possível acessar a câmera.",
           "erro"
         );
 
@@ -620,7 +1315,9 @@
 
         } catch (erro) {
 
-          console.log(erro);
+          console.log(
+            erro
+          );
 
         }
 
@@ -628,311 +1325,99 @@
 
       }
 
+
       document
-        .getElementById("areaScanner")
-        .style.display = "none";
+        .getElementById(
+          "areaScanner"
+        )
+        .style.display =
+          "none";
 
     }
 
 
     /*
-     * =========================================================
-     * BUSCA POR QR
-     * =========================================================
-     */
-
-    async function buscarPorQR(qr) {
-
-      if (!qr) {
-
-        mostrarStatus(
-          "statusBusca",
-          "QR Code vazio.",
-          "erro"
-        );
-
-        return;
-      }
-
-
-      mostrarStatus(
-        "statusBusca",
-        "Consultando lote...",
-        "info"
-      );
-
-
-      try {
-
-        const url =
-          API_URL +
-          "?acao=buscar&qr=" +
-          encodeURIComponent(qr);
-
-
-        const resposta =
-          await fetch(url);
-
-        const resultado =
-          await resposta.json();
-
-
-        processarResultado(resultado);
-
-      } catch (erro) {
-
-        console.error(erro);
-
-        mostrarStatus(
-          "statusBusca",
-          "Erro ao consultar lote.",
-          "erro"
-        );
-
-      }
-
-    }
-
-
-    /*
-     * =========================================================
-     * BUSCA POR LOTE
-     * =========================================================
-     */
-
-    async function buscarPorLote() {
-
-      const lote =
-        document
-          .getElementById("loteManual")
-          .value
-          .trim();
-
-
-      if (!lote) {
-
-        mostrarStatus(
-          "statusBusca",
-          "Digite o número do lote.",
-          "erro"
-        );
-
-        return;
-      }
-
-
-      mostrarStatus(
-        "statusBusca",
-        "Consultando lote...",
-        "info"
-      );
-
-
-      try {
-
-        const url =
-          API_URL +
-          "?acao=buscar&lote=" +
-          encodeURIComponent(lote);
-
-
-        const resposta =
-          await fetch(url);
-
-        const resultado =
-          await resposta.json();
-
-
-        processarResultado(resultado);
-
-      } catch (erro) {
-
-        console.error(erro);
-
-        mostrarStatus(
-          "statusBusca",
-          "Erro ao consultar lote.",
-          "erro"
-        );
-
-      }
-
-    }
-
-
-    /*
-     * =========================================================
-     * PROCESSAR RESULTADO DA API
-     * =========================================================
-     */
-
-    function processarResultado(resultado) {
-
-      if (
-        !resultado ||
-        resultado.status !== "ok"
-      ) {
-
-        mostrarStatus(
-          "statusBusca",
-          resultado && resultado.mensagem
-            ? resultado.mensagem
-            : "Lote não encontrado.",
-          "erro"
-        );
-
-        return;
-      }
-
-
-      loteAtual =
-        resultado.dados;
-
-
-      /*
-       * Preenche os dados do lote.
-       */
-
-      document
-        .getElementById("campoQR")
-        .textContent =
-          loteAtual.QR || "-";
-
-
-      document
-        .getElementById("campoLote")
-        .textContent =
-          loteAtual.LOTE || "-";
-
-
-      document
-        .getElementById("campoVariedade")
-        .textContent =
-          loteAtual.VARIEDADE || "-";
-
-
-      document
-        .getElementById("campoPeneira")
-        .textContent =
-          formatarNumero(
-            loteAtual.PENEIRA
-          );
-
-
-      /*
-       * Aceita tanto o cabeçalho correto
-       * quanto o cabeçalho antigo com espaço.
-       */
-
-      const umidadeRecebimento =
-        loteAtual.UMIDADE_RECEBIMENTO ??
-        loteAtual["UMIDADE_RECEBIMENTO "] ??
-        "";
-
-
-      document
-        .getElementById("campoUmidadeRecebimento")
-        .textContent =
-          formatarNumero(
-            umidadeRecebimento
-          );
-
-
-      document
-        .getElementById("campoPesoRecebido")
-        .textContent =
-          formatarNumero(
-            loteAtual.PESO_RECEBIDO
-          );
-
-
-      /*
-       * Mostra os cards.
-       */
-
-      document
-        .getElementById("cardLote")
-        .classList
-        .remove("oculto");
-
-
-      document
-        .getElementById("cardBeneficiamento")
-        .classList
-        .remove("oculto");
-
-
-      mostrarStatus(
-        "statusBusca",
-        "Lote localizado com sucesso.",
-        "ok"
-      );
-
-    }
-
-
-    /*
-     * =========================================================
-     * INICIAR BENEFICIAMENTO
-     * =========================================================
+     * =====================================================
+     * INICIAR
+     * =====================================================
      */
 
     function iniciarBeneficiamento() {
 
       const operador =
         document
-          .getElementById("operador")
+          .getElementById(
+            "operador"
+          )
           .value
           .trim();
 
 
       const maquina =
         document
-          .getElementById("maquina")
+          .getElementById(
+            "maquina"
+          )
           .value;
 
 
-      const umidadeAntes =
+      const umidade =
         document
-          .getElementById("umidadeAntes")
+          .getElementById(
+            "umidadeAntes"
+          )
           .value;
 
 
-      const pesoAntes =
+      const peso =
         document
-          .getElementById("pesoAntes")
+          .getElementById(
+            "pesoAntes"
+          )
           .value;
 
 
       if (!operador) {
 
-        alert("Informe o operador.");
+        alert(
+          "Informe o operador."
+        );
 
         return;
+
       }
 
 
       if (!maquina) {
 
-        alert("Selecione a máquina.");
+        alert(
+          "Selecione a máquina."
+        );
 
         return;
+
       }
 
 
-      if (!umidadeAntes) {
+      if (!umidade) {
 
-        alert("Informe a umidade antes.");
+        alert(
+          "Informe a umidade antes."
+        );
 
         return;
+
       }
 
 
-      if (!pesoAntes) {
+      if (!peso) {
 
-        alert("Informe o peso antes.");
+        alert(
+          "Informe o peso antes."
+        );
 
         return;
+
       }
 
 
@@ -941,20 +1426,19 @@
 
 
       document
-        .getElementById("btnIniciar")
-        .disabled = true;
+        .getElementById(
+          "btnIniciar"
+        )
+        .disabled =
+          true;
 
 
       document
-        .getElementById("areaProcesso")
+        .getElementById(
+          "areaProcesso"
+        )
         .classList
         .remove("oculto");
-
-
-      document
-        .getElementById("cardFinalizacao")
-        .classList
-        .add("oculto");
 
 
       atualizarTimer();
@@ -970,15 +1454,17 @@
 
 
     /*
-     * =========================================================
+     * =====================================================
      * TIMER
-     * =========================================================
+     * =====================================================
      */
 
     function atualizarTimer() {
 
       if (!inicioProcesso) {
+
         return;
+
       }
 
 
@@ -986,24 +1472,27 @@
         new Date();
 
 
-      const diferenca =
-        agora - inicioProcesso;
+      const tempo =
+        agora -
+        inicioProcesso;
 
 
       document
-        .getElementById("timer")
+        .getElementById(
+          "timer"
+        )
         .textContent =
           formatarTempo(
-            diferenca
+            tempo
           );
 
     }
 
 
     /*
-     * =========================================================
-     * FINALIZAR PROCESSO
-     * =========================================================
+     * =====================================================
+     * FINALIZAR
+     * =====================================================
      */
 
     function finalizarBeneficiamento() {
@@ -1015,6 +1504,7 @@
         );
 
         return;
+
       }
 
 
@@ -1028,26 +1518,27 @@
 
 
       document
-        .getElementById("cardFinalizacao")
-        .classList
-        .remove("oculto");
-
-
-      document
-        .getElementById("areaProcesso")
+        .getElementById(
+          "areaProcesso"
+        )
         .classList
         .add("oculto");
 
 
-      calcularResultado();
+      document
+        .getElementById(
+          "cardFinalizacao"
+        )
+        .classList
+        .remove("oculto");
 
     }
 
 
     /*
-     * =========================================================
-     * CALCULAR RESULTADO
-     * =========================================================
+     * =====================================================
+     * CALCULAR
+     * =====================================================
      */
 
     function calcularResultado() {
@@ -1055,7 +1546,9 @@
       const pesoAntes =
         converterNumero(
           document
-            .getElementById("pesoAntes")
+            .getElementById(
+              "pesoAntes"
+            )
             .value
         );
 
@@ -1063,17 +1556,24 @@
       const pesoDepois =
         converterNumero(
           document
-            .getElementById("pesoDepois")
+            .getElementById(
+              "pesoDepois"
+            )
             .value
         );
 
 
-      if (!pesoAntes || !pesoDepois) {
+      if (
+        pesoAntes <= 0 ||
+        pesoDepois <= 0
+      ) {
 
         document
-          .getElementById("resultadoTexto")
+          .getElementById(
+            "resultadoTexto"
+          )
           .textContent =
-            "Informe o peso antes e o peso depois.";
+            "Informe os pesos antes e depois.";
 
         return;
 
@@ -1081,41 +1581,58 @@
 
 
       const descarte =
-        pesoAntes - pesoDepois;
+        pesoAntes -
+        pesoDepois;
 
 
       const rendimento =
-        (pesoDepois / pesoAntes) * 100;
+        (
+          pesoDepois /
+          pesoAntes
+        ) * 100;
 
 
       document
-        .getElementById("resultadoTexto")
+        .getElementById(
+          "resultadoTexto"
+        )
         .innerHTML =
 
-        "Descarte: <strong>" +
-        formatarNumero(descarte) +
-        " kg</strong><br>" +
+          "Descarte: <strong>" +
 
-        "Rendimento: <strong>" +
-        rendimento.toFixed(2).replace(".", ",") +
-        "%</strong>";
+          formatarNumero(
+            descarte
+          ) +
+
+          " kg</strong><br>" +
+
+          "Rendimento: <strong>" +
+
+          rendimento
+            .toFixed(2)
+            .replace(".", ",") +
+
+          "%</strong>";
 
     }
 
 
     /*
-     * =========================================================
-     * SALVAR BENEFICIAMENTO
-     * =========================================================
+     * =====================================================
+     * SALVAR
+     * =====================================================
      */
 
-    async function salvarBeneficiamento() {
+    function salvarBeneficiamento() {
 
       if (!loteAtual) {
 
-        alert("Nenhum lote foi selecionado.");
+        alert(
+          "Nenhum lote selecionado."
+        );
 
         return;
+
       }
 
 
@@ -1126,70 +1643,35 @@
         );
 
         return;
+
       }
 
 
       if (!fimProcesso) {
 
         alert(
-          "Finalize o beneficiamento antes de salvar."
+          "Finalize o beneficiamento."
         );
 
         return;
+
       }
 
 
-      const operador =
+      const pesoDepois =
         document
-          .getElementById("operador")
-          .value
-          .trim();
-
-
-      const maquina =
-        document
-          .getElementById("maquina")
-          .value;
-
-
-      const umidadeAntes =
-        document
-          .getElementById("umidadeAntes")
-          .value;
-
-
-      const pesoAntes =
-        document
-          .getElementById("pesoAntes")
+          .getElementById(
+            "pesoDepois"
+          )
           .value;
 
 
       const umidadeDepois =
         document
-          .getElementById("umidadeDepois")
+          .getElementById(
+            "umidadeDepois"
+          )
           .value;
-
-
-      const pesoDepois =
-        document
-          .getElementById("pesoDepois")
-          .value;
-
-
-      const observacao =
-        document
-          .getElementById("observacao")
-          .value;
-
-
-      if (!umidadeDepois) {
-
-        alert(
-          "Informe a umidade depois."
-        );
-
-        return;
-      }
 
 
       if (!pesoDepois) {
@@ -1199,6 +1681,18 @@
         );
 
         return;
+
+      }
+
+
+      if (!umidadeDepois) {
+
+        alert(
+          "Informe a umidade depois."
+        );
+
+        return;
+
       }
 
 
@@ -1218,164 +1712,224 @@
 
         umidadeRecebimento:
           loteAtual.UMIDADE_RECEBIMENTO ??
-          loteAtual["UMIDADE_RECEBIMENTO "] ??
+          loteAtual[
+            "UMIDADE_RECEBIMENTO "
+          ] ??
           "",
 
         pesoRecebimento:
           loteAtual.PESO_RECEBIDO || "",
 
         operador:
-          operador,
+          document
+            .getElementById(
+              "operador"
+            )
+            .value
+            .trim(),
 
         maquina:
-          maquina,
+          document
+            .getElementById(
+              "maquina"
+            )
+            .value,
 
         dataInicio:
-          formatarData(inicioProcesso),
+          formatarData(
+            inicioProcesso
+          ),
 
         horaInicio:
-          formatarHora(inicioProcesso),
+          formatarHora(
+            inicioProcesso
+          ),
 
         umidadeAntes:
-          converterNumero(umidadeAntes),
+          converterNumero(
+            document
+              .getElementById(
+                "umidadeAntes"
+              )
+              .value
+          ),
 
         pesoAntes:
-          converterNumero(pesoAntes),
+          converterNumero(
+            document
+              .getElementById(
+                "pesoAntes"
+              )
+              .value
+          ),
 
         dataFim:
-          formatarData(fimProcesso),
+          formatarData(
+            fimProcesso
+          ),
 
         horaFim:
-          formatarHora(fimProcesso),
+          formatarHora(
+            fimProcesso
+          ),
 
         umidadeDepois:
-          converterNumero(umidadeDepois),
+          converterNumero(
+            umidadeDepois
+          ),
 
         pesoDepois:
-          converterNumero(pesoDepois),
+          converterNumero(
+            pesoDepois
+          ),
 
         tempoProcesso:
           formatarTempo(
-            fimProcesso - inicioProcesso
+            fimProcesso -
+            inicioProcesso
           ),
 
         observacao:
-          observacao
+          document
+            .getElementById(
+              "observacao"
+            )
+            .value
 
       };
 
 
-      mostrarStatus(
-        "statusSalvar",
-        "Salvando beneficiamento...",
-        "info"
+      enviarBeneficiamento(
+        dados
       );
-
-
-      try {
-
-        /*
-         * Usa um formulário invisível para enviar
-         * os dados para o Apps Script.
-         */
-
-        const iframe =
-          document.createElement("iframe");
-
-        iframe.name =
-          "agrotrace_post_" +
-          Date.now();
-
-        iframe.style.display =
-          "none";
-
-
-        document
-          .body
-          .appendChild(iframe);
-
-
-        const form =
-          document.createElement("form");
-
-        form.method =
-          "POST";
-
-        form.action =
-          API_URL;
-
-        form.target =
-          iframe.name;
-
-
-        const campo =
-          document.createElement("input");
-
-        campo.type =
-          "hidden";
-
-        campo.name =
-          "dados";
-
-        campo.value =
-          JSON.stringify(dados);
-
-
-        form.appendChild(campo);
-
-        document
-          .body
-          .appendChild(form);
-
-
-        form.submit();
-
-
-        mostrarStatus(
-          "statusSalvar",
-          "Beneficiamento enviado para gravação. Confira a aba BENEFICIAMENTOS.",
-          "ok"
-        );
-
-
-        setTimeout(() => {
-
-          iframe.remove();
-          form.remove();
-
-        }, 5000);
-
-
-      } catch (erro) {
-
-        console.error(erro);
-
-        mostrarStatus(
-          "statusSalvar",
-          "Erro ao enviar beneficiamento.",
-          "erro"
-        );
-
-      }
 
     }
 
 
     /*
-     * =========================================================
-     * FUNÇÕES AUXILIARES
-     * =========================================================
+     * =====================================================
+     * ENVIO
+     * =====================================================
+     */
+
+    function enviarBeneficiamento(
+      dados
+    ) {
+
+      mostrarStatus(
+        "statusSalvar",
+        "Enviando beneficiamento...",
+        "info"
+      );
+
+
+      const iframe =
+        document.createElement(
+          "iframe"
+        );
+
+
+      iframe.name =
+        "agrotrace_" +
+        Date.now();
+
+
+      iframe.style.display =
+        "none";
+
+
+      document.body.appendChild(
+        iframe
+      );
+
+
+      const form =
+        document.createElement(
+          "form"
+        );
+
+
+      form.method =
+        "POST";
+
+
+      form.action =
+        API_URL;
+
+
+      form.target =
+        iframe.name;
+
+
+      const campo =
+        document.createElement(
+          "input"
+        );
+
+
+      campo.type =
+        "hidden";
+
+
+      campo.name =
+        "dados";
+
+
+      campo.value =
+        JSON.stringify(
+          dados
+        );
+
+
+      form.appendChild(
+        campo
+      );
+
+
+      document.body.appendChild(
+        form
+      );
+
+
+      form.submit();
+
+
+      mostrarStatus(
+        "statusSalvar",
+        "Beneficiamento enviado para gravação.",
+        "ok"
+      );
+
+
+      setTimeout(
+        function() {
+
+          iframe.remove();
+
+          form.remove();
+
+        },
+        5000
+      );
+
+    }
+
+
+    /*
+     * =====================================================
+     * AUXILIARES
+     * =====================================================
      */
 
     function mostrarStatus(
-      elementoId,
+      id,
       mensagem,
       tipo
     ) {
 
       const elemento =
         document.getElementById(
-          elementoId
+          id
         );
 
 
@@ -1384,12 +1938,15 @@
 
 
       elemento.className =
-        "status " + tipo;
+        "status " +
+        tipo;
 
     }
 
 
-    function converterNumero(valor) {
+    function converterNumero(
+      valor
+    ) {
 
       if (
         valor === null ||
@@ -1410,7 +1967,9 @@
     }
 
 
-    function formatarNumero(valor) {
+    function formatarNumero(
+      valor
+    ) {
 
       if (
         valor === null ||
@@ -1427,9 +1986,13 @@
         Number(valor);
 
 
-      if (isNaN(numero)) {
+      if (
+        isNaN(numero)
+      ) {
 
-        return String(valor);
+        return String(
+          valor
+        );
 
       }
 
@@ -1441,99 +2004,105 @@
     }
 
 
-    function formatarData(data) {
+    function formatarData(
+      data
+    ) {
 
-      const dia =
+      return (
+
         String(
           data.getDate()
-        ).padStart(2, "0");
+        ).padStart(2, "0")
 
+        +
 
-      const mes =
+        "/" +
+
         String(
           data.getMonth() + 1
-        ).padStart(2, "0");
+        ).padStart(2, "0")
 
+        +
 
-      const ano =
-        data.getFullYear();
-
-
-      return (
-        dia +
         "/" +
-        mes +
-        "/" +
-        ano
+
+        data.getFullYear()
+
       );
 
     }
 
 
-    function formatarHora(data) {
+    function formatarHora(
+      data
+    ) {
 
-      const hora =
+      return (
+
         String(
           data.getHours()
-        ).padStart(2, "0");
+        ).padStart(2, "0")
 
+        +
 
-      const minuto =
+        ":" +
+
         String(
           data.getMinutes()
-        ).padStart(2, "0");
+        ).padStart(2, "0")
 
+        +
 
-      const segundo =
+        ":" +
+
         String(
           data.getSeconds()
-        ).padStart(2, "0");
+        ).padStart(2, "0")
 
-
-      return (
-        hora +
-        ":" +
-        minuto +
-        ":" +
-        segundo
       );
 
     }
 
 
-    function formatarTempo(milisegundos) {
+    function formatarTempo(
+      ms
+    ) {
 
-      const totalSegundos =
+      const total =
         Math.floor(
-          milisegundos / 1000
+          ms / 1000
         );
 
 
       const horas =
         Math.floor(
-          totalSegundos / 3600
+          total / 3600
         );
 
 
       const minutos =
         Math.floor(
-          (totalSegundos % 3600) / 60
+          (total % 3600) / 60
         );
 
 
       const segundos =
-        totalSegundos % 60;
+        total % 60;
 
 
       return (
 
         String(horas)
-          .padStart(2, "0") +
+          .padStart(2, "0")
+
+        +
 
         ":" +
 
         String(minutos)
-          .padStart(2, "0") +
+          .padStart(2, "0")
+
+        +
 
         ":" +
 
@@ -1544,7 +2113,9 @@
 
     }
 
+
   </script>
 
 </body>
+
 </html>
