@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>AgroTrace - Beneficiamento</title>
 
-  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+  <script
+    src="https://unpkg.com/html5-qrcode"
+    type="text/javascript">
+  </script>
 
   <style>
+
     * {
       box-sizing: border-box;
     }
@@ -16,30 +26,28 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #f1f5f3;
+      background: #f3f5f4;
       color: #1f2937;
     }
 
-    .topo {
+    .header {
       background: #166534;
       color: white;
-      padding: 20px;
+      padding: 22px 18px;
       text-align: center;
     }
 
-    .topo h1 {
+    .header h1 {
       margin: 0;
-      font-size: 25px;
+      font-size: 26px;
     }
 
-    .topo p {
+    .header p {
       margin: 6px 0 0;
       font-size: 14px;
-      opacity: 0.9;
     }
 
     .container {
-      width: 100%;
       max-width: 600px;
       margin: auto;
       padding: 18px;
@@ -54,16 +62,16 @@
     }
 
     .titulo {
-      font-size: 18px;
+      font-size: 19px;
       font-weight: bold;
-      margin-bottom: 14px;
       color: #166534;
+      margin-bottom: 15px;
     }
 
     label {
       display: block;
-      font-weight: bold;
       font-size: 14px;
+      font-weight: bold;
       margin-bottom: 6px;
     }
 
@@ -75,8 +83,7 @@
       border: 1px solid #d1d5db;
       border-radius: 8px;
       font-size: 16px;
-      margin-bottom: 12px;
-      background: white;
+      margin-bottom: 13px;
     }
 
     textarea {
@@ -86,76 +93,46 @@
 
     button {
       width: 100%;
-      border: none;
-      border-radius: 9px;
       padding: 14px;
+      border: 0;
+      border-radius: 9px;
       font-size: 16px;
       font-weight: bold;
+      margin-top: 7px;
       cursor: pointer;
-      margin-top: 6px;
     }
 
-    .btn-verde {
+    .verde {
       background: #166534;
       color: white;
     }
 
-    .btn-verde:active {
-      background: #14532d;
-    }
-
-    .btn-cinza {
+    .cinza {
       background: #e5e7eb;
       color: #111827;
     }
 
-    .btn-vermelho {
+    .vermelho {
       background: #b91c1c;
       color: white;
     }
 
-    .resultado {
-      display: none;
-    }
-
-    .dados {
-      background: #f0fdf4;
-      border: 1px solid #bbf7d0;
-      border-radius: 10px;
-      padding: 14px;
-      margin-top: 12px;
-    }
-
-    .linha {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 7px 0;
-      border-bottom: 1px solid #dcfce7;
-    }
-
-    .linha:last-child {
-      border-bottom: none;
-    }
-
-    .nome {
-      font-weight: bold;
-    }
-
-    .valor {
-      text-align: right;
-    }
-
     .status {
-      padding: 12px;
-      border-radius: 8px;
-      margin-bottom: 15px;
       display: none;
-      font-weight: bold;
+      padding: 12px;
+      border-radius: 9px;
+      margin-bottom: 15px;
       text-align: center;
+      font-weight: bold;
     }
 
-    .status.sucesso {
+    .status.info {
+      display: block;
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    .status.ok {
       display: block;
       background: #dcfce7;
       color: #166534;
@@ -167,24 +144,44 @@
       color: #991b1b;
     }
 
-    .status.info {
-      display: block;
-      background: #dbeafe;
-      color: #1e40af;
+    .dados {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 10px;
+      padding: 12px;
     }
 
-    #leitor {
-      width: 100%;
-      margin-top: 12px;
-      display: none;
+    .linha {
+      display: flex;
+      justify-content: space-between;
+      padding: 9px 0;
+      border-bottom: 1px solid #dcfce7;
+      gap: 10px;
+    }
+
+    .linha:last-child {
+      border-bottom: 0;
+    }
+
+    .campo {
+      font-weight: bold;
+    }
+
+    .valor {
+      text-align: right;
     }
 
     .timer {
-      font-size: 34px;
       text-align: center;
+      font-size: 38px;
       font-weight: bold;
       color: #166534;
-      padding: 15px;
+      padding: 15px 0;
+    }
+
+    #scanner {
+      display: none;
+      margin-top: 15px;
     }
 
     .oculto {
@@ -193,61 +190,78 @@
 
     .rodape {
       text-align: center;
-      font-size: 12px;
       color: #6b7280;
+      font-size: 12px;
       padding: 20px;
     }
+
   </style>
+
 </head>
+
 
 <body>
 
-  <div class="topo">
+  <div class="header">
+
     <h1>AgroTrace</h1>
-    <p>Controle de Beneficiamento de Sementes</p>
+
+    <p>
+      Controle de Beneficiamento de Sementes
+    </p>
+
   </div>
+
 
   <div class="container">
 
+
     <div id="status" class="status"></div>
 
-    <!-- LOCALIZAR LOTE -->
-    <div class="card" id="cardBusca">
+
+    <!-- BUSCA -->
+
+    <div class="card">
 
       <div class="titulo">
         Localizar lote
       </div>
 
-      <label>Número do lote</label>
+      <label>
+        Número do lote
+      </label>
 
       <input
+        id="lote"
         type="text"
-        id="loteBusca"
         placeholder="Ex.: LT26-001"
-        autocomplete="off"
       >
 
       <button
-        class="btn-verde"
+        class="verde"
         onclick="buscarLote()"
       >
         🔎 Consultar lote
       </button>
 
       <button
-        class="btn-cinza"
+        class="cinza"
         onclick="abrirScanner()"
       >
         📷 Ler QR Code
       </button>
 
-      <div id="leitor"></div>
+      <div id="scanner"></div>
 
     </div>
 
 
-    <!-- DADOS DO LOTE -->
-    <div class="card resultado" id="cardLote">
+    <!-- DADOS -->
+
+    <div
+      id="dadosLote"
+      class="card oculto"
+    >
 
       <div class="titulo">
         Dados do lote
@@ -256,33 +270,59 @@
       <div class="dados">
 
         <div class="linha">
-          <span class="nome">Lote</span>
-          <span class="valor" id="campoLote">-</span>
+          <span class="campo">Lote</span>
+          <span
+            class="valor"
+            id="dLote">
+          </span>
         </div>
 
         <div class="linha">
-          <span class="nome">QR</span>
-          <span class="valor" id="campoQR">-</span>
+          <span class="campo">QR</span>
+          <span
+            class="valor"
+            id="dQR">
+          </span>
         </div>
 
         <div class="linha">
-          <span class="nome">Variedade</span>
-          <span class="valor" id="campoVariedade">-</span>
+          <span class="campo">Variedade</span>
+          <span
+            class="valor"
+            id="dVariedade">
+          </span>
         </div>
 
         <div class="linha">
-          <span class="nome">Peneira</span>
-          <span class="valor" id="campoPeneira">-</span>
+          <span class="campo">Peneira</span>
+          <span
+            class="valor"
+            id="dPeneira">
+          </span>
         </div>
 
         <div class="linha">
-          <span class="nome">Umidade recebimento</span>
-          <span class="valor" id="campoUmidadeRecebimento">-</span>
+          <span class="campo">
+            Umidade recebimento
+          </span>
+
+          <span
+            class="valor"
+            id="dUmidade">
+          </span>
         </div>
 
         <div class="linha">
-          <span class="nome">Peso recebido</span>
-          <span class="valor" id="campoPesoRecebido">-</span>
+
+          <span class="campo">
+            Peso recebido
+          </span>
+
+          <span
+            class="valor"
+            id="dPeso">
+          </span>
+
         </div>
 
       </div>
@@ -291,63 +331,96 @@
 
 
     <!-- BENEFICIAMENTO -->
-    <div class="card resultado" id="cardBeneficiamento">
+
+    <div
+      id="beneficiamento"
+      class="card oculto"
+    >
 
       <div class="titulo">
         Beneficiamento
       </div>
 
-      <label>Operador</label>
+
+      <label>
+        Operador
+      </label>
 
       <input
-        type="text"
         id="operador"
+        type="text"
         placeholder="Nome do operador"
       >
 
-      <label>Máquina</label>
+
+      <label>
+        Máquina
+      </label>
 
       <select id="maquina">
-        <option value="">Selecione</option>
-        <option value="CD 500">CD 500</option>
-        <option value="CD 1000">CD 1000</option>
+
+        <option value="">
+          Selecione
+        </option>
+
+        <option value="CD 500">
+          CD 500
+        </option>
+
+        <option value="CD 1000">
+          CD 1000
+        </option>
+
       </select>
 
-      <label>Umidade antes (%)</label>
+
+      <label>
+        Umidade antes (%)
+      </label>
 
       <input
-        type="number"
         id="umidadeAntes"
+        type="number"
         step="0.1"
         placeholder="Ex.: 13,5"
       >
 
-      <label>Peso antes (kg)</label>
+
+      <label>
+        Peso antes (kg)
+      </label>
 
       <input
-        type="number"
         id="pesoAntes"
+        type="number"
         step="0.01"
         placeholder="Ex.: 1200"
       >
 
+
       <button
-        class="btn-verde"
         id="btnIniciar"
-        onclick="iniciarBeneficiamento()"
+        class="verde"
+        onclick="iniciar()"
       >
         ▶ Iniciar Beneficiamento
       </button>
 
-      <div id="areaTimer" class="oculto">
 
-        <div class="timer" id="timer">
+      <div
+        id="areaProcesso"
+        class="oculto"
+      >
+
+        <div
+          id="timer"
+          class="timer">
           00:00:00
         </div>
 
         <button
-          class="btn-vermelho"
-          onclick="finalizarBeneficiamento()"
+          class="vermelho"
+          onclick="finalizar()"
         >
           ■ Finalizar Beneficiamento
         </button>
@@ -358,40 +431,54 @@
 
 
     <!-- FINALIZAÇÃO -->
-    <div class="card resultado" id="cardFinalizacao">
+
+    <div
+      id="finalizacao"
+      class="card oculto"
+    >
 
       <div class="titulo">
         Finalização
       </div>
 
-      <label>Umidade depois (%)</label>
+
+      <label>
+        Umidade depois (%)
+      </label>
 
       <input
-        type="number"
         id="umidadeDepois"
+        type="number"
         step="0.1"
         placeholder="Ex.: 12,8"
       >
 
-      <label>Peso depois (kg)</label>
+
+      <label>
+        Peso depois (kg)
+      </label>
 
       <input
-        type="number"
         id="pesoDepois"
+        type="number"
         step="0.01"
         placeholder="Ex.: 1160"
       >
 
-      <label>Observação</label>
+
+      <label>
+        Observação
+      </label>
 
       <textarea
         id="observacao"
-        placeholder="Observações do processo..."
-      ></textarea>
+        placeholder="Observações do processo">
+      </textarea>
+
 
       <button
-        class="btn-verde"
-        onclick="salvarBeneficiamento()"
+        class="verde"
+        onclick="salvar()"
       >
         💾 Salvar Beneficiamento
       </button>
@@ -399,42 +486,67 @@
     </div>
 
 
-    <!-- RESULTADO FINAL -->
-    <div class="card resultado" id="cardResultado">
+    <!-- RESULTADO -->
+
+    <div
+      id="resultado"
+      class="card oculto"
+    >
 
       <div class="titulo">
-        Beneficiamento concluído
+        Processo concluído
       </div>
 
       <div class="dados">
 
         <div class="linha">
-          <span class="nome">Descarte</span>
-          <span class="valor" id="resultadoDescarte">-</span>
+          <span class="campo">
+            Descarte
+          </span>
+
+          <span
+            class="valor"
+            id="rDescarte">
+          </span>
         </div>
 
         <div class="linha">
-          <span class="nome">Rendimento</span>
-          <span class="valor" id="resultadoRendimento">-</span>
+          <span class="campo">
+            Rendimento
+          </span>
+
+          <span
+            class="valor"
+            id="rRendimento">
+          </span>
         </div>
 
         <div class="linha">
-          <span class="nome">Tempo de processo</span>
-          <span class="valor" id="resultadoTempo">-</span>
+          <span class="campo">
+            Tempo
+          </span>
+
+          <span
+            class="valor"
+            id="rTempo">
+          </span>
         </div>
 
       </div>
 
+
       <button
-        class="btn-verde"
-        onclick="novoBeneficiamento()"
+        class="verde"
+        onclick="location.reload()"
       >
         + Novo Beneficiamento
       </button>
 
     </div>
 
+
   </div>
+
 
   <div class="rodape">
     AgroTrace • Controle de Beneficiamento
@@ -443,84 +555,57 @@
 
 <script>
 
-  /*
-   * URL DA API
-   */
-  const API_URL =
-    "https://script.google.com/macros/s/AKfycbx7boqIdOtBzhFpxY2sF9Bp7MDR4_VdKTJWAOAwGwt67UHoBRrnIYshDCbXe4HzqmXv/exec";
+const API_URL =
+"https://script.google.com/macros/s/AKfycbx7boqIdOtBzhFpxY2sF9Bp7MDR4_VdKTJWAOAwGwt67UHoBRrnIYshDCbXe4HzqmXv/exec";
 
 
-  /*
-   * VARIÁVEIS DO PROCESSO
-   */
+let loteAtual = null;
 
-  let loteAtual = null;
+let inicio = null;
 
-  let inicioProcesso = null;
+let intervalo = null;
 
-  let intervaloTimer = null;
-
-  let scanner = null;
+let leitor = null;
 
 
-  /*
-   * MOSTRAR STATUS
-   */
+/* =========================
+   STATUS
+========================= */
 
-  function mostrarStatus(mensagem, tipo) {
+function status(texto, tipo) {
 
-    const elemento =
-      document.getElementById("status");
+  const elemento =
+    document.getElementById("status");
 
-    elemento.innerText = mensagem;
+  elemento.innerText = texto;
 
-    elemento.className =
-      "status " + tipo;
+  elemento.className =
+    "status " + tipo;
 
-  }
-
-
-  /*
-   * ESCONDER STATUS
-   */
-
-  function esconderStatus() {
-
-    const elemento =
-      document.getElementById("status");
-
-    elemento.className = "status";
-
-  }
+}
 
 
-  /*
-   * CONSULTA DO LOTE
-   *
-   * Aqui usamos JSONP.
-   */
+/* =========================
+   CONSULTAR API
+========================= */
 
-  function consultarAPI(parametros) {
+function consultar(lote) {
 
-    return new Promise(function(resolve, reject) {
+  return new Promise(
+    function(resolve, reject) {
 
       const nomeCallback =
-        "agroTraceCallback";
+        "agroTrace_" +
+        Date.now();
 
       const script =
         document.createElement("script");
-
-      let terminou = false;
 
 
       window[nomeCallback] =
         function(resposta) {
 
-          if (terminou) {
-            return;
-          }
-
-          terminou = true;
+          delete window[nomeCallback];
 
           if (script.parentNode) {
             script.parentNode.removeChild(script);
@@ -531,28 +616,10 @@
         };
 
 
-      const url =
-        API_URL +
-        "?acao=buscar" +
-        "&lote=" +
-        encodeURIComponent(parametros.lote || "") +
-        "&qr=" +
-        encodeURIComponent(parametros.qr || "");
-
-
-      script.src = url;
-
-      script.async = true;
-
-
       script.onerror =
         function() {
 
-          if (terminou) {
-            return;
-          }
-
-          terminou = true;
+          delete window[nomeCallback];
 
           if (script.parentNode) {
             script.parentNode.removeChild(script);
@@ -560,409 +627,102 @@
 
           reject(
             new Error(
-              "Não foi possível acessar a API."
+              "Erro ao acessar a API."
             )
           );
 
         };
 
 
+      script.src =
+        API_URL +
+        "?acao=buscar" +
+        "&lote=" +
+        encodeURIComponent(lote) +
+        "&callback=" +
+        encodeURIComponent(nomeCallback);
+
+
       document.body.appendChild(script);
 
 
-      setTimeout(function() {
+      setTimeout(
+        function() {
 
-        if (terminou) {
-          return;
-        }
+          if (window[nomeCallback]) {
 
-        terminou = true;
+            delete window[nomeCallback];
 
-        if (script.parentNode) {
-          script.parentNode.removeChild(script);
-        }
+            if (script.parentNode) {
+              script.parentNode.removeChild(script);
+            }
 
-        reject(
-          new Error(
-            "Tempo limite da consulta."
-          )
-        );
+            reject(
+              new Error(
+                "Tempo limite da consulta."
+              )
+            );
 
-      }, 15000);
+          }
 
-    });
-
-  }
-
-
-  /*
-   * BUSCAR LOTE MANUALMENTE
-   */
-
-  async function buscarLote() {
-
-    const lote =
-      document
-        .getElementById("loteBusca")
-        .value
-        .trim();
-
-
-    if (!lote) {
-
-      mostrarStatus(
-        "Digite o número do lote.",
-        "erro"
+        },
+        15000
       );
 
-      return;
     }
+  );
+
+}
 
 
-    mostrarStatus(
-      "Consultando lote...",
-      "info"
+/* =========================
+   BUSCAR LOTE
+========================= */
+
+async function buscarLote() {
+
+  const lote =
+    document
+      .getElementById("lote")
+      .value
+      .trim();
+
+
+  if (!lote) {
+
+    status(
+      "Digite o número do lote.",
+      "erro"
     );
 
-
-    try {
-
-      const resposta =
-        await consultarAPI({
-          lote: lote
-        });
-
-
-      console.log(
-        "Resposta da API:",
-        resposta
-      );
-
-
-      if (
-        resposta.status !== "ok"
-      ) {
-
-        mostrarStatus(
-          "Lote não encontrado.",
-          "erro"
-        );
-
-        return;
-      }
-
-
-      mostrarLote(
-        resposta.dados
-      );
-
-
-      mostrarStatus(
-        "Lote localizado com sucesso.",
-        "sucesso"
-      );
-
-
-    } catch (erro) {
-
-      console.error(
-        erro
-      );
-
-      mostrarStatus(
-        "Erro ao consultar lote.",
-        "erro"
-      );
-
-    }
-
+    return;
   }
 
 
-  /*
-   * MOSTRAR DADOS DO LOTE
-   */
-
-  function mostrarLote(dados) {
-
-    loteAtual =
-      dados;
+  status(
+    "Consultando lote...",
+    "info"
+  );
 
 
-    document
-      .getElementById("campoLote")
-      .innerText =
-        dados.LOTE || "-";
+  try {
+
+    const resposta =
+      await consultar(lote);
 
 
-    document
-      .getElementById("campoQR")
-      .innerText =
-        dados.QR || "-";
-
-
-    document
-      .getElementById("campoVariedade")
-      .innerText =
-        dados.VARIEDADE || "-";
-
-
-    document
-      .getElementById("campoPeneira")
-      .innerText =
-        dados.PENEIRA || "-";
-
-
-    document
-      .getElementById("campoUmidadeRecebimento")
-      .innerText =
-        dados.UMIDADE_RECEBIMENTO || "-";
-
-
-    document
-      .getElementById("campoPesoRecebido")
-      .innerText =
-        dados.PESO_RECEBIDO || "-";
-
-
-    document
-      .getElementById("cardLote")
-      .style.display =
-        "block";
-
-
-    document
-      .getElementById("cardBeneficiamento")
-      .style.display =
-        "block";
-
-
-    document
-      .getElementById("cardFinalizacao")
-      .style.display =
-        "none";
-
-
-    document
-      .getElementById("cardResultado")
-      .style.display =
-        "none";
-
-  }
-
-
-  /*
-   * INICIAR BENEFICIAMENTO
-   */
-
-  function iniciarBeneficiamento() {
-
-    const operador =
-      document
-        .getElementById("operador")
-        .value
-        .trim();
-
-
-    const maquina =
-      document
-        .getElementById("maquina")
-        .value;
-
-
-    const umidade =
-      document
-        .getElementById("umidadeAntes")
-        .value;
-
-
-    const peso =
-      document
-        .getElementById("pesoAntes")
-        .value;
-
-
-    if (!operador) {
-
-      mostrarStatus(
-        "Informe o operador.",
-        "erro"
-      );
-
-      return;
-    }
-
-
-    if (!maquina) {
-
-      mostrarStatus(
-        "Selecione a máquina.",
-        "erro"
-      );
-
-      return;
-    }
-
-
-    if (!umidade || !peso) {
-
-      mostrarStatus(
-        "Informe umidade e peso antes do processo.",
-        "erro"
-      );
-
-      return;
-    }
-
-
-    inicioProcesso =
-      new Date();
-
-
-    document
-      .getElementById("btnIniciar")
-      .style.display =
-        "none";
-
-
-    document
-      .getElementById("areaTimer")
-      .style.display =
-        "block";
-
-
-    intervaloTimer =
-      setInterval(
-        atualizarTimer,
-        1000
-      );
-
-
-    atualizarTimer();
-
-
-    mostrarStatus(
-      "Beneficiamento iniciado.",
-      "sucesso"
+    console.log(
+      "Resposta:",
+      resposta
     );
-
-  }
-
-
-  /*
-   * TIMER
-   */
-
-  function atualizarTimer() {
-
-    if (!inicioProcesso) {
-      return;
-    }
-
-
-    const agora =
-      new Date();
-
-
-    const segundos =
-      Math.floor(
-        (agora - inicioProcesso) /
-        1000
-      );
-
-
-    const horas =
-      Math.floor(
-        segundos / 3600
-      );
-
-
-    const minutos =
-      Math.floor(
-        (segundos % 3600) / 60
-      );
-
-
-    const seg =
-      segundos % 60;
-
-
-    const texto =
-      String(horas).padStart(2, "0") +
-      ":" +
-      String(minutos).padStart(2, "0") +
-      ":" +
-      String(seg).padStart(2, "0");
-
-
-    document
-      .getElementById("timer")
-      .innerText =
-        texto;
-
-  }
-
-
-  /*
-   * FINALIZAR
-   */
-
-  function finalizarBeneficiamento() {
-
-    if (intervaloTimer) {
-
-      clearInterval(
-        intervaloTimer
-      );
-
-    }
-
-
-    document
-      .getElementById("cardFinalizacao")
-      .style.display =
-        "block";
-
-
-    mostrarStatus(
-      "Informe os dados finais do beneficiamento.",
-      "info"
-    );
-
-  }
-
-
-  /*
-   * SALVAR
-   */
-
-  async function salvarBeneficiamento() {
-
-    const umidadeDepois =
-      document
-        .getElementById("umidadeDepois")
-        .value;
-
-
-    const pesoDepois =
-      document
-        .getElementById("pesoDepois")
-        .value;
-
-
-    const observacao =
-      document
-        .getElementById("observacao")
-        .value;
 
 
     if (
-      !umidadeDepois ||
-      !pesoDepois
+      resposta.status !== "ok"
     ) {
 
-      mostrarStatus(
-        "Informe a umidade e o peso depois.",
+      status(
+        "Lote não encontrado.",
         "erro"
       );
 
@@ -970,357 +730,452 @@
     }
 
 
-    const pesoAntes =
-      Number(
-        document
-          .getElementById("pesoAntes")
-          .value
-          .replace(",", ".")
-      );
-
-
-    const pesoFinal =
-      Number(
-        pesoDepois
-          .replace(",", ".")
-      );
-
-
-    const descarte =
-      pesoAntes -
-      pesoFinal;
-
-
-    const rendimento =
-      pesoAntes > 0
-        ? (pesoFinal / pesoAntes) * 100
-        : 0;
-
-
-    const agora =
-      new Date();
-
-
-    const tempoSegundos =
-      Math.floor(
-        (agora - inicioProcesso) /
-        1000
-      );
-
-
-    const horas =
-      Math.floor(
-        tempoSegundos / 3600
-      );
-
-
-    const minutos =
-      Math.floor(
-        (tempoSegundos % 3600) / 60
-      );
-
-
-    const segundos =
-      tempoSegundos % 60;
-
-
-    const tempo =
-      String(horas).padStart(2, "0") +
-      ":" +
-      String(minutos).padStart(2, "0") +
-      ":" +
-      String(segundos).padStart(2, "0");
-
-
-    const dados = {
-
-      qr:
-        loteAtual.QR || "",
-
-      lote:
-        loteAtual.LOTE || "",
-
-      variedade:
-        loteAtual.VARIEDADE || "",
-
-      peneira:
-        loteAtual.PENEIRA || "",
-
-      umidadeRecebimento:
-        loteAtual.UMIDADE_RECEBIMENTO || "",
-
-      pesoRecebimento:
-        loteAtual.PESO_RECEBIDO || "",
-
-      operador:
-        document
-          .getElementById("operador")
-          .value,
-
-      maquina:
-        document
-          .getElementById("maquina")
-          .value,
-
-      dataInicio:
-        formatarData(inicioProcesso),
-
-      horaInicio:
-        formatarHora(inicioProcesso),
-
-      umidadeAntes:
-        document
-          .getElementById("umidadeAntes")
-          .value,
-
-      pesoAntes:
-        pesoAntes,
-
-      dataFim:
-        formatarData(agora),
-
-      horaFim:
-        formatarHora(agora),
-
-      umidadeDepois:
-        umidadeDepois,
-
-      pesoDepois:
-        pesoFinal,
-
-      tempoProcesso:
-        tempo,
-
-      observacao:
-        observacao
-
-    };
-
-
-    mostrarStatus(
-      "Salvando beneficiamento...",
-      "info"
+    mostrarLote(
+      resposta.dados
     );
 
 
-    /*
-     * ENVIO PARA O GOOGLE APPS SCRIPT
-     */
-
-    try {
-
-      const iframe =
-        document.createElement("iframe");
-
-      iframe.name =
-        "envioAgroTrace";
-
-      iframe.style.display =
-        "none";
+    status(
+      "Lote localizado com sucesso.",
+      "ok"
+    );
 
 
-      document.body.appendChild(
-        iframe
-      );
+  } catch (erro) {
 
+    console.error(
+      erro
+    );
 
-      const formulario =
-        document.createElement("form");
-
-      formulario.method =
-        "POST";
-
-      formulario.action =
-        API_URL;
-
-      formulario.target =
-        "envioAgroTrace";
-
-
-      const campo =
-        document.createElement("input");
-
-      campo.type =
-        "hidden";
-
-      campo.name =
-        "dados";
-
-      campo.value =
-        JSON.stringify(dados);
-
-
-      formulario.appendChild(
-        campo
-      );
-
-
-      document.body.appendChild(
-        formulario
-      );
-
-
-      formulario.submit();
-
-
-      mostrarStatus(
-        "Beneficiamento enviado para o sistema.",
-        "sucesso"
-      );
-
-
-      document
-        .getElementById("resultadoDescarte")
-        .innerText =
-          descarte.toFixed(2) +
-          " kg";
-
-
-      document
-        .getElementById("resultadoRendimento")
-        .innerText =
-          rendimento.toFixed(2) +
-          "%";
-
-
-      document
-        .getElementById("resultadoTempo")
-        .innerText =
-          tempo;
-
-
-      document
-        .getElementById("cardResultado")
-        .style.display =
-          "block";
-
-
-      document
-        .getElementById("cardFinalizacao")
-        .style.display =
-          "none";
-
-
-    } catch (erro) {
-
-      console.error(
-        erro
-      );
-
-      mostrarStatus(
-        "Erro ao enviar os dados.",
-        "erro"
-      );
-
-    }
+    status(
+      "Erro ao consultar lote.",
+      "erro"
+    );
 
   }
 
+}
 
-  /*
-   * DATA
-   */
 
-  function formatarData(data) {
+/* =========================
+   MOSTRAR LOTE
+========================= */
 
-    return String(
-      data.getDate()
-    ).padStart(2, "0") +
-      "/" +
-      String(
-        data.getMonth() + 1
-      ).padStart(2, "0") +
-      "/" +
-      data.getFullYear();
+function mostrarLote(dados) {
 
+  loteAtual =
+    dados;
+
+
+  document
+    .getElementById("dLote")
+    .innerText =
+      dados.LOTE || "-";
+
+
+  document
+    .getElementById("dQR")
+    .innerText =
+      dados.QR || "-";
+
+
+  document
+    .getElementById("dVariedade")
+    .innerText =
+      dados.VARIEDADE || "-";
+
+
+  document
+    .getElementById("dPeneira")
+    .innerText =
+      dados.PENEIRA || "-";
+
+
+  document
+    .getElementById("dUmidade")
+    .innerText =
+      dados.UMIDADE_RECEBIMENTO || "-";
+
+
+  document
+    .getElementById("dPeso")
+    .innerText =
+      dados.PESO_RECEBIDO || "-";
+
+
+  document
+    .getElementById("dadosLote")
+    .classList.remove("oculto");
+
+
+  document
+    .getElementById("beneficiamento")
+    .classList.remove("oculto");
+
+}
+
+
+/* =========================
+   INICIAR
+========================= */
+
+function iniciar() {
+
+  const operador =
+    document
+      .getElementById("operador")
+      .value
+      .trim();
+
+
+  const maquina =
+    document
+      .getElementById("maquina")
+      .value;
+
+
+  const umidade =
+    document
+      .getElementById("umidadeAntes")
+      .value;
+
+
+  const peso =
+    document
+      .getElementById("pesoAntes")
+      .value;
+
+
+  if (!operador) {
+
+    status(
+      "Informe o operador.",
+      "erro"
+    );
+
+    return;
   }
 
 
-  /*
-   * HORA
-   */
+  if (!maquina) {
 
-  function formatarHora(data) {
+    status(
+      "Selecione a máquina.",
+      "erro"
+    );
 
-    return String(
-      data.getHours()
-    ).padStart(2, "0") +
+    return;
+  }
+
+
+  if (!umidade || !peso) {
+
+    status(
+      "Informe umidade e peso antes.",
+      "erro"
+    );
+
+    return;
+  }
+
+
+  inicio =
+    new Date();
+
+
+  document
+    .getElementById("btnIniciar")
+    .style.display =
+    "none";
+
+
+  document
+    .getElementById("areaProcesso")
+    .classList.remove("oculto");
+
+
+  intervalo =
+    setInterval(
+      atualizarTimer,
+      1000
+    );
+
+
+  atualizarTimer();
+
+
+  status(
+    "Beneficiamento iniciado.",
+    "ok"
+  );
+
+}
+
+
+/* =========================
+   TIMER
+========================= */
+
+function atualizarTimer() {
+
+  if (!inicio) {
+    return;
+  }
+
+
+  const segundos =
+    Math.floor(
+      (new Date() - inicio) / 1000
+    );
+
+
+  const h =
+    Math.floor(
+      segundos / 3600
+    );
+
+
+  const m =
+    Math.floor(
+      (segundos % 3600) / 60
+    );
+
+
+  const s =
+    segundos % 60;
+
+
+  document
+    .getElementById("timer")
+    .innerText =
+      String(h).padStart(2,"0") +
       ":" +
-      String(
-        data.getMinutes()
-      ).padStart(2, "0") +
+      String(m).padStart(2,"0") +
       ":" +
-      String(
-        data.getSeconds()
-      ).padStart(2, "0");
+      String(s).padStart(2,"0");
 
+}
+
+
+/* =========================
+   FINALIZAR
+========================= */
+
+function finalizar() {
+
+  clearInterval(
+    intervalo
+  );
+
+
+  document
+    .getElementById("finalizacao")
+    .classList.remove("oculto");
+
+
+  status(
+    "Informe os dados finais.",
+    "info"
+  );
+
+}
+
+
+/* =========================
+   SALVAR
+========================= */
+
+function salvar() {
+
+  const pesoAntes =
+    Number(
+      document
+        .getElementById("pesoAntes")
+        .value
+        .replace(",", ".")
+    );
+
+
+  const pesoDepois =
+    Number(
+      document
+        .getElementById("pesoDepois")
+        .value
+        .replace(",", ".")
+    );
+
+
+  const umidadeDepois =
+    document
+      .getElementById("umidadeDepois")
+      .value;
+
+
+  if (
+    !pesoDepois ||
+    !umidadeDepois
+  ) {
+
+    status(
+      "Informe os dados finais.",
+      "erro"
+    );
+
+    return;
   }
 
 
+  const descarte =
+    pesoAntes -
+    pesoDepois;
+
+
+  const rendimento =
+    (pesoDepois / pesoAntes) * 100;
+
+
+  const agora =
+    new Date();
+
+
+  const tempoSegundos =
+    Math.floor(
+      (agora - inicio) / 1000
+    );
+
+
+  const h =
+    Math.floor(
+      tempoSegundos / 3600
+    );
+
+
+  const m =
+    Math.floor(
+      (tempoSegundos % 3600) / 60
+    );
+
+
+  const s =
+    tempoSegundos % 60;
+
+
+  const tempo =
+    String(h).padStart(2,"0") +
+    ":" +
+    String(m).padStart(2,"0") +
+    ":" +
+    String(s).padStart(2,"0");
+
+
   /*
-   * ABRIR LEITOR QR
+   * POR ENQUANTO:
+   * vamos mostrar o resultado na tela.
    */
 
-  function abrirScanner() {
-
-    const elemento =
-      document.getElementById("leitor");
-
-
-    elemento.style.display =
-      "block";
+  document
+    .getElementById("rDescarte")
+    .innerText =
+      descarte.toFixed(2) +
+      " kg";
 
 
-    if (scanner) {
-      return;
-    }
+  document
+    .getElementById("rRendimento")
+    .innerText =
+      rendimento.toFixed(2) +
+      "%";
 
 
-    scanner =
-      new Html5Qrcode(
-        "leitor"
-      );
+  document
+    .getElementById("rTempo")
+    .innerText =
+      tempo;
 
 
-    scanner.start(
-
-      {
-        facingMode: "environment"
-      },
-
-      {
-        fps: 10,
-        qrbox: 250
-      },
-
-      function(texto) {
-
-        document
-          .getElementById("loteBusca")
-          .value =
-            texto;
+  document
+    .getElementById("resultado")
+    .classList.remove("oculto");
 
 
-        scanner.stop()
-          .then(function() {
+  document
+    .getElementById("finalizacao")
+    .classList.add("oculto");
+
+
+  status(
+    "Beneficiamento concluído.",
+    "ok"
+  );
+
+}
+
+
+/* =========================
+   QR CODE
+========================= */
+
+function abrirScanner() {
+
+  const elemento =
+    document.getElementById("scanner");
+
+
+  elemento.style.display =
+    "block";
+
+
+  if (leitor) {
+    return;
+  }
+
+
+  leitor =
+    new Html5Qrcode(
+      "scanner"
+    );
+
+
+  leitor.start(
+
+    {
+      facingMode: "environment"
+    },
+
+    {
+      fps: 10,
+      qrbox: 250
+    },
+
+    function(texto) {
+
+      document
+        .getElementById("lote")
+        .value =
+          texto;
+
+
+      leitor.stop()
+        .then(
+          function() {
 
             elemento.style.display =
               "none";
 
-            scanner = null;
+            leitor = null;
 
-            buscarPorQR(
-              texto
-            );
+            buscarLote();
 
-          });
+          }
+        );
 
-      },
+    },
 
-      function() {}
+    function() {}
 
-    )
-    .catch(function(erro) {
+  )
+  .catch(
+    function(erro) {
 
       console.error(
         erro
@@ -1329,85 +1184,15 @@
       elemento.style.display =
         "none";
 
-      mostrarStatus(
-        "Não foi possível abrir a câmera. Verifique a permissão.",
-        "erro"
-      );
-
-    });
-
-  }
-
-
-  /*
-   * BUSCAR PELO QR
-   */
-
-  async function buscarPorQR(qr) {
-
-    mostrarStatus(
-      "Consultando QR Code...",
-      "info"
-    );
-
-
-    try {
-
-      const resposta =
-        await consultarAPI({
-          qr: qr
-        });
-
-
-      if (
-        resposta.status !== "ok"
-      ) {
-
-        mostrarStatus(
-          "QR Code não encontrado.",
-          "erro"
-        );
-
-        return;
-      }
-
-
-      mostrarLote(
-        resposta.dados
-      );
-
-
-      mostrarStatus(
-        "QR Code localizado com sucesso.",
-        "sucesso"
-      );
-
-
-    } catch (erro) {
-
-      console.error(
-        erro
-      );
-
-      mostrarStatus(
-        "Erro ao consultar QR Code.",
+      status(
+        "Não foi possível abrir a câmera.",
         "erro"
       );
 
     }
+  );
 
-  }
-
-
-  /*
-   * NOVO BENEFICIAMENTO
-   */
-
-  function novoBeneficiamento() {
-
-    location.reload();
-
-  }
+}
 
 </script>
 
