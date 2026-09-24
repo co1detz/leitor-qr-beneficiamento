@@ -3,366 +3,335 @@
 
 <head>
 
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
-  <title>AgroTrace - Beneficiamento</title>
+<title>AgroTrace - Beneficiamento</title>
 
-  <script
-    src="https://unpkg.com/html5-qrcode"
-    type="text/javascript">
-  </script>
 
+<script src="https://unpkg.com/html5-qrcode"></script>
 
-  <style>
 
-    * {
-      box-sizing: border-box;
-    }
+<style>
 
+* {
+  box-sizing: border-box;
+}
 
-    body {
 
-      margin: 0;
+body {
 
-      font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+  margin: 0;
 
-      background: #f3f5f4;
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
 
-      color: #1f2933;
+  background: #f4f6f5;
 
-    }
+  color: #1f2933;
 
+}
 
-    .topo {
 
-      background: #1f5f3b;
+header {
 
-      color: white;
+  background: #166534;
 
-      padding: 18px 20px;
+  color: white;
 
-      text-align: center;
+  padding: 18px;
 
-    }
+  text-align: center;
 
+}
 
-    .topo h1 {
 
-      margin: 0;
+header h1 {
 
-      font-size: 24px;
+  margin: 0;
 
-    }
+  font-size: 24px;
 
+}
 
-    .topo p {
 
-      margin: 5px 0 0;
+header p {
 
-      font-size: 13px;
+  margin: 5px 0 0;
 
-      opacity: .9;
+  font-size: 13px;
 
-    }
+  opacity: 0.9;
 
+}
 
-    .container {
 
-      max-width: 700px;
+.container {
 
-      margin: 20px auto;
+  max-width: 700px;
 
-      padding: 0 15px 40px;
+  margin: auto;
 
-    }
+  padding: 15px;
 
+}
 
-    .card {
 
-      background: white;
+.card {
 
-      border-radius: 12px;
+  background: white;
 
-      padding: 20px;
+  border-radius: 12px;
 
-      margin-bottom: 18px;
+  padding: 18px;
 
-      box-shadow:
-        0 2px 10px
-        rgba(0,0,0,.08);
+  margin-bottom: 15px;
 
-    }
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.08);
 
+}
 
-    .card h2 {
 
-      margin-top: 0;
+.card h2 {
 
-      font-size: 19px;
+  margin-top: 0;
 
-    }
+  font-size: 19px;
 
+  color: #166534;
 
-    label {
+}
 
-      display: block;
 
-      margin-top: 14px;
+label {
 
-      margin-bottom: 6px;
+  display: block;
 
-      font-weight: bold;
+  margin-top: 12px;
 
-      font-size: 14px;
+  margin-bottom: 5px;
 
-    }
+  font-weight: bold;
 
+  font-size: 14px;
 
-    input,
-    select,
-    textarea {
+}
 
-      width: 100%;
 
-      padding: 12px;
+input,
+select,
+textarea {
 
-      border:
-        1px solid #cbd5d1;
+  width: 100%;
 
-      border-radius: 8px;
+  padding: 12px;
 
-      font-size: 16px;
+  border: 1px solid #cbd5e1;
 
-      background: white;
+  border-radius: 8px;
 
-    }
+  font-size: 16px;
 
+}
 
-    textarea {
 
-      min-height: 90px;
+textarea {
 
-      resize: vertical;
+  min-height: 80px;
 
-    }
+  resize: vertical;
 
+}
 
-    button {
 
-      width: 100%;
+button {
 
-      border: 0;
+  width: 100%;
 
-      border-radius: 8px;
+  border: none;
 
-      padding: 13px;
+  border-radius: 8px;
 
-      margin-top: 12px;
+  padding: 14px;
 
-      font-size: 16px;
+  margin-top: 12px;
 
-      font-weight: bold;
+  font-size: 16px;
 
-      cursor: pointer;
+  font-weight: bold;
 
-    }
+  cursor: pointer;
 
+}
 
-    button:disabled {
 
-      opacity: .5;
+.btn-primary {
 
-    }
+  background: #166534;
 
+  color: white;
 
-    .btn-principal {
+}
 
-      background: #1f5f3b;
 
-      color: white;
+.btn-secondary {
 
-    }
+  background: #e2e8f0;
 
+  color: #1e293b;
 
-    .btn-secundario {
+}
 
-      background: #e8efeb;
 
-      color: #1f5f3b;
+.btn-danger {
 
-    }
+  background: #b91c1c;
 
+  color: white;
 
-    .btn-finalizar {
+}
 
-      background: #b42318;
 
-      color: white;
+.grid {
 
-    }
+  display: grid;
 
+  grid-template-columns:
+    1fr 1fr;
 
-    .grid {
+  gap: 10px;
 
-      display: grid;
+}
 
-      grid-template-columns:
-        1fr 1fr;
 
-      gap: 12px;
+.info {
 
-    }
+  background: #f0fdf4;
 
+  border-left: 4px solid #16a34a;
 
-    .valor {
+  padding: 12px;
 
-      background: #f5f7f6;
+  border-radius: 6px;
 
-      padding: 11px;
+  margin-top: 10px;
 
-      border-radius: 7px;
+}
 
-      border:
-        1px solid #e1e7e4;
 
-    }
+.info strong {
 
+  display: block;
 
-    .status {
+}
 
-      padding: 12px;
 
-      border-radius: 8px;
+.status {
 
-      margin-top: 12px;
+  padding: 12px;
 
-      font-size: 14px;
+  border-radius: 8px;
 
-      display: none;
+  margin-top: 12px;
 
-    }
+  display: none;
 
+}
 
-    .status.ok {
 
-      display: block;
+.status.ok {
 
-      background: #e7f5ec;
+  display: block;
 
-      color: #176b3a;
+  background: #dcfce7;
 
-    }
+  color: #166534;
 
+}
 
-    .status.erro {
 
-      display: block;
+.status.erro {
 
-      background: #fdecec;
+  display: block;
 
-      color: #a11a1a;
+  background: #fee2e2;
 
-    }
+  color: #991b1b;
 
+}
 
-    .status.info {
 
-      display: block;
+.timer {
 
-      background: #eef4f8;
+  font-size: 32px;
 
-      color: #24516b;
+  font-weight: bold;
 
-    }
+  text-align: center;
 
+  margin: 15px 0;
 
-    #areaScanner {
+  color: #166534;
 
-      display: none;
+}
 
-      margin-top: 15px;
 
-    }
+#scanner {
 
+  width: 100%;
 
-    #reader {
+  margin-top: 12px;
 
-      width: 100%;
+}
 
-      overflow: hidden;
 
-      border-radius: 10px;
+.hidden {
 
-    }
+  display: none !important;
 
+}
 
-    .timer {
 
-      text-align: center;
+.resultado {
 
-      font-size: 34px;
+  background: #f8fafc;
 
-      font-weight: bold;
+  padding: 12px;
 
-      margin: 15px 0;
+  border-radius: 8px;
 
-      color: #1f5f3b;
+  margin-top: 12px;
 
-    }
+}
 
 
-    .resultado {
+.valor {
 
-      background: #eef7f1;
+  font-size: 18px;
 
-      border-radius: 8px;
+  font-weight: bold;
 
-      padding: 15px;
+}
 
-      margin-top: 15px;
 
-    }
+@media (max-width: 500px) {
 
+  .grid {
 
-    .oculto {
+    grid-template-columns: 1fr;
 
-      display: none;
+  }
 
-    }
+}
 
-
-    .rodape {
-
-      text-align: center;
-
-      color: #6b7280;
-
-      font-size: 12px;
-
-      margin-top: 20px;
-
-    }
-
-
-    @media (max-width: 550px) {
-
-      .grid {
-
-        grid-template-columns: 1fr;
-
-      }
-
-    }
-
-  </style>
+</style>
 
 </head>
 
@@ -370,1751 +339,1577 @@
 <body>
 
 
-  <div class="topo">
+<header>
 
-    <h1>AgroTrace</h1>
+<h1>AgroTrace</h1>
 
-    <p>
-      Controle de Beneficiamento de Sementes
-    </p>
+<p>Controle de Beneficiamento de Sementes</p>
 
-  </div>
+</header>
 
 
-  <div class="container">
+<div class="container">
 
 
-    <!-- LOCALIZAR -->
+<!-- ================================= -->
+<!-- LOCALIZAR LOTE -->
+<!-- ================================= -->
 
-    <div class="card">
+<div class="card">
 
-      <h2>🔎 Localizar Lote</h2>
+<h2>1. Localizar Lote</h2>
 
 
-      <button
-        class="btn-principal"
-        onclick="abrirScanner()">
+<button
+  class="btn-primary"
+  onclick="abrirScanner()"
+>
 
-        📷 Escanear QR Code
+📷 Ler QR Code
 
-      </button>
+</button>
 
 
-      <div id="areaScanner">
+<div id="scanner" class="hidden"></div>
 
-        <div id="reader"></div>
 
-        <button
-          class="btn-secundario"
-          onclick="fecharScanner()">
+<label for="loteInput">
+Número do Lote
+</label>
 
-          Fechar câmera
 
-        </button>
+<input
+  id="loteInput"
+  type="text"
+  placeholder="Ex.: LT26-001"
+>
 
-      </div>
 
+<button
+  class="btn-primary"
+  onclick="buscarPorLote()"
+>
 
-      <label>
+🔎 Consultar Lote
 
-        Ou digite o número do lote
+</button>
 
-      </label>
 
+<div
+  id="statusBusca"
+  class="status"
+></div>
 
-      <input
-        type="text"
-        id="loteManual"
-        placeholder="Ex.: LT26-001"
-      >
 
+</div>
 
-      <button
-        class="btn-principal"
-        onclick="buscarPorLote()">
 
-        🔎 Buscar pelo Lote
+<!-- ================================= -->
+<!-- DADOS DO LOTE -->
+<!-- ================================= -->
 
-      </button>
+<div
+  id="dadosLoteCard"
+  class="card hidden"
+>
 
+<h2>2. Dados do Lote</h2>
 
-      <div
-        id="statusBusca"
-        class="status">
-      </div>
 
-    </div>
+<div class="resultado">
 
+<strong>QR</strong>
 
-    <!-- DADOS -->
+<div
+  id="campoQR"
+  class="valor"
+>
+-
+</div>
 
-    <div
-      class="card oculto"
-      id="cardLote">
+</div>
 
-      <h2>📋 Dados do Lote</h2>
 
+<div class="resultado">
 
-      <div class="grid">
+<strong>Lote</strong>
 
-        <div>
+<div
+  id="campoLote"
+  class="valor"
+>
+-
+</div>
 
-          <label>QR</label>
+</div>
 
-          <div
-            class="valor"
-            id="campoQR">
-            -
-          </div>
 
-        </div>
+<div class="resultado">
 
+<strong>Variedade</strong>
 
-        <div>
+<div
+  id="campoVariedade"
+  class="valor"
+>
+-
+</div>
 
-          <label>Lote</label>
+</div>
 
-          <div
-            class="valor"
-            id="campoLote">
-            -
-          </div>
 
-        </div>
+<div class="grid">
 
+<div class="resultado">
 
-        <div>
+<strong>Peneira</strong>
 
-          <label>Variedade</label>
+<div id="campoPeneira">
+-
+</div>
 
-          <div
-            class="valor"
-            id="campoVariedade">
-            -
-          </div>
+</div>
 
-        </div>
 
+<div class="resultado">
 
-        <div>
+<strong>Umidade recebimento</strong>
 
-          <label>Peneira</label>
+<div id="campoUmidadeRecebimento">
+-
+</div>
 
-          <div
-            class="valor"
-            id="campoPeneira">
-            -
-          </div>
+</div>
 
-        </div>
+</div>
 
 
-        <div>
+<div class="resultado">
 
-          <label>
-            Umidade no recebimento
-          </label>
+<strong>Peso recebido</strong>
 
-          <div
-            class="valor"
-            id="campoUmidadeRecebimento">
-            -
-          </div>
+<div id="campoPesoRecebimento">
+-
+</div>
 
-        </div>
+</div>
 
 
-        <div>
+</div>
 
-          <label>
-            Peso recebido
-          </label>
 
-          <div
-            class="valor"
-            id="campoPesoRecebido">
-            -
-          </div>
+<!-- ================================= -->
+<!-- BENEFICIAMENTO -->
+<!-- ================================= -->
 
-        </div>
+<div
+  id="beneficiamentoCard"
+  class="card hidden"
+>
 
-      </div>
+<h2>3. Beneficiamento</h2>
 
-    </div>
 
+<label for="operador">
+Operador
+</label>
 
-    <!-- BENEFICIAMENTO -->
 
-    <div
-      class="card oculto"
-      id="cardBeneficiamento">
+<input
+  id="operador"
+  type="text"
+  placeholder="Nome do operador"
+>
 
-      <h2>⚙️ Beneficiamento</h2>
 
+<label for="maquina">
+Máquina
+</label>
 
-      <label>
-        Operador
-      </label>
 
-      <input
-        type="text"
-        id="operador"
-        placeholder="Nome do operador"
-      >
+<select id="maquina">
 
+<option value="">
+Selecione
+</option>
 
-      <label>
-        Máquina
-      </label>
+<option value="CD 500">
+CD 500
+</option>
 
-      <select id="maquina">
+<option value="CD 1000">
+CD 1000
+</option>
 
-        <option value="">
-          Selecione a máquina
-        </option>
+</select>
 
-        <option value="CD 500">
-          CD 500
-        </option>
 
-        <option value="CD 1000">
-          CD 1000
-        </option>
+<div class="grid">
 
-      </select>
+<div>
 
+<label for="umidadeAntes">
+Umidade antes (%)
+</label>
 
-      <div class="grid">
+<input
+  id="umidadeAntes"
+  type="number"
+  step="0.1"
+  placeholder="Ex.: 13,5"
+>
 
-        <div>
+</div>
 
-          <label>
-            Umidade antes
-          </label>
 
-          <input
-            type="number"
-            id="umidadeAntes"
-            step="0.1"
-            inputmode="decimal"
-            placeholder="Ex.: 13,5"
-          >
+<div>
 
-        </div>
+<label for="pesoAntes">
+Peso antes (kg)
+</label>
 
+<input
+  id="pesoAntes"
+  type="number"
+  step="0.01"
+  placeholder="Ex.: 1200"
+>
 
-        <div>
+</div>
 
-          <label>
-            Peso antes (kg)
-          </label>
+</div>
 
-          <input
-            type="number"
-            id="pesoAntes"
-            step="0.01"
-            inputmode="decimal"
-            placeholder="Ex.: 1200"
-          >
 
-        </div>
+<button
+  id="btnIniciar"
+  class="btn-primary"
+  onclick="iniciarBeneficiamento()"
+>
 
-      </div>
+▶ Iniciar Beneficiamento
 
+</button>
 
-      <button
-        class="btn-principal"
-        id="btnIniciar"
-        onclick="iniciarBeneficiamento()">
 
-        ▶️ Iniciar Beneficiamento
+<div
+  id="timer"
+  class="timer"
+>
 
-      </button>
+00:00:00
 
+</div>
 
-      <div
-        id="areaProcesso"
-        class="oculto">
 
-        <div
-          class="timer"
-          id="timer">
-          00:00:00
-        </div>
+<button
+  id="btnFinalizar"
+  class="btn-danger hidden"
+  onclick="finalizarBeneficiamento()"
+>
 
+⏹ Finalizar Beneficiamento
 
-        <button
-          class="btn-finalizar"
-          onclick="finalizarBeneficiamento()">
+</button>
 
-          ⏹️ Finalizar Beneficiamento
 
-        </button>
+</div>
 
-      </div>
 
-    </div>
+<!-- ================================= -->
+<!-- FINALIZAÇÃO -->
+<!-- ================================= -->
 
+<div
+  id="finalizacaoCard"
+  class="card hidden"
+>
 
-    <!-- FINALIZAÇÃO -->
+<h2>4. Finalização</h2>
 
-    <div
-      class="card oculto"
-      id="cardFinalizacao">
 
-      <h2>
-        ✅ Finalizar Beneficiamento
-      </h2>
+<div class="grid">
 
+<div>
 
-      <div class="grid">
+<label for="umidadeDepois">
+Umidade depois (%)
+</label>
 
-        <div>
+<input
+  id="umidadeDepois"
+  type="number"
+  step="0.1"
+  placeholder="Ex.: 12,8"
+>
 
-          <label>
-            Umidade depois
-          </label>
+</div>
 
-          <input
-            type="number"
-            id="umidadeDepois"
-            step="0.1"
-            inputmode="decimal"
-            placeholder="Ex.: 12,8"
-          >
 
-        </div>
+<div>
 
+<label for="pesoDepois">
+Peso depois (kg)
+</label>
 
-        <div>
+<input
+  id="pesoDepois"
+  type="number"
+  step="0.01"
+  placeholder="Ex.: 1160"
+>
 
-          <label>
-            Peso depois (kg)
-          </label>
+</div>
 
-          <input
-            type="number"
-            id="pesoDepois"
-            step="0.01"
-            inputmode="decimal"
-            placeholder="Ex.: 1160"
-          >
+</div>
 
-        </div>
 
-      </div>
+<label for="observacao">
+Observação
+</label>
 
 
-      <label>
-        Observação
-      </label>
+<textarea
+  id="observacao"
+  placeholder="Observações do processo..."
+></textarea>
 
 
-      <textarea
-        id="observacao"
-        placeholder="Observação do processo...">
-      </textarea>
+<div
+  id="resultadoCalculo"
+  class="info hidden"
+>
 
+<strong>Resultado</strong>
 
-      <div
-        class="resultado"
-        id="resultadoCalculo">
+<div id="textoCalculo"></div>
 
-        <strong>Resultado</strong>
+</div>
 
-        <div id="resultadoTexto">
 
-          Informe o peso depois
-          para calcular.
+<button
+  class="btn-primary"
+  onclick="salvarBeneficiamento()"
+>
 
-        </div>
+💾 Salvar Beneficiamento
 
-      </div>
+</button>
 
 
-      <button
-        class="btn-principal"
-        onclick="calcularResultado()">
+<div
+  id="statusSalvar"
+  class="status"
+></div>
 
-        🧮 Calcular
 
-      </button>
+</div>
 
 
-      <button
-        class="btn-principal"
-        onclick="salvarBeneficiamento()">
+</div>
 
-        💾 Salvar Beneficiamento
 
-      </button>
+<!-- ================================= -->
+<!-- JAVASCRIPT -->
+<!-- ================================= -->
 
+<script>
 
-      <div
-        id="statusSalvar"
-        class="status">
-      </div>
 
-    </div>
+/*
+ * =========================================
+ * CONFIGURAÇÃO
+ * =========================================
+ */
 
+const API_URL =
+"https://script.google.com/macros/s/AKfycbx7boqIdOtBzhFpxY2sF9Bp7MDR4_VdKTJWAOAwGwt67UHoBRrnIYshDCbXe4HzqmXv/exec";
 
-    <div class="rodape">
 
-      AgroTrace • Controle de Beneficiamento
+let loteAtual = null;
 
-    </div>
+let inicioProcesso = null;
 
+let fimProcesso = null;
 
-  </div>
+let intervaloTimer = null;
 
+let scanner = null;
 
-  <script>
 
+/*
+ * =========================================
+ * ELEMENTOS
+ * =========================================
+ */
 
-    /*
-     * =====================================================
-     * API
-     * =====================================================
-     */
+const statusBusca =
+document.getElementById("statusBusca");
 
-    const API_URL =
-      "https://script.google.com/macros/s/AKfycbx7boqIdOtBzhFpxY2sF9Bp7MDR4_VdKTJWAOAwGwt67UHoBRrnIYshDCbXe4HzqmXv/exec";
+const statusSalvar =
+document.getElementById("statusSalvar");
 
 
-    let scanner = null;
+/*
+ * =========================================
+ * STATUS
+ * =========================================
+ */
 
-    let loteAtual = null;
+function mostrarStatus(elemento, mensagem, tipo) {
 
-    let inicioProcesso = null;
+  elemento.textContent = mensagem;
 
-    let fimProcesso = null;
+  elemento.className =
+    "status " + tipo;
 
-    let intervaloTimer = null;
+}
 
 
-    /*
-     * =====================================================
-     * BUSCA USANDO JSONP
-     * =====================================================
-     *
-     * Aqui não usamos fetch().
-     *
-     * Isso evita o problema de comunicação
-     * entre GitHub Pages e Google Apps Script.
-     */
+/*
+ * =========================================
+ * JSONP
+ * =========================================
+ */
 
+function consultarAPI(parametros) {
 
-    function consultarAPI(parametros) {
+  return new Promise(function(resolve, reject) {
 
-      return new Promise(
-        function(resolve, reject) {
-
-          const callbackName =
-            "agrotraceCallback_" +
-            Date.now() +
-            "_" +
-            Math.floor(
-              Math.random() * 10000
-            );
-
-
-          const script =
-            document.createElement(
-              "script"
-            );
-
-
-          const query =
-            new URLSearchParams(
-              parametros
-            );
-
-
-          query.set(
-            "callback",
-            callbackName
-          );
-
-
-          const timeout =
-            setTimeout(
-              function() {
-
-                limpar();
-
-                reject(
-                  new Error(
-                    "Tempo limite da consulta."
-                  )
-                );
-
-              },
-              15000
-            );
-
-
-          window[callbackName] =
-            function(resultado) {
-
-              clearTimeout(
-                timeout
-              );
-
-              limpar();
-
-              resolve(
-                resultado
-              );
-
-            };
-
-
-          function limpar() {
-
-            delete window[
-              callbackName
-            ];
-
-            if (script.parentNode) {
-
-              script.parentNode.removeChild(
-                script
-              );
-
-            }
-
-          }
-
-
-          script.onerror =
-            function() {
-
-              clearTimeout(
-                timeout
-              );
-
-              limpar();
-
-              reject(
-                new Error(
-                  "Não foi possível acessar a API."
-                )
-              );
-
-            };
-
-
-          script.src =
-            API_URL +
-            "?" +
-            query.toString();
-
-
-          document
-            .body
-            .appendChild(script);
-
-        }
-      );
-
-    }
-
-
-    /*
-     * =====================================================
-     * BUSCAR POR LOTE
-     * =====================================================
-     */
-
-    async function buscarPorLote() {
-
-      const lote =
-        document
-          .getElementById(
-            "loteManual"
-          )
-          .value
-          .trim();
-
-
-      if (!lote) {
-
-        mostrarStatus(
-          "statusBusca",
-          "Digite o número do lote.",
-          "erro"
-        );
-
-        return;
-
-      }
-
-
-      mostrarStatus(
-        "statusBusca",
-        "Consultando lote...",
-        "info"
+    const callbackName =
+      "agrotraceCallback_" +
+      Date.now() +
+      "_" +
+      Math.floor(
+        Math.random() * 100000
       );
 
 
-      try {
-
-        const resultado =
-          await consultarAPI({
-
-            acao: "buscar",
-
-            lote: lote
-
-          });
+    const script =
+      document.createElement("script");
 
 
-        processarResultado(
-          resultado
-        );
-
-
-      } catch (erro) {
-
-        console.error(
-          erro
-        );
-
-
-        mostrarStatus(
-          "statusBusca",
-          "Erro ao consultar lote. Verifique a conexão com a API.",
-          "erro"
-        );
-
-      }
-
-    }
-
-
-    /*
-     * =====================================================
-     * BUSCAR POR QR
-     * =====================================================
-     */
-
-    async function buscarPorQR(qr) {
-
-      if (!qr) {
-
-        mostrarStatus(
-          "statusBusca",
-          "QR Code vazio.",
-          "erro"
-        );
-
-        return;
-
-      }
-
-
-      mostrarStatus(
-        "statusBusca",
-        "Consultando QR Code...",
-        "info"
+    const query =
+      new URLSearchParams(
+        parametros
       );
 
 
-      try {
+    query.set(
+      "callback",
+      callbackName
+    );
 
-        const resultado =
-          await consultarAPI({
 
-            acao: "buscar",
+    const timeout =
+      setTimeout(function() {
 
-            qr: qr
+        cleanup();
 
-          });
-
-
-        processarResultado(
-          resultado
-        );
-
-
-      } catch (erro) {
-
-        console.error(
-          erro
-        );
-
-
-        mostrarStatus(
-          "statusBusca",
-          "Erro ao consultar QR Code.",
-          "erro"
-        );
-
-      }
-
-    }
-
-
-    /*
-     * =====================================================
-     * PROCESSAR LOTE
-     * =====================================================
-     */
-
-    function processarResultado(
-      resultado
-    ) {
-
-      if (
-        !resultado ||
-        resultado.status !== "ok"
-      ) {
-
-        mostrarStatus(
-          "statusBusca",
-
-          resultado &&
-          resultado.mensagem
-            ? resultado.mensagem
-            : "Lote não encontrado.",
-
-          "erro"
-        );
-
-        return;
-
-      }
-
-
-      loteAtual =
-        resultado.dados;
-
-
-      document
-        .getElementById(
-          "campoQR"
-        )
-        .textContent =
-          loteAtual.QR || "-";
-
-
-      document
-        .getElementById(
-          "campoLote"
-        )
-        .textContent =
-          loteAtual.LOTE || "-";
-
-
-      document
-        .getElementById(
-          "campoVariedade"
-        )
-        .textContent =
-          loteAtual.VARIEDADE || "-";
-
-
-      document
-        .getElementById(
-          "campoPeneira"
-        )
-        .textContent =
-          formatarNumero(
-            loteAtual.PENEIRA
-          );
-
-
-      const umidade =
-        loteAtual.UMIDADE_RECEBIMENTO ??
-        loteAtual[
-          "UMIDADE_RECEBIMENTO "
-        ] ??
-        "";
-
-
-      document
-        .getElementById(
-          "campoUmidadeRecebimento"
-        )
-        .textContent =
-          formatarNumero(
-            umidade
-          );
-
-
-      document
-        .getElementById(
-          "campoPesoRecebido"
-        )
-        .textContent =
-          formatarNumero(
-            loteAtual.PESO_RECEBIDO
-          );
-
-
-      document
-        .getElementById(
-          "cardLote"
-        )
-        .classList
-        .remove("oculto");
-
-
-      document
-        .getElementById(
-          "cardBeneficiamento"
-        )
-        .classList
-        .remove("oculto");
-
-
-      mostrarStatus(
-        "statusBusca",
-        "Lote localizado com sucesso.",
-        "ok"
-      );
-
-    }
-
-
-    /*
-     * =====================================================
-     * SCANNER
-     * =====================================================
-     */
-
-    async function abrirScanner() {
-
-      document
-        .getElementById(
-          "areaScanner"
-        )
-        .style.display =
-          "block";
-
-
-      try {
-
-        scanner =
-          new Html5Qrcode(
-            "reader"
-          );
-
-
-        const cameras =
-          await Html5Qrcode
-            .getCameras();
-
-
-        if (
-          !cameras ||
-          cameras.length === 0
-        ) {
-
-          throw new Error(
-            "Nenhuma câmera encontrada."
-          );
-
-        }
-
-
-        let camera =
-          cameras[
-            cameras.length - 1
-          ].id;
-
-
-        for (
-          const c of cameras
-        ) {
-
-          const nome =
-            (
-              c.label || ""
-            ).toLowerCase();
-
-
-          if (
-
-            nome.includes("back") ||
-            nome.includes("rear") ||
-            nome.includes("traseira") ||
-            nome.includes("environment")
-
-          ) {
-
-            camera = c.id;
-
-            break;
-
-          }
-
-        }
-
-
-        await scanner.start(
-
-          camera,
-
-          {
-
-            fps: 10,
-
-            qrbox: {
-
-              width: 250,
-
-              height: 250
-
-            }
-
-          },
-
-          function(texto) {
-
-            fecharScanner();
-
-            buscarPorQR(
-              texto
-            );
-
-          },
-
-          function() {}
-
-        );
-
-
-      } catch (erro) {
-
-        console.error(
-          erro
-        );
-
-
-        mostrarStatus(
-          "statusBusca",
-          "Não foi possível acessar a câmera.",
-          "erro"
-        );
-
-      }
-
-    }
-
-
-    async function fecharScanner() {
-
-      if (scanner) {
-
-        try {
-
-          await scanner.stop();
-
-          await scanner.clear();
-
-        } catch (erro) {
-
-          console.log(
-            erro
-          );
-
-        }
-
-        scanner = null;
-
-      }
-
-
-      document
-        .getElementById(
-          "areaScanner"
-        )
-        .style.display =
-          "none";
-
-    }
-
-
-    /*
-     * =====================================================
-     * INICIAR
-     * =====================================================
-     */
-
-    function iniciarBeneficiamento() {
-
-      const operador =
-        document
-          .getElementById(
-            "operador"
+        reject(
+          new Error(
+            "Tempo limite da API excedido."
           )
-          .value
-          .trim();
-
-
-      const maquina =
-        document
-          .getElementById(
-            "maquina"
-          )
-          .value;
-
-
-      const umidade =
-        document
-          .getElementById(
-            "umidadeAntes"
-          )
-          .value;
-
-
-      const peso =
-        document
-          .getElementById(
-            "pesoAntes"
-          )
-          .value;
-
-
-      if (!operador) {
-
-        alert(
-          "Informe o operador."
         );
 
-        return;
+      }, 15000);
 
-      }
 
+    window[callbackName] =
+      function(resultado) {
 
-      if (!maquina) {
+        clearTimeout(timeout);
 
-        alert(
-          "Selecione a máquina."
-        );
+        cleanup();
 
-        return;
-
-      }
-
-
-      if (!umidade) {
-
-        alert(
-          "Informe a umidade antes."
-        );
-
-        return;
-
-      }
-
-
-      if (!peso) {
-
-        alert(
-          "Informe o peso antes."
-        );
-
-        return;
-
-      }
-
-
-      inicioProcesso =
-        new Date();
-
-
-      document
-        .getElementById(
-          "btnIniciar"
-        )
-        .disabled =
-          true;
-
-
-      document
-        .getElementById(
-          "areaProcesso"
-        )
-        .classList
-        .remove("oculto");
-
-
-      atualizarTimer();
-
-
-      intervaloTimer =
-        setInterval(
-          atualizarTimer,
-          1000
-        );
-
-    }
-
-
-    /*
-     * =====================================================
-     * TIMER
-     * =====================================================
-     */
-
-    function atualizarTimer() {
-
-      if (!inicioProcesso) {
-
-        return;
-
-      }
-
-
-      const agora =
-        new Date();
-
-
-      const tempo =
-        agora -
-        inicioProcesso;
-
-
-      document
-        .getElementById(
-          "timer"
-        )
-        .textContent =
-          formatarTempo(
-            tempo
-          );
-
-    }
-
-
-    /*
-     * =====================================================
-     * FINALIZAR
-     * =====================================================
-     */
-
-    function finalizarBeneficiamento() {
-
-      if (!inicioProcesso) {
-
-        alert(
-          "O beneficiamento ainda não foi iniciado."
-        );
-
-        return;
-
-      }
-
-
-      fimProcesso =
-        new Date();
-
-
-      clearInterval(
-        intervaloTimer
-      );
-
-
-      document
-        .getElementById(
-          "areaProcesso"
-        )
-        .classList
-        .add("oculto");
-
-
-      document
-        .getElementById(
-          "cardFinalizacao"
-        )
-        .classList
-        .remove("oculto");
-
-    }
-
-
-    /*
-     * =====================================================
-     * CALCULAR
-     * =====================================================
-     */
-
-    function calcularResultado() {
-
-      const pesoAntes =
-        converterNumero(
-          document
-            .getElementById(
-              "pesoAntes"
-            )
-            .value
-        );
-
-
-      const pesoDepois =
-        converterNumero(
-          document
-            .getElementById(
-              "pesoDepois"
-            )
-            .value
-        );
-
-
-      if (
-        pesoAntes <= 0 ||
-        pesoDepois <= 0
-      ) {
-
-        document
-          .getElementById(
-            "resultadoTexto"
-          )
-          .textContent =
-            "Informe os pesos antes e depois.";
-
-        return;
-
-      }
-
-
-      const descarte =
-        pesoAntes -
-        pesoDepois;
-
-
-      const rendimento =
-        (
-          pesoDepois /
-          pesoAntes
-        ) * 100;
-
-
-      document
-        .getElementById(
-          "resultadoTexto"
-        )
-        .innerHTML =
-
-          "Descarte: <strong>" +
-
-          formatarNumero(
-            descarte
-          ) +
-
-          " kg</strong><br>" +
-
-          "Rendimento: <strong>" +
-
-          rendimento
-            .toFixed(2)
-            .replace(".", ",") +
-
-          "%</strong>";
-
-    }
-
-
-    /*
-     * =====================================================
-     * SALVAR
-     * =====================================================
-     */
-
-    function salvarBeneficiamento() {
-
-      if (!loteAtual) {
-
-        alert(
-          "Nenhum lote selecionado."
-        );
-
-        return;
-
-      }
-
-
-      if (!inicioProcesso) {
-
-        alert(
-          "O beneficiamento não foi iniciado."
-        );
-
-        return;
-
-      }
-
-
-      if (!fimProcesso) {
-
-        alert(
-          "Finalize o beneficiamento."
-        );
-
-        return;
-
-      }
-
-
-      const pesoDepois =
-        document
-          .getElementById(
-            "pesoDepois"
-          )
-          .value;
-
-
-      const umidadeDepois =
-        document
-          .getElementById(
-            "umidadeDepois"
-          )
-          .value;
-
-
-      if (!pesoDepois) {
-
-        alert(
-          "Informe o peso depois."
-        );
-
-        return;
-
-      }
-
-
-      if (!umidadeDepois) {
-
-        alert(
-          "Informe a umidade depois."
-        );
-
-        return;
-
-      }
-
-
-      const dados = {
-
-        qr:
-          loteAtual.QR || "",
-
-        lote:
-          loteAtual.LOTE || "",
-
-        variedade:
-          loteAtual.VARIEDADE || "",
-
-        peneira:
-          loteAtual.PENEIRA || "",
-
-        umidadeRecebimento:
-          loteAtual.UMIDADE_RECEBIMENTO ??
-          loteAtual[
-            "UMIDADE_RECEBIMENTO "
-          ] ??
-          "",
-
-        pesoRecebimento:
-          loteAtual.PESO_RECEBIDO || "",
-
-        operador:
-          document
-            .getElementById(
-              "operador"
-            )
-            .value
-            .trim(),
-
-        maquina:
-          document
-            .getElementById(
-              "maquina"
-            )
-            .value,
-
-        dataInicio:
-          formatarData(
-            inicioProcesso
-          ),
-
-        horaInicio:
-          formatarHora(
-            inicioProcesso
-          ),
-
-        umidadeAntes:
-          converterNumero(
-            document
-              .getElementById(
-                "umidadeAntes"
-              )
-              .value
-          ),
-
-        pesoAntes:
-          converterNumero(
-            document
-              .getElementById(
-                "pesoAntes"
-              )
-              .value
-          ),
-
-        dataFim:
-          formatarData(
-            fimProcesso
-          ),
-
-        horaFim:
-          formatarHora(
-            fimProcesso
-          ),
-
-        umidadeDepois:
-          converterNumero(
-            umidadeDepois
-          ),
-
-        pesoDepois:
-          converterNumero(
-            pesoDepois
-          ),
-
-        tempoProcesso:
-          formatarTempo(
-            fimProcesso -
-            inicioProcesso
-          ),
-
-        observacao:
-          document
-            .getElementById(
-              "observacao"
-            )
-            .value
+        resolve(resultado);
 
       };
 
 
-      enviarBeneficiamento(
-        dados
-      );
+    function cleanup() {
+
+      delete window[callbackName];
+
+      if (script.parentNode) {
+
+        script.parentNode.removeChild(
+          script
+        );
+
+      }
 
     }
 
 
-    /*
-     * =====================================================
-     * ENVIO
-     * =====================================================
-     */
+    script.onerror =
+      function() {
 
-    function enviarBeneficiamento(
-      dados
-    ) {
+        clearTimeout(timeout);
 
-      mostrarStatus(
-        "statusSalvar",
-        "Enviando beneficiamento...",
-        "info"
-      );
+        cleanup();
 
-
-      const iframe =
-        document.createElement(
-          "iframe"
+        reject(
+          new Error(
+            "Não foi possível conectar à API."
+          )
         );
 
-
-      iframe.name =
-        "agrotrace_" +
-        Date.now();
+      };
 
 
-      iframe.style.display =
-        "none";
+    script.src =
+      API_URL +
+      "?" +
+      query.toString();
 
 
-      document.body.appendChild(
-        iframe
-      );
+    document.body.appendChild(
+      script
+    );
+
+  });
+
+}
 
 
-      const form =
-        document.createElement(
-          "form"
+/*
+ * =========================================
+ * BUSCAR POR LOTE
+ * =========================================
+ */
+
+async function buscarPorLote() {
+
+  const lote =
+    document
+      .getElementById("loteInput")
+      .value
+      .trim();
+
+
+  if (!lote) {
+
+    mostrarStatus(
+      statusBusca,
+      "Digite o número do lote.",
+      "erro"
+    );
+
+    return;
+
+  }
+
+
+  mostrarStatus(
+    statusBusca,
+    "Consultando lote...",
+    "ok"
+  );
+
+
+  try {
+
+    const resultado =
+      await consultarAPI({
+
+        acao: "buscar",
+
+        lote: lote
+
+      });
+
+
+    processarResultadoBusca(
+      resultado
+    );
+
+
+  } catch (erro) {
+
+    console.error(erro);
+
+    mostrarStatus(
+      statusBusca,
+      "Erro ao consultar lote. Verifique a conexão com a API.",
+      "erro"
+    );
+
+  }
+
+}
+
+
+/*
+ * =========================================
+ * BUSCAR POR QR
+ * =========================================
+ */
+
+async function buscarPorQR(qr) {
+
+  try {
+
+    mostrarStatus(
+      statusBusca,
+      "Consultando QR Code...",
+      "ok"
+    );
+
+
+    const resultado =
+      await consultarAPI({
+
+        acao: "buscar",
+
+        qr: qr
+
+      });
+
+
+    processarResultadoBusca(
+      resultado
+    );
+
+
+  } catch (erro) {
+
+    console.error(erro);
+
+    mostrarStatus(
+      statusBusca,
+      "Erro ao consultar lote. Verifique a conexão com a API.",
+      "erro"
+    );
+
+  }
+
+}
+
+
+/*
+ * =========================================
+ * PROCESSAR RESULTADO
+ * =========================================
+ */
+
+function processarResultadoBusca(resultado) {
+
+  console.log(
+    "Resposta da API:",
+    resultado
+  );
+
+
+  if (!resultado) {
+
+    throw new Error(
+      "API retornou resposta vazia."
+    );
+
+  }
+
+
+  if (
+    resultado.status !== "ok"
+  ) {
+
+    mostrarStatus(
+      statusBusca,
+      resultado.mensagem ||
+      "Lote não encontrado.",
+      "erro"
+    );
+
+    return;
+
+  }
+
+
+  loteAtual =
+    resultado.dados;
+
+
+  document
+    .getElementById("campoQR")
+    .textContent =
+      loteAtual.QR || "-";
+
+
+  document
+    .getElementById("campoLote")
+    .textContent =
+      loteAtual.LOTE || "-";
+
+
+  document
+    .getElementById("campoVariedade")
+    .textContent =
+      loteAtual.VARIEDADE || "-";
+
+
+  document
+    .getElementById("campoPeneira")
+    .textContent =
+      loteAtual.PENEIRA || "-";
+
+
+  const umidadeRecebimento =
+    loteAtual.UMIDADE_RECEBIMENTO ??
+    loteAtual["UMIDADE_RECEBIMENTO "] ??
+    "";
+
+
+  document
+    .getElementById("campoUmidadeRecebimento")
+    .textContent =
+      umidadeRecebimento !== ""
+        ? umidadeRecebimento + "%"
+        : "-";
+
+
+  document
+    .getElementById("campoPesoRecebimento")
+    .textContent =
+      loteAtual.PESO_RECEBIDO
+        ? loteAtual.PESO_RECEBIDO + " kg"
+        : "-";
+
+
+  document
+    .getElementById("dadosLoteCard")
+    .classList
+    .remove("hidden");
+
+
+  document
+    .getElementById("beneficiamentoCard")
+    .classList
+    .remove("hidden");
+
+
+  mostrarStatus(
+    statusBusca,
+    "Lote localizado com sucesso.",
+    "ok"
+  );
+
+}
+
+
+/*
+ * =========================================
+ * SCANNER QR CODE
+ * =========================================
+ */
+
+function abrirScanner() {
+
+  const scannerDiv =
+    document.getElementById(
+      "scanner"
+    );
+
+
+  scannerDiv.classList.remove(
+    "hidden"
+  );
+
+
+  if (scanner) {
+
+    return;
+
+  }
+
+
+  scanner =
+    new Html5Qrcode(
+      "scanner"
+    );
+
+
+  Html5Qrcode
+    .getCameras()
+    .then(function(cameras) {
+
+      if (
+        !cameras ||
+        cameras.length === 0
+      ) {
+
+        throw new Error(
+          "Nenhuma câmera encontrada."
         );
 
-
-      form.method =
-        "POST";
+      }
 
 
-      form.action =
-        API_URL;
+      let cameraId =
+        cameras[
+          cameras.length - 1
+        ].id;
 
 
-      form.target =
-        iframe.name;
+      for (
+        let i = 0;
+        i < cameras.length;
+        i++
+      ) {
+
+        const label =
+          (
+            cameras[i].label ||
+            ""
+          ).toLowerCase();
 
 
-      const campo =
-        document.createElement(
-          "input"
-        );
+        if (
+          label.includes("back") ||
+          label.includes("trás") ||
+          label.includes("traseira") ||
+          label.includes("environment")
+        ) {
+
+          cameraId =
+            cameras[i].id;
+
+          break;
+
+        }
+
+      }
 
 
-      campo.type =
-        "hidden";
+      scanner.start(
 
+        cameraId,
 
-      campo.name =
-        "dados";
+        {
+          fps: 10,
 
-
-      campo.value =
-        JSON.stringify(
-          dados
-        );
-
-
-      form.appendChild(
-        campo
-      );
-
-
-      document.body.appendChild(
-        form
-      );
-
-
-      form.submit();
-
-
-      mostrarStatus(
-        "statusSalvar",
-        "Beneficiamento enviado para gravação.",
-        "ok"
-      );
-
-
-      setTimeout(
-        function() {
-
-          iframe.remove();
-
-          form.remove();
+          qrbox: {
+            width: 250,
+            height: 250
+          }
 
         },
-        5000
-      );
 
-    }
+        function(decodedText) {
 
+          scanner.stop()
+            .then(function() {
 
-    /*
-     * =====================================================
-     * AUXILIARES
-     * =====================================================
-     */
-
-    function mostrarStatus(
-      id,
-      mensagem,
-      tipo
-    ) {
-
-      const elemento =
-        document.getElementById(
-          id
-        );
+              scannerDiv
+                .classList
+                .add("hidden");
 
 
-      elemento.textContent =
-        mensagem;
+              scanner.clear();
 
 
-      elemento.className =
-        "status " +
-        tipo;
-
-    }
+              scanner = null;
 
 
-    function converterNumero(
-      valor
-    ) {
-
-      if (
-        valor === null ||
-        valor === undefined ||
-        valor === ""
-      ) {
-
-        return 0;
-
-      }
+              document
+                .getElementById("loteInput")
+                .value =
+                  decodedText;
 
 
-      return Number(
-        String(valor)
-          .replace(",", ".")
-      );
+              buscarPorQR(
+                decodedText
+              );
 
-    }
+            });
 
+        },
 
-    function formatarNumero(
-      valor
-    ) {
+        function(errorMessage) {
 
-      if (
-        valor === null ||
-        valor === undefined ||
-        valor === ""
-      ) {
+          // leitura normal continua
 
-        return "-";
-
-      }
-
-
-      const numero =
-        Number(valor);
-
-
-      if (
-        isNaN(numero)
-      ) {
-
-        return String(
-          valor
-        );
-
-      }
-
-
-      return numero
-        .toFixed(2)
-        .replace(".", ",");
-
-    }
-
-
-    function formatarData(
-      data
-    ) {
-
-      return (
-
-        String(
-          data.getDate()
-        ).padStart(2, "0")
-
-        +
-
-        "/" +
-
-        String(
-          data.getMonth() + 1
-        ).padStart(2, "0")
-
-        +
-
-        "/" +
-
-        data.getFullYear()
+        }
 
       );
 
-    }
+    })
 
+    .catch(function(erro) {
 
-    function formatarHora(
-      data
-    ) {
+      console.error(erro);
 
-      return (
-
-        String(
-          data.getHours()
-        ).padStart(2, "0")
-
-        +
-
-        ":" +
-
-        String(
-          data.getMinutes()
-        ).padStart(2, "0")
-
-        +
-
-        ":" +
-
-        String(
-          data.getSeconds()
-        ).padStart(2, "0")
-
+      mostrarStatus(
+        statusBusca,
+        "Não foi possível acessar a câmera.",
+        "erro"
       );
 
-    }
+    });
+
+}
 
 
-    function formatarTempo(
-      ms
-    ) {
+/*
+ * =========================================
+ * INICIAR BENEFICIAMENTO
+ * =========================================
+ */
 
-      const total =
-        Math.floor(
-          ms / 1000
-        );
+function iniciarBeneficiamento() {
 
-
-      const horas =
-        Math.floor(
-          total / 3600
-        );
-
-
-      const minutos =
-        Math.floor(
-          (total % 3600) / 60
-        );
+  const operador =
+    document
+      .getElementById("operador")
+      .value
+      .trim();
 
 
-      const segundos =
-        total % 60;
+  const maquina =
+    document
+      .getElementById("maquina")
+      .value;
 
 
-      return (
+  const umidadeAntes =
+    document
+      .getElementById("umidadeAntes")
+      .value;
 
-        String(horas)
-          .padStart(2, "0")
 
-        +
+  const pesoAntes =
+    document
+      .getElementById("pesoAntes")
+      .value;
 
-        ":" +
 
-        String(minutos)
-          .padStart(2, "0")
+  if (!operador) {
 
-        +
+    alert(
+      "Informe o operador."
+    );
 
-        ":" +
+    return;
 
-        String(segundos)
-          .padStart(2, "0")
+  }
 
+
+  if (!maquina) {
+
+    alert(
+      "Selecione a máquina."
+    );
+
+    return;
+
+  }
+
+
+  if (!umidadeAntes) {
+
+    alert(
+      "Informe a umidade antes."
+    );
+
+    return;
+
+  }
+
+
+  if (!pesoAntes) {
+
+    alert(
+      "Informe o peso antes."
+    );
+
+    return;
+
+  }
+
+
+  inicioProcesso =
+    new Date();
+
+
+  document
+    .getElementById("btnIniciar")
+    .classList
+    .add("hidden");
+
+
+  document
+    .getElementById("btnFinalizar")
+    .classList
+    .remove("hidden");
+
+
+  iniciarTimer();
+
+}
+
+
+/*
+ * =========================================
+ * TIMER
+ * =========================================
+ */
+
+function iniciarTimer() {
+
+  intervaloTimer =
+    setInterval(
+      atualizarTimer,
+      1000
+    );
+
+
+  atualizarTimer();
+
+}
+
+
+function atualizarTimer() {
+
+  if (!inicioProcesso) {
+
+    return;
+
+  }
+
+
+  const agora =
+    new Date();
+
+
+  const diferenca =
+    agora - inicioProcesso;
+
+
+  document
+    .getElementById("timer")
+    .textContent =
+      formatarTempo(
+        diferenca
       );
 
-    }
+}
 
 
-  </script>
+function formatarTempo(ms) {
+
+  const totalSegundos =
+    Math.floor(
+      ms / 1000
+    );
+
+
+  const horas =
+    Math.floor(
+      totalSegundos / 3600
+    );
+
+
+  const minutos =
+    Math.floor(
+      (totalSegundos % 3600) / 60
+    );
+
+
+  const segundos =
+    totalSegundos % 60;
+
+
+  return (
+
+    String(horas)
+      .padStart(2, "0")
+
+    + ":" +
+
+    String(minutos)
+      .padStart(2, "0")
+
+    + ":" +
+
+    String(segundos)
+      .padStart(2, "0")
+
+  );
+
+}
+
+
+/*
+ * =========================================
+ * FINALIZAR
+ * =========================================
+ */
+
+function finalizarBeneficiamento() {
+
+  if (!inicioProcesso) {
+
+    return;
+
+  }
+
+
+  fimProcesso =
+    new Date();
+
+
+  clearInterval(
+    intervaloTimer
+  );
+
+
+  document
+    .getElementById("btnFinalizar")
+    .classList
+    .add("hidden");
+
+
+  document
+    .getElementById("finalizacaoCard")
+    .classList
+    .remove("hidden");
+
+
+  calcularResultado();
+
+}
+
+
+/*
+ * =========================================
+ * CÁLCULO
+ * =========================================
+ */
+
+function calcularResultado() {
+
+  const pesoAntes =
+    Number(
+      document
+        .getElementById("pesoAntes")
+        .value
+    );
+
+
+  const pesoDepois =
+    Number(
+      document
+        .getElementById("pesoDepois")
+        .value
+    );
+
+
+  if (
+    !pesoAntes ||
+    !pesoDepois
+  ) {
+
+    return;
+
+  }
+
+
+  const descarte =
+    pesoAntes -
+    pesoDepois;
+
+
+  const rendimento =
+    (
+      pesoDepois /
+      pesoAntes
+    ) * 100;
+
+
+  document
+    .getElementById("resultadoCalculo")
+    .classList
+    .remove("hidden");
+
+
+  document
+    .getElementById("textoCalculo")
+    .innerHTML =
+
+      "Peso antes: <strong>" +
+      pesoAntes.toFixed(2) +
+      " kg</strong><br><br>" +
+
+      "Peso depois: <strong>" +
+      pesoDepois.toFixed(2) +
+      " kg</strong><br><br>" +
+
+      "Descarte: <strong>" +
+      descarte.toFixed(2) +
+      " kg</strong><br><br>" +
+
+      "Rendimento: <strong>" +
+      rendimento.toFixed(2) +
+      "%</strong>";
+
+}
+
+
+/*
+ * =========================================
+ * SALVAR BENEFICIAMENTO
+ * =========================================
+ */
+
+function salvarBeneficiamento() {
+
+  const umidadeDepois =
+    document
+      .getElementById("umidadeDepois")
+      .value;
+
+
+  const pesoDepois =
+    document
+      .getElementById("pesoDepois")
+      .value;
+
+
+  if (!umidadeDepois) {
+
+    alert(
+      "Informe a umidade depois."
+    );
+
+    return;
+
+  }
+
+
+  if (!pesoDepois) {
+
+    alert(
+      "Informe o peso depois."
+    );
+
+    return;
+
+  }
+
+
+  calcularResultado();
+
+
+  const operador =
+    document
+      .getElementById("operador")
+      .value
+      .trim();
+
+
+  const maquina =
+    document
+      .getElementById("maquina")
+      .value;
+
+
+  const umidadeAntes =
+    document
+      .getElementById("umidadeAntes")
+      .value;
+
+
+  const pesoAntes =
+    document
+      .getElementById("pesoAntes")
+      .value;
+
+
+  const observacao =
+    document
+      .getElementById("observacao")
+      .value;
+
+
+  const dados = {
+
+    qr:
+      loteAtual.QR || "",
+
+    lote:
+      loteAtual.LOTE || "",
+
+    variedade:
+      loteAtual.VARIEDADE || "",
+
+    peneira:
+      loteAtual.PENEIRA || "",
+
+    umidadeRecebimento:
+      loteAtual.UMIDADE_RECEBIMENTO ??
+      loteAtual["UMIDADE_RECEBIMENTO "] ??
+      "",
+
+    pesoRecebimento:
+      loteAtual.PESO_RECEBIDO || "",
+
+    operador:
+      operador,
+
+    maquina:
+      maquina,
+
+    dataInicio:
+      formatarData(
+        inicioProcesso
+      ),
+
+    horaInicio:
+      formatarHora(
+        inicioProcesso
+      ),
+
+    umidadeAntes:
+      umidadeAntes,
+
+    pesoAntes:
+      pesoAntes,
+
+    dataFim:
+      formatarData(
+        fimProcesso
+      ),
+
+    horaFim:
+      formatarHora(
+        fimProcesso
+      ),
+
+    umidadeDepois:
+      umidadeDepois,
+
+    pesoDepois:
+      pesoDepois,
+
+    tempoProcesso:
+      formatarTempo(
+        fimProcesso -
+        inicioProcesso
+      ),
+
+    observacao:
+      observacao
+
+  };
+
+
+  enviarBeneficiamento(
+    dados
+  );
+
+}
+
+
+/*
+ * =========================================
+ * ENVIAR PARA GOOGLE APPS SCRIPT
+ * =========================================
+ */
+
+function enviarBeneficiamento(dados) {
+
+  const iframe =
+    document.createElement(
+      "iframe"
+    );
+
+
+  iframe.name =
+    "agrotrace_post_iframe";
+
+
+  iframe.style.display =
+    "none";
+
+
+  document.body.appendChild(
+    iframe
+  );
+
+
+  const form =
+    document.createElement(
+      "form"
+    );
+
+
+  form.method =
+    "POST";
+
+
+  form.action =
+    API_URL;
+
+
+  form.target =
+    "agrotrace_post_iframe";
+
+
+  const input =
+    document.createElement(
+      "input"
+    );
+
+
+  input.type =
+    "hidden";
+
+
+  input.name =
+    "dados";
+
+
+  input.value =
+    JSON.stringify(
+      dados
+    );
+
+
+  form.appendChild(
+    input
+  );
+
+
+  document.body.appendChild(
+    form
+  );
+
+
+  form.submit();
+
+
+  mostrarStatus(
+    statusSalvar,
+    "Beneficiamento enviado para registro.",
+    "ok"
+  );
+
+
+  setTimeout(
+    function() {
+
+      iframe.remove();
+
+      form.remove();
+
+    },
+    5000
+  );
+
+}
+
+
+/*
+ * =========================================
+ * DATA
+ * =========================================
+ */
+
+function formatarData(data) {
+
+  if (!data) {
+
+    return "";
+
+  }
+
+
+  const dia =
+    String(
+      data.getDate()
+    ).padStart(2, "0");
+
+
+  const mes =
+    String(
+      data.getMonth() + 1
+    ).padStart(2, "0");
+
+
+  const ano =
+    data.getFullYear();
+
+
+  return (
+    dia +
+    "/" +
+    mes +
+    "/" +
+    ano
+  );
+
+}
+
+
+/*
+ * =========================================
+ * HORA
+ * =========================================
+ */
+
+function formatarHora(data) {
+
+  if (!data) {
+
+    return "";
+
+  }
+
+
+  const hora =
+    String(
+      data.getHours()
+    ).padStart(2, "0");
+
+
+  const minuto =
+    String(
+      data.getMinutes()
+    ).padStart(2, "0");
+
+
+  const segundo =
+    String(
+      data.getSeconds()
+    ).padStart(2, "0");
+
+
+  return (
+    hora +
+    ":" +
+    minuto +
+    ":" +
+    segundo
+  );
+
+}
+
+
+/*
+ * =========================================
+ * ATUALIZAR CÁLCULO AUTOMATICAMENTE
+ * =========================================
+ */
+
+document
+  .getElementById("pesoDepois")
+  .addEventListener(
+    "input",
+    calcularResultado
+  );
+
+
+</script>
+
 
 </body>
 
